@@ -1907,9 +1907,9 @@
 ✅ *Payment:* Cash on Delivery
     `;
 
-    console.log('📤 Sending order to Telegram via PHP proxy...');
+    console.log('📤 Sending order via PHP proxy...');
 
-    // Send to your PHP proxy
+    // ===== SEND VIA PHP PROXY (NOT DIRECT) =====
     fetch('/telegram.php', {
         method: 'POST',
         headers: { 
@@ -1920,7 +1920,7 @@
     })
     .then(response => response.json())
     .then(data => {
-        console.log('📥 Response from server:', data);
+        console.log('📥 Server Response:', data);
         if (data.success) {
             console.log('✅ Telegram notification sent to @Snooq_bot!');
             showNotification('🎉 Order #' + orderId + ' placed successfully!');
@@ -1934,6 +1934,26 @@
         showNotification('⚠️ Order placed! Check your Telegram.');
     });
     
+    // Clear form
+    document.getElementById('fullName').value = '';
+    document.getElementById('phone').value = '';
+    document.getElementById('whatsapp').value = '';
+    document.getElementById('address').value = '';
+    document.getElementById('city').value = '';
+    document.getElementById('state').value = '';
+    document.getElementById('pincode').value = '';
+    document.getElementById('couponInput').value = '';
+    document.getElementById('discountRow').style.display = 'none';
+    couponDiscount = 0;
+    quantity = 1;
+    document.getElementById('qtyDisplay').textContent = '1';
+    updateSummary();
+    
+    setTimeout(() => {
+        showLiveNotification();
+    }, 1000);
+}
+
     // Clear form
     document.getElementById('fullName').value = '';
     document.getElementById('phone').value = '';
