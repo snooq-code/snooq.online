@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SNOOQ — Home Gadgets</title>
-  <!-- Canela & Neue Haas Grotesk Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -15,7 +14,6 @@
       box-sizing: border-box;
     }
 
-    /* ===== LUXURY COLOR PALETTE ===== */
     :root {
       --gold: #b89b5e;
       --gold-light: #d4b87a;
@@ -28,8 +26,8 @@
       --shadow-hover: rgba(0, 0, 0, 0.05);
       --font-heading: 'DM Serif Display', serif;
       --font-body: 'Inter', sans-serif;
-      --cod-red: #c0392b;
-      --cod-gold: #f1c40f;
+      --success: #27ae60;
+      --danger: #e74c3c;
     }
 
     body {
@@ -42,7 +40,7 @@
 
     html { scroll-behavior: smooth; }
 
-    /* ---------- SCROLLING ANNOUNCEMENT BANNER (LEFT TO RIGHT) ---------- */
+    /* ---------- SCROLLING ANNOUNCEMENT BANNER ---------- */
     .announcement-banner {
       background: var(--gold);
       color: var(--white);
@@ -103,158 +101,14 @@
       z-index: 2;
     }
     .announcement-banner .close-banner:hover { opacity: 1; transform: translateY(-50%) scale(1.2); }
-    .announcement-banner.hidden {
-      display: none;
-    }
+    .announcement-banner.hidden { display: none; }
 
     @keyframes scrollLeftToRight {
       0% { transform: translateX(0); }
       100% { transform: translateX(-50%); }
     }
 
-    /* ---------- COD MEGA BANNER ---------- */
-    .cod-mega-banner {
-      background: linear-gradient(135deg, #c0392b 0%, #e74c3c 100%);
-      color: var(--white);
-      text-align: center;
-      padding: 14px 16px;
-      font-size: 1.1rem;
-      font-weight: 800;
-      letter-spacing: 1px;
-      border-bottom: 4px solid var(--gold);
-      position: relative;
-      z-index: 1099;
-      text-transform: uppercase;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-      font-family: var(--font-body);
-    }
-    .cod-mega-banner span {
-      background: var(--white);
-      color: #c0392b;
-      padding: 2px 14px;
-      border-radius: 30px;
-      font-size: 0.85rem;
-      font-weight: 900;
-    }
-    .cod-mega-banner .cod-icon {
-      font-size: 1.6rem;
-      animation: pulse 2s ease-in-out infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.15); }
-    }
-
-    /* ---------- GLOBAL ---------- */
-    .fade-in-up {
-      opacity: 0;
-      animation: fadeInUp 0.7s ease forwards;
-    }
-    .fade-in-up-delay-1 { animation-delay: 0.05s; }
-    .fade-in-up-delay-2 { animation-delay: 0.1s; }
-    .fade-in-up-delay-3 { animation-delay: 0.15s; }
-    .fade-in-up-delay-4 { animation-delay: 0.2s; }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.02); }
-    }
-    @keyframes slideIn {
-      from { opacity: 0; transform: translateX(30px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
-    }
-    @keyframes shimmer {
-      0% { background-position: -200% 0; }
-      100% { background-position: 200% 0; }
-    }
-
-    .headline-heavy {
-      font-family: var(--font-heading);
-      font-weight: 400;
-      font-style: italic;
-      font-size: 2.6rem;
-      line-height: 0.95;
-      text-transform: uppercase;
-      color: var(--white);
-      letter-spacing: -1px;
-      text-shadow: 0 2px 12px rgba(0,0,0,0.08);
-    }
-    .section-title-italic {
-      font-family: var(--font-heading);
-      color: var(--text-dark);
-      font-size: 2rem;
-      font-style: italic;
-      font-weight: 400;
-      text-transform: uppercase;
-      line-height: 1.05;
-      margin-bottom: 16px;
-      text-align: center;
-    }
-
-    /* BUTTONS */
-    .btn-solid-primary {
-      display: block;
-      width: 100%;
-      padding: 16px;
-      border-radius: 8px;
-      font-family: var(--font-heading);
-      font-weight: 400;
-      font-style: italic;
-      font-size: 1.15rem;
-      text-transform: uppercase;
-      text-decoration: none;
-      text-align: center;
-      border: none;
-      cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-      background: var(--gold);
-      color: var(--white);
-      box-shadow: 0 4px 16px rgba(184, 155, 94, 0.2);
-      border: 2px solid var(--gold);
-    }
-    .btn-solid-primary:hover {
-      transform: translateY(-4px) scale(1.03);
-      box-shadow: 0 12px 32px rgba(184, 155, 94, 0.3);
-      background: var(--gold-dark);
-      border-color: var(--gold-dark);
-    }
-    .btn-solid-dark {
-      display: block;
-      width: 100%;
-      padding: 16px;
-      border-radius: 8px;
-      font-family: var(--font-heading);
-      font-weight: 400;
-      font-style: italic;
-      font-size: 1.15rem;
-      text-transform: uppercase;
-      text-decoration: none;
-      text-align: center;
-      border: 2px solid var(--white);
-      cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-      background: transparent;
-      color: var(--white);
-    }
-    .btn-solid-dark:hover {
-      transform: translateY(-4px) scale(1.03);
-      background: rgba(255,255,255,0.12);
-      border-color: var(--gold-light);
-    }
-
-    /* ---------- HEADER (Logo Center, Menu Left, Cart Right) ---------- */
+    /* ---------- HEADER ---------- */
     .main-header {
       position: sticky;
       top: 0;
@@ -308,47 +162,6 @@
       letter-spacing: -1px;
       text-decoration: none;
     }
-    .cart-icon {
-      position: relative;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: var(--white);
-      border: 2px solid var(--border-beige);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-      color: var(--text-dark);
-      font-size: 1.2rem;
-      text-decoration: none;
-    }
-    .cart-icon:hover {
-      transform: scale(1.1) rotate(-5deg);
-      background: var(--gold);
-      color: var(--white);
-      border-color: var(--gold);
-    }
-    .cart-icon .badge {
-      position: absolute;
-      top: -6px;
-      right: -6px;
-      background: var(--gold);
-      color: var(--white);
-      font-size: 0.65rem;
-      font-weight: 700;
-      border-radius: 50%;
-      width: 20px;
-      height: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--font-body);
-      border: 2px solid var(--white);
-      transition: transform 0.3s ease;
-    }
-    .cart-icon:hover .badge { transform: scale(1.2); }
     .menu-btn {
       width: 44px;
       height: 44px;
@@ -517,7 +330,81 @@
       font-family: var(--font-body);
     }
 
-    /* ---------- BIG PRODUCT CARD (SQUARE) ---------- */
+    .headline-heavy {
+      font-family: var(--font-heading);
+      font-weight: 400;
+      font-style: italic;
+      font-size: 2.6rem;
+      line-height: 0.95;
+      text-transform: uppercase;
+      color: var(--white);
+      letter-spacing: -1px;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+    .section-title-italic {
+      font-family: var(--font-heading);
+      color: var(--text-dark);
+      font-size: 2rem;
+      font-style: italic;
+      font-weight: 400;
+      text-transform: uppercase;
+      line-height: 1.05;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    /* BUTTONS */
+    .btn-solid-primary {
+      display: block;
+      width: 100%;
+      padding: 16px;
+      border-radius: 8px;
+      font-family: var(--font-heading);
+      font-weight: 400;
+      font-style: italic;
+      font-size: 1.15rem;
+      text-transform: uppercase;
+      text-decoration: none;
+      text-align: center;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      background: var(--gold);
+      color: var(--white);
+      box-shadow: 0 4px 16px rgba(184, 155, 94, 0.2);
+      border: 2px solid var(--gold);
+    }
+    .btn-solid-primary:hover {
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 12px 32px rgba(184, 155, 94, 0.3);
+      background: var(--gold-dark);
+      border-color: var(--gold-dark);
+    }
+    .btn-solid-dark {
+      display: block;
+      width: 100%;
+      padding: 16px;
+      border-radius: 8px;
+      font-family: var(--font-heading);
+      font-weight: 400;
+      font-style: italic;
+      font-size: 1.15rem;
+      text-transform: uppercase;
+      text-decoration: none;
+      text-align: center;
+      border: 2px solid var(--white);
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      background: transparent;
+      color: var(--white);
+    }
+    .btn-solid-dark:hover {
+      transform: translateY(-4px) scale(1.03);
+      background: rgba(255,255,255,0.12);
+      border-color: var(--gold-light);
+    }
+
+    /* ---------- BIG PRODUCT CARD ---------- */
     .big-product-section {
       padding: 20px 20px 30px 20px;
     }
@@ -547,20 +434,6 @@
       transition: transform 0.6s ease;
     }
     .big-product-card:hover .big-img { transform: scale(1.02); }
-    .big-product-card .big-badge {
-      display: inline-block;
-      background: var(--gold);
-      color: var(--white);
-      font-family: var(--font-heading);
-      font-weight: 400;
-      font-style: italic;
-      padding: 2px 16px;
-      border-radius: 30px;
-      font-size: 0.7rem;
-      letter-spacing: 0.5px;
-      margin-bottom: 6px;
-      border: 2px solid var(--white);
-    }
     .big-product-card h2 {
       font-family: var(--font-heading);
       font-weight: 400;
@@ -603,21 +476,6 @@
       margin-bottom: 10px;
       font-family: var(--font-body);
     }
-    .big-product-card .big-details {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 6px 12px;
-      font-size: 0.7rem;
-      color: var(--text-muted);
-      margin-bottom: 12px;
-      background: var(--ivory);
-      padding: 8px 10px;
-      border-radius: 10px;
-      border: 1px solid var(--border-beige);
-      font-family: var(--font-body);
-    }
-    .big-product-card .big-details span { display: inline-flex; align-items: center; gap: 3px; }
     .big-product-card .big-actions {
       display: flex;
       gap: 10px;
@@ -639,6 +497,7 @@
       transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
       border: 2px solid var(--gold);
       box-shadow: 0 4px 16px rgba(184, 155, 94, 0.12);
+      text-decoration: none;
     }
     .big-product-card .big-actions .btn-big-add:hover {
       transform: scale(1.05) translateY(-2px);
@@ -672,7 +531,7 @@
       box-shadow: 0 8px 24px var(--shadow-hover);
     }
 
-    /* ---------- FAST SCROLLING COLLECTIONS (SQUARE & COMPACT) ---------- */
+    /* ---------- FAST SCROLLING COLLECTIONS ---------- */
     .fast-scroll-section {
       padding: 10px 0 35px 0;
       overflow: hidden;
@@ -727,13 +586,6 @@
       line-height: 1.1;
       margin-bottom: 2px;
     }
-    .fast-scroll-item .price {
-      font-family: var(--font-heading);
-      font-weight: 400;
-      font-style: italic;
-      font-size: 0.7rem;
-      color: var(--gold-dark);
-    }
     .fast-scroll-item .cod-tag {
       font-size: 0.5rem;
       background: #c0392b;
@@ -747,7 +599,7 @@
       font-family: var(--font-body);
     }
 
-    /* ---------- COD HIGHLIGHT BANNER (mid-page) ---------- */
+    /* ---------- COD HIGHLIGHT BANNER ---------- */
     .cod-highlight-banner {
       background: linear-gradient(135deg, #b89b5e);
       color: var(--white);
@@ -850,19 +702,6 @@
       margin-bottom: 2px;
       line-height: 1.1;
     }
-    .product-detail-item .detail-info .detail-price {
-      font-family: var(--font-heading);
-      font-weight: 400;
-      font-style: italic;
-      font-size: 0.85rem;
-      color: var(--gold-dark);
-    }
-    .product-detail-item .detail-info .detail-price small {
-      font-size: 0.65rem;
-      color: var(--text-muted);
-      text-decoration: line-through;
-      margin-left: 5px;
-    }
     .product-detail-item .detail-info .detail-desc {
       font-size: 0.6rem;
       color: var(--text-muted);
@@ -893,19 +732,6 @@
       background: var(--gold-dark);
       border-color: var(--gold-dark);
       transform: scale(1.08);
-    }
-    .product-detail-item .detail-cod-tag {
-      font-size: 0.45rem;
-      background: #c0392b;
-      color: white;
-      padding: 1px 10px;
-      border-radius: 20px;
-      display: inline-block;
-      font-weight: 700;
-      letter-spacing: 0.3px;
-      margin-top: 2px;
-      width: fit-content;
-      font-family: var(--font-body);
     }
 
     /* ---------- INFO CARDS ---------- */
@@ -1077,38 +903,163 @@
       color: var(--gold-dark);
     }
 
-    /* ---------- SOCIAL ---------- */
-    .social-feed-section {
-      padding: 20px 0 40px 0;
+    /* ---------- BRANDS COLLABORATION ---------- */
+    .brands-section {
+      padding: 40px 20px 60px;
+      max-width: 1000px;
+      margin: 0 auto;
     }
-    .horizontal-media-scroller {
-      display: flex;
-      gap: 14px;
-      overflow-x: auto;
-      padding: 0 20px 12px 20px;
-      scroll-snap-type: x mandatory;
-      scrollbar-width: none;
-      scroll-behavior: smooth;
+    .brands-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+      align-items: center;
     }
-    .horizontal-media-scroller::-webkit-scrollbar { display: none; }
-    .media-card {
-      flex: 0 0 75%;
-      scroll-snap-align: center;
-      border-radius: 18px;
-      overflow: hidden;
-      height: 260px;
+    .brand-item {
       background: var(--white);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
       border: 2px solid var(--border-beige);
       transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      font-family: var(--font-heading);
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--text-muted);
     }
-    .media-card:hover {
+    .brand-item:hover {
+      transform: translateY(-6px);
       border-color: var(--gold);
-      transform: scale(1.03);
       box-shadow: 0 12px 32px var(--shadow-hover);
+      color: var(--gold-dark);
     }
-    .media-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
-    .media-card:hover img { transform: scale(1.05); }
-    .card-rounded-video { flex: 0 0 65%; height: 320px; border-radius: 20px; }
+    .brand-item .brand-icon {
+      font-size: 2.5rem;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    /* ---------- LIVE NOTIFICATION (No Profile Icons) ---------- */
+    .live-notification {
+      position: fixed;
+      bottom: 30px;
+      right: 20px;
+      background: var(--white);
+      border-radius: 12px;
+      padding: 12px 16px;
+      border-left: 4px solid var(--gold);
+      border-top: 2px solid var(--border-beige);
+      border-right: 2px solid var(--border-beige);
+      border-bottom: 2px solid var(--border-beige);
+      box-shadow: 0 8px 30px var(--shadow-hover);
+      z-index: 9998;
+      max-width: 320px;
+      animation: slideIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+      display: none;
+      transform: translateX(30px);
+      opacity: 0;
+      transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .live-notification.show {
+      display: block;
+      transform: translateX(0);
+      opacity: 1;
+    }
+    .live-notification .notif-content {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .live-notification .notif-content .text { flex: 1; }
+    .live-notification .notif-content .text .name {
+      font-weight: 700;
+      color: var(--gold-dark);
+      font-size: 0.8rem;
+      font-family: var(--font-body);
+    }
+    .live-notification .notif-content .text .action {
+      color: var(--text-dark);
+      font-size: 0.75rem;
+      font-family: var(--font-body);
+    }
+    .live-notification .notif-content .text .time { color: var(--text-muted); font-size: 0.65rem; font-family: var(--font-body); }
+    .live-notification .notif-close {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: 0.3s;
+      font-family: var(--font-body);
+    }
+    .live-notification .notif-close:hover { color: var(--gold); transform: scale(1.2); }
+
+    /* ---------- STICKY COD POPUP ---------- */
+    .cod-sticky-popup {
+      position: fixed;
+      bottom: 30px;
+      left: 20px;
+      background: linear-gradient(135deg, #ff0000, #cc0000);
+      color: var(--white);
+      padding: 10px 18px;
+      border-radius: 50px;
+      border: 3px solid var(--gold);
+      box-shadow: 0 8px 32px rgba(192, 57, 43, 0.4);
+      z-index: 9997;
+      font-family: var(--font-heading);
+      font-weight: 400;
+      font-style: italic;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      animation: float 3s ease-in-out infinite;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: default;
+      max-width: 90vw;
+      white-space: nowrap;
+    }
+    .cod-sticky-popup:hover {
+      transform: scale(1.05) translateY(-4px);
+      box-shadow: 0 12px 40px rgba(192, 57, 43, 0.5);
+    }
+    .cod-sticky-popup .popup-text {
+      line-height: 1.2;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+    .cod-sticky-popup .popup-badge {
+      background: var(--white);
+      color: #ff0000;
+      padding: 2px 12px;
+      border-radius: 30px;
+      font-size: 0.6rem;
+      font-weight: 900;
+      font-style: normal;
+      display: inline-block;
+      text-align: center;
+      line-height: 1.4;
+      font-family: var(--font-body);
+    }
+    @media (max-width: 500px) {
+      .cod-sticky-popup {
+        bottom: 16px;
+        left: 12px;
+        padding: 8px 14px;
+        font-size: 0.7rem;
+        border-width: 2px;
+        gap: 6px;
+      }
+      .cod-sticky-popup .popup-badge {
+        font-size: 0.5rem;
+        padding: 1px 8px;
+      }
+    }
 
     /* ---------- FOOTER ---------- */
     .global-footer {
@@ -1130,6 +1081,11 @@
       transition: transform 0.4s ease;
     }
     .footer-logo-massive:hover { transform: scale(1.02); }
+    .footer-directory-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
     .directory-column h4 {
       font-family: var(--font-heading);
       color: var(--text-dark);
@@ -1162,9 +1118,7 @@
       font-weight: 600;
       font-family: var(--font-body);
     }
-    .footer-directory-grid { display: flex; flex-direction: column; gap: 28px; }
 
-    /* ---------- NEWSLETTER ---------- */
     .newsletter-subscription-box {
       background: var(--ivory);
       border-radius: 20px;
@@ -1233,154 +1187,6 @@
       font-family: var(--font-body);
     }
 
-    /* ---------- LIVE NOTIFICATION ---------- */
-    .live-notification {
-      position: fixed;
-      bottom: 30px;
-      right: 20px;
-      background: var(--white);
-      border-radius: 12px;
-      padding: 12px 16px;
-      border-left: 4px solid var(--gold);
-      border-top: 2px solid var(--border-beige);
-      border-right: 2px solid var(--border-beige);
-      border-bottom: 2px solid var(--border-beige);
-      box-shadow: 0 8px 30px var(--shadow-hover);
-      z-index: 9998;
-      max-width: 320px;
-      animation: slideIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-      display: none;
-      transform: translateX(30px);
-      opacity: 0;
-      transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-    .live-notification.show {
-      display: block;
-      transform: translateX(0);
-      opacity: 1;
-    }
-    .live-notification .notif-content {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .live-notification .notif-content .avatar {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: var(--gold);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1rem;
-      border: 2px solid var(--white);
-      color: var(--white);
-      animation: pulse 2s ease-in-out infinite;
-    }
-    .live-notification .notif-content .text { flex: 1; }
-    .live-notification .notif-content .text .name {
-      font-weight: 700;
-      color: var(--gold-dark);
-      font-size: 0.8rem;
-      font-family: var(--font-body);
-    }
-    .live-notification .notif-content .text .action {
-      color: var(--text-dark);
-      font-size: 0.75rem;
-      font-family: var(--font-body);
-    }
-    .live-notification .notif-content .text .time { color: var(--text-muted); font-size: 0.65rem; font-family: var(--font-body); }
-    .live-notification .notif-close {
-      background: none;
-      border: none;
-      color: var(--text-muted);
-      cursor: pointer;
-      font-size: 0.8rem;
-      transition: 0.3s;
-      font-family: var(--font-body);
-    }
-    .live-notification .notif-close:hover { color: var(--gold); transform: scale(1.2); }
-
-   /* ---------- STICKY COD POPUP (BOTTOM LEFT) ---------- */
-    .cod-sticky-popup {
-      position: fixed;
-      bottom: 30px;
-      left: 20px;
-      background: linear-gradient(135deg, #ff0000, #cc0000);
-      color: var(--white);
-      padding: 10px 18px;
-      border-radius: 50px;
-      border: 3px solid var(--gold);
-      box-shadow: 0 8px 32px rgba(192, 57, 43, 0.4);
-      z-index: 9997;
-      font-family: var(--font-heading);
-      font-weight: 400;
-      font-style: italic;
-      font-size: 0.95rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      animation: float 3s ease-in-out infinite;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: default;
-      max-width: 90vw;
-      white-space: nowrap;
-    }
-    .cod-sticky-popup:hover {
-      transform: scale(1.05) translateY(-4px);
-      box-shadow: 0 12px 40px rgba(192, 57, 43, 0.5);
-    }
-    .cod-sticky-popup .popup-icon {
-      font-size: 1.4rem;
-      animation: pulse 2s ease-in-out infinite;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .cod-sticky-popup .popup-text {
-      line-height: 1.2;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      white-space: nowrap;
-    }
-    .cod-sticky-popup .popup-badge {
-      background: var(--white);
-      color: #ff0000;
-      padding: 2px 12px;
-      border-radius: 30px;
-      font-size: 0.6rem;
-      font-weight: 900;
-      font-style: normal;
-      display: inline-block;
-      text-align: center;
-      line-height: 1.4;
-      font-family: var(--font-body);
-    }
-    @media (max-width: 500px) {
-      .cod-sticky-popup {
-        bottom: 16px;
-        left: 12px;
-        padding: 8px 14px;
-        font-size: 0.7rem;
-        border-width: 2px;
-        gap: 6px;
-      }
-      .cod-sticky-popup .popup-icon {
-        font-size: 1.1rem;
-      }
-      .cod-sticky-popup .popup-badge {
-        font-size: 0.5rem;
-        padding: 1px 8px;
-      }
-      .cod-sticky-popup .popup-text {
-        gap: 4px;
-      }
-    }
-
     /* ---------- RESPONSIVE ---------- */
     @media (max-width: 500px) {
       .reviews-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
@@ -1403,9 +1209,9 @@
       .product-detail-item .detail-info .detail-desc { font-size: 0.5rem; }
       .product-detail-item .detail-buy { font-size: 0.45rem; padding: 3px 10px; }
       .cod-highlight-banner { font-size: 1rem; padding: 14px 12px; margin: 20px 12px 20px 12px; }
-      .cod-mega-banner { font-size: 0.85rem; padding: 10px 12px; }
       .hero-cod-strip { font-size: 0.7rem; padding: 8px 16px; margin-bottom: 14px; }
       .hero-section { padding: 30px 16px 40px 16px; }
+      .brands-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (min-width: 768px) {
       .hero-section,
@@ -1420,12 +1226,16 @@
         margin-left: auto;
         margin-right: auto;
       }
+      .footer-directory-grid {
+        flex-direction: row;
+        justify-content: space-between;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- SCROLLING ANNOUNCEMENT BANNER (LEFT TO RIGHT) -->
+  <!-- SCROLLING ANNOUNCEMENT BANNER -->
   <div class="announcement-banner" id="announcementBanner">
     <div class="banner-track">
       <div class="banner-slide">
@@ -1440,8 +1250,6 @@
         <span><a href="#big-product">Shop now →</a></span>
         <span class="separator">|</span>
         <span>🔥 LIMITED STOCK</span>
-        <span class="separator">|</span>
-        <span><a href="#fast-scroll">View Bestsellers →</a></span>
       </div>
       <div class="banner-slide">
         <span>💵 CASH ON DELIVERY</span>
@@ -1455,14 +1263,12 @@
         <span><a href="#big-product">Shop now →</a></span>
         <span class="separator">|</span>
         <span>🔥 LIMITED STOCK</span>
-        <span class="separator">|</span>
-        <span><a href="#fast-scroll">View Bestsellers →</a></span>
       </div>
     </div>
     <button class="close-banner" id="closeBannerBtn">✕</button>
   </div>
 
-  <!-- HEADER (Menu Left, Logo Center, Cart Right) -->
+  <!-- HEADER -->
   <header class="main-header" id="mainHeader">
     <div class="header-left">
       <button class="menu-btn" id="menuToggle"><span></span><span></span><span></span></button>
@@ -1471,27 +1277,24 @@
       <div class="logo-pill"><a href="index.html" style="text-decoration:none;"><span class="logo-text">SNOOQ</span></a></div>
     </div>
     <div class="header-right">
-      <a href="cart.html" class="cart-icon" id="cartLink">
-        🛒<span class="badge" id="cartBadge">0</span>
-      </a>
+      <!-- No cart icon -->
     </div>
   </header>
 
   <!-- OVERLAY -->
   <div class="overlay" id="overlay"></div>
 
-  <!-- DROPDOWN (Left Side) -->
+  <!-- DROPDOWN -->
   <nav class="dropdown-menu" id="dropdownMenu">
     <button class="menu-close" id="menuClose">✕</button>
     <ul>
-      <li><a href="index.html">🏠 Home</a></li>
-      <li><a href="#fast-scroll">🔥 Bestsellers</a></li>
-      <li><a href="#big-product">⭐ Featured</a></li>
-      <li><a href="#product-details">📦 All Products</a></li>
-      <li><a href="shop.html">🛍️ Shop All</a></li>
-      <li><a href="reviews.html">⭐ Reviews</a></li>
-      <li><a href="about.html">📖 About</a></li>
-      <li><a href="contact.html">📞 Contact</a></li>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="#fast-scroll">Bestsellers</a></li>
+      <li><a href="#big-product">Featured</a></li>
+      <li><a href="#product-details">All Products</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#brands">Brands</a></li>
+      <li><a href="contact.html">Contact</a></li>
     </ul>
     <div class="menu-divider"></div>
     <div class="menu-gold-text">✦ Home Essentials ✦</div>
@@ -1500,17 +1303,16 @@
   <!-- LIVE NOTIFICATION -->
   <div class="live-notification" id="liveNotif">
     <div class="notif-content">
-      <div class="avatar" id="notifAvatar">🛍️</div>
       <div class="text">
-        <div class="name" id="notifName">Sarah</div>
-        <div class="action" id="notifAction">just bought <strong>Kitchen Combo</strong></div>
+        <div class="name" id="notifName">Priya</div>
+        <div class="action" id="notifAction">just bought <strong>20-in-1 Combo</strong></div>
         <div class="time" id="notifTime">Just now</div>
       </div>
       <button class="notif-close" onclick="this.closest('.live-notification').classList.remove('show')">✕</button>
     </div>
   </div>
 
-  <!-- STICKY COD POPUP (BOTTOM LEFT) -->
+  <!-- STICKY COD POPUP -->
   <div class="cod-sticky-popup">
     <span class="popup-text">COD <span class="popup-badge">Only</span></span>
   </div>
@@ -1518,7 +1320,7 @@
   <!-- HERO SECTION -->
   <section class="hero-section">
     <div class="hero-bg-wrapper">
-      <img src="image/IMG_2445.PNG" alt="Hero Background" />
+      <img src="image/IMG_2431.PNG" alt="Hero Background" />
     </div>
     <div class="hero-content">
       <h1 class="headline-heavy">20 Useful<br/>Home gadgets<br/>just ₹999</h1>
@@ -1530,17 +1332,15 @@
     </div>
   </section>
 
-  <!-- COD HIGHLIGHT BANNER (mid-page) -->
+  <!-- COD HIGHLIGHT BANNER -->
   <div class="cod-highlight-banner">
-    
-    <span>PAY ON DELIVERY</span>
-    <span class="cod-badge">COD</span>
-    <span class="small-text">· No hidden charges ·</span>
+    <span>CASH ON DELIVERY</span>
+    <span class="cod-badge">ONLY</span>
+    <span class="small-text">NO HIDDEN CHARGES · SHIPPING ALL OVER INDIA</span>
   </div>
 
-  <!-- FAST SCROLLING COLLECTIONS (SQUARE & COMPACT) -->
+  <!-- FAST SCROLLING COLLECTIONS -->
   <section class="fast-scroll-section" id="fast-scroll">
-    <h2 class="section-title-italic">Bestsellers</h2>
     <div class="fast-scroll-track" id="fastTrack">
       <div class="fast-scroll-item"><img src="image/IMG_2430.PNG" alt="Shelf Rack" /><h4>Bathroom Shelf</h4><span class="cod-tag">PACK OF 2</span></div>
       <div class="fast-scroll-item"><img src="image/IMG_2432.PNG" alt="Soap Holder" /><h4>Soap Holder</h4><span class="cod-tag">PACK OF 2</span></div>
@@ -1552,16 +1352,15 @@
       <div class="fast-scroll-item"><img src="image/IMG_2443.PNG" alt="Spice Jar" /><h4>Spice Jar</h4><span class="cod-tag">PACK OF 4</span></div>
       <div class="fast-scroll-item"><img src="image/IMG_2445.PNG" alt="Oil Bottle" /><h4>Oil Bottle</h4><span class="cod-tag">PACK OF 2</span></div>
       <div class="fast-scroll-item"><img src="image/IMG_2449.PNG" alt="Spatula Brush" /><h4>Spatula Brush</h4><span class="cod-tag">PACK OF 2</span></div>
-      <div class="fast-scroll-item"><img src="image/IMG_2451.PNG" alt="Funnel" /><h4>Silicone Funnel</h4><span class="cod-tag">PACK OF 1S</span></div>
+      <div class="fast-scroll-item"><img src="image/IMG_2451.PNG" alt="Funnel" /><h4>Silicone Funnel</h4><span class="cod-tag">PACK OF 1</span></div>
       <div class="fast-scroll-item"><img src="image/IMG_2451.PNG" alt="Hook Hanger" /><h4>6 Hook Hanger</h4><span class="cod-tag">PACK OF 1</span></div>
-      <!-- duplicate for seamless loop -->
       <div class="fast-scroll-item"><img src="image/IMG_2430.PNG" alt="Shelf Rack" /><h4>Bathroom Shelf</h4><span class="cod-tag">PACK OF 2</span></div>
       <div class="fast-scroll-item"><img src="image/IMG_2432.PNG" alt="Soap Holder" /><h4>Soap Holder</h4><span class="cod-tag">PACK OF 2</span></div>
       <div class="fast-scroll-item"><img src="image/IMG_2433.PNG" alt="Cleaning Brush" /><h4>Cleaning Brush</h4><span class="cod-tag">PACK OF 1</span></div>
     </div>
   </section>
 
-  <!-- BIG PRODUCT CARD (SQUARE IMAGE) -->
+  <!-- BIG PRODUCT CARD -->
   <section class="big-product-section" id="big-product">
     <div class="big-product-card">
       <img src="image/IMG_2431.PNG" alt="Kitchen Combo" class="big-img" />
@@ -1571,8 +1370,8 @@
       <div class="big-sold">🔥 9,847 sold</div>
       <p class="big-desc">20 essential gadgets · premium quality · COD</p>
       <div class="big-actions">
-        <button class="btn-big-add" id="bigAddBtn"> BUY NOW</button>
-        <a href="product.html" class="btn-big-details">View Details</a>
+        <a href="#checkout-section" class="btn-big-add">BUY NOW</a>
+        <a href="#product-details" class="btn-big-details">View Details</a>
       </div>
     </div>
   </section>
@@ -1581,112 +1380,100 @@
   <section class="product-details-section" id="product-details">
     <h2 class="section-title-italic">20-IN-1 COMBO PRODUCTS</h2>
     <div class="product-details-grid">
-      <a href="product.html" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
+      <a href="#checkout-section" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
         <div class="detail-image"><img src="image/IMG_2430.PNG" alt="Shelf Rack" /></div>
         <div class="detail-info">
           <h4>Bathroom Shelf Rack</h4>
-          
           <div class="detail-desc">Stainless steel · wall mount</div>
-          <span class="detail-buy" onclick="event.stopPropagation(); addToCart('Shelf Rack', 149)">Add to Cart</span>
+          <span class="detail-buy">VIEW PRODUCT</span>
         </div>
       </a>
-      <a href="product.html" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
+      <a href="#checkout-section" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
         <div class="detail-image"><img src="image/IMG_2432.PNG" alt="Soap Holder" /></div>
         <div class="detail-info">
           <h4>Wall Mounted Soap Holder</h4>
-          
           <div class="detail-desc">Premium · rust-proof</div>
-          <span class="detail-buy" onclick="event.stopPropagation(); addToCart('Soap Holder', 149)">Add to Cart</span>
+          <span class="detail-buy">VIEW PRODUCT</span>
         </div>
       </a>
-      <a href="product.html" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
+      <a href="#checkout-section" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
         <div class="detail-image"><img src="image/IMG_2514.PNG" alt="Hook Hanger" /></div>
         <div class="detail-info">
           <h4>6 Hook Hanger</h4>
-          
           <div class="detail-desc">Strong adhesive · multi-use</div>
-          <span class="detail-buy" onclick="event.stopPropagation(); addToCart('Hook Hanger', 149)">Add to Cart</span>
+          <span class="detail-buy">VIEW PRODUCT</span>
         </div>
       </a>
-      <a href="product.html" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
+      <a href="#checkout-section" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
         <div class="detail-image"><img src="image/IMG_2433.PNG" alt="Cleaning Brush" /></div>
         <div class="detail-info">
           <h4>Long Handle Cleaning Brush</h4>
-          
           <div class="detail-desc">Ergonomic · durable bristles</div>
-          <span class="detail-buy" onclick="event.stopPropagation(); addToCart('Cleaning Brush', 149)">Add to Cart</span>
+          <span class="detail-buy">VIEW PRODUCT</span>
         </div>
       </a>
-      <a href="product.html" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
+      <a href="#checkout-section" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
         <div class="detail-image"><img src="image/IMG_2435.PNG" alt="Strainer" /></div>
         <div class="detail-info">
           <h4>Sink Strainer Basket</h4>
-          
           <div class="detail-desc">Stainless steel · easy clean</div>
-          <span class="detail-buy" onclick="event.stopPropagation(); addToCart('Strainer', 149)">Add to Cart</span>
+          <span class="detail-buy">VIEW PRODUCT</span>
         </div>
       </a>
-      <a href="product.html" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
+      <a href="#checkout-section" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
         <div class="detail-image"><img src="image/IMG_2438.PNG" alt="Scrub Brush" /></div>
         <div class="detail-info">
           <h4>Scrub Brush</h4>
-          
           <div class="detail-desc">Heavy duty · non-scratch</div>
-          <span class="detail-buy" onclick="event.stopPropagation(); addToCart('Scrub Brush', 149)">Add to Cart</span>
+          <span class="detail-buy">VIEW PRODUCT</span>
         </div>
       </a>
-      <a href="product.html" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
+      <a href="#checkout-section" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
         <div class="detail-image"><img src="image/IMG_2439.PNG" alt="Soap Pump" /></div>
         <div class="detail-info">
           <h4>3in1 Soap Pump Dispenser</h4>
-          
           <div class="detail-desc">Multi-purpose · leak-proof</div>
-          <span class="detail-buy" onclick="event.stopPropagation(); addToCart('Soap Pump', 149)">Add to Cart</span>
+          <span class="detail-buy">VIEW PRODUCT</span>
         </div>
       </a>
-      <a href="product.html" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
+      <a href="#checkout-section" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
         <div class="detail-image"><img src="image/IMG_2442.PNG" alt="Mesh Cloth" /></div>
         <div class="detail-info">
           <h4>Mesh Cleaning Cloths</h4>
-          
           <div class="detail-desc">Scratch-free · reusable</div>
-          <span class="detail-buy" onclick="event.stopPropagation(); addToCart('Mesh Cloth', 149)">Add to Cart</span>
+          <span class="detail-buy">VIEW PRODUCT</span>
         </div>
       </a>
-      <a href="product.html" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
+      <a href="#checkout-section" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
         <div class="detail-image"><img src="image/IMG_2443.PNG" alt="Spice Jar" /></div>
         <div class="detail-info">
           <h4>Spice Jar Set</h4>
-          
           <div class="detail-desc">Airtight · glass bottles</div>
-          <span class="detail-buy" onclick="event.stopPropagation(); addToCart('Spice Jar', 149)">Add to Cart</span>
+          <span class="detail-buy">VIEW PRODUCT</span>
         </div>
       </a>
-      <a href="product.html" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
+      <a href="#checkout-section" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
         <div class="detail-image"><img src="image/IMG_2445.PNG" alt="Oil Bottle" /></div>
         <div class="detail-info">
           <h4>Glass Oil Bottles</h4>
-          
           <div class="detail-desc">Drip-free · premium glass</div>
-          <span class="detail-buy" onclick="event.stopPropagation(); addToCart('Oil Bottle', 149)">Add to Cart</span>
+          <span class="detail-buy">VIEW PRODUCT</span>
         </div>
       </a>
-      <a href="product.html" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
+      <a href="#checkout-section" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
         <div class="detail-image"><img src="image/IMG_2451.PNG" alt="Funnel" /></div>
         <div class="detail-info">
           <h4>Silicone Funnel</h4>
-          
           <div class="detail-desc">Flexible · heat resistant</div>
-          <span class="detail-buy" onclick="event.stopPropagation(); addToCart('Funnel', 149)">Add to Cart</span>
+          <span class="detail-buy">VIEW PRODUCT</span>
         </div>
       </a>
-      <a href="product.html" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
+      <a href="#checkout-section" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
         <div class="detail-image"><img src="image/IMG_2449.PNG" alt="Spatula Brush" /></div>
         <div class="detail-info">
           <h4>Spatula & Basting Brush</h4>
-          
           <div class="detail-desc">Silicone · non-stick safe</div>
-          <span class="detail-buy" onclick="event.stopPropagation(); addToCart('Spatula Brush', 149)">Add to Cart</span>
+          <span class="detail-buy">VIEW PRODUCT</span>
         </div>
       </a>
     </div>
@@ -1694,7 +1481,7 @@
 
   <!-- INFO CARDS -->
   <section class="product-info-section">
-     <div class="reviews-header">
+    <div class="reviews-header">
       <h2 class="section-title-italic">OUR PROMISES</h2>
     </div>
     <div class="product-info-grid">
@@ -1705,7 +1492,7 @@
   </section>
 
   <!-- REVIEWS -->
-  <section class="reviews-section">
+  <section class="reviews-section" id="reviews">
     <div class="reviews-header">
       <h2 class="section-title-italic">Customer Reviews</h2>
       <span class="reviews-total">⭐ 4.6 · 5,639 reviews</span>
@@ -1716,10 +1503,10 @@
       <div class="review-card"><div class="stars">★★★★☆</div><p class="review-text">"Great value for money. The spatula set is very durable."</p><span class="reviewer">— Ravi K.</span></div>
       <div class="review-card"><div class="stars">★★★★★</div><p class="review-text">"Best kitchen gadgets I've ever bought. Will buy again!"</p><span class="reviewer">— Ananya R.</span></div>
     </div>
-    <div style="text-align:center;margin-top:16px;"><a href="reviews.html" class="btn-solid-primary" style="max-width:200px;margin:0 auto;">Read all reviews</a></div>
+    <div style="text-align:center;margin-top:16px;"><a href="#checkout-section" class="btn-solid-primary" style="max-width:200px;margin:0 auto;">Buy Combo Now</a></div>
   </section>
 
-  <!-- MILESTONE -->
+  <!-- MILESTONE SECTION -->
   <section class="milestone-tracker-section">
     <h2 class="section-title-italic">Milestone</h2>
     <div class="red-milestone-box">
@@ -1727,17 +1514,119 @@
       <p class="milestone-explainer-text">Gadgets sold worldwide. Join thousands of happy customers.</p>
       <div class="progress-bar-container"><div class="progress-bar-fill" style="width:90%;"></div><span class="avatar-tracker-icon" style="left:90%;">🏆</span></div>
       <div class="progress-metrics-row"><span>90%</span><span>Few Products Left</span></div>
-      <a href="#big-product" class="btn-solid-dark">Shop now</a>
+      <a href="#checkout-section" class="btn-solid-dark" style="display:block;width:100%;padding:16px;border-radius:8px;font-family:var(--font-heading);font-weight:400;font-style:italic;font-size:1.15rem;text-transform:uppercase;text-decoration:none;text-align:center;border:2px solid var(--gold);background:var(--gold);color:var(--white);transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);">Shop Now</a>
     </div>
   </section>
 
-  <!-- SOCIAL -->
-  <section class="social-feed-section">
-    <h2 class="section-title-italic">Awards</h2>
-    <div class="horizontal-media-scroller">
-      <div class="media-card card-rounded-video"><img src="image/IMG_2414.PNG" /></div>
-      <div class="media-card card-rounded-video"><img src="image/IMG_2431.PNG"/></div>
-      <div class="media-card card-rounded-video"><img src="image/IMG_2431.PNG" /></div>
+  <!-- BRANDS SECTION -->
+  <section class="brands-section" id="brands">
+    <h2 class="section-title-italic">✨ Brands We've Collaborated With</h2>
+    <p class="section-subtitle" style="text-align:center;color:var(--text-muted);margin-bottom:30px;">Trusted by leading brands worldwide</p>
+    <div class="brands-grid">
+      <div class="brand-item"><span class="brand-icon">🏠</span>IKEA</div>
+      <div class="brand-item"><span class="brand-icon">⚡</span>Philips</div>
+      <div class="brand-item"><span class="brand-icon">🍳</span>Prestige</div>
+      <div class="brand-item"><span class="brand-icon">🔪</span>Victorinox</div>
+      <div class="brand-item"><span class="brand-icon">🧴</span>Dove</div>
+      <div class="brand-item"><span class="brand-icon">🏆</span>Amazon</div>
+      <div class="brand-item"><span class="brand-icon">🛒</span>Flipkart</div>
+      <div class="brand-item"><span class="brand-icon">⭐</span>Nykaa</div>
+    </div>
+  </section>
+
+  <!-- CHECKOUT SECTION -->
+  <section class="checkout-section" id="checkout-section" style="padding:40px 20px 60px;max-width:600px;margin:0 auto;">
+    <h2 class="section-title-italic">🛒 Complete Your Order</h2>
+    <div style="background:var(--white);border-radius:24px;padding:30px;border:2px solid var(--border-beige);box-shadow:0 6px 24px var(--shadow-hover);">
+      <div style="display:flex;gap:20px;align-items:center;margin-bottom:20px;flex-wrap:wrap;">
+        <img src="image/IMG_2431.PNG" alt="Combo" style="width:100px;height:100px;object-fit:cover;border-radius:12px;border:2px solid var(--border-beige);" />
+        <div>
+          <h3 style="font-family:var(--font-heading);font-style:italic;font-weight:400;">20-in-1 Pro Combo Set</h3>
+          <div style="font-family:var(--font-heading);font-style:italic;font-size:1.4rem;color:var(--gold-dark);">₹999 <small style="font-size:0.9rem;color:var(--text-muted);text-decoration:line-through;">₹4500</small></div>
+          <div style="color:var(--text-muted);font-size:0.85rem;">⭐ 4.9 · 9,847 sold</div>
+        </div>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="display:block;font-weight:600;font-size:0.85rem;margin-bottom:4px;">Quantity</label>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <button onclick="updateQty(-1)" style="width:34px;height:34px;border-radius:50%;border:2px solid var(--border-beige);background:var(--white);cursor:pointer;font-size:1.1rem;font-weight:600;">−</button>
+          <span id="qtyDisplay" style="font-size:1.2rem;font-weight:600;min-width:30px;text-align:center;">1</span>
+          <button onclick="updateQty(1)" style="width:34px;height:34px;border-radius:50%;border:2px solid var(--border-beige);background:var(--white);cursor:pointer;font-size:1.1rem;font-weight:600;">+</button>
+        </div>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="display:block;font-weight:600;font-size:0.85rem;margin-bottom:4px;">Full Name *</label>
+        <input type="text" id="fullName" placeholder="Enter your full name" style="width:100%;padding:12px 14px;border:2px solid var(--border-beige);border-radius:8px;font-size:1rem;font-family:var(--font-body);" />
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="display:block;font-weight:600;font-size:0.85rem;margin-bottom:4px;">Phone Number *</label>
+        <input type="tel" id="phone" placeholder="Enter your phone number" style="width:100%;padding:12px 14px;border:2px solid var(--border-beige);border-radius:8px;font-size:1rem;font-family:var(--font-body);" />
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="display:block;font-weight:600;font-size:0.85rem;margin-bottom:4px;">WhatsApp Number *</label>
+        <input type="tel" id="whatsapp" placeholder="Enter your WhatsApp number" style="width:100%;padding:12px 14px;border:2px solid var(--border-beige);border-radius:8px;font-size:1rem;font-family:var(--font-body);" />
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="display:block;font-weight:600;font-size:0.85rem;margin-bottom:4px;">Delivery Address *</label>
+        <input type="text" id="address" placeholder="Street address, building, apartment" style="width:100%;padding:12px 14px;border:2px solid var(--border-beige);border-radius:8px;font-size:1rem;font-family:var(--font-body);" />
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
+        <div>
+          <label style="display:block;font-weight:600;font-size:0.85rem;margin-bottom:4px;">City *</label>
+          <input type="text" id="city" placeholder="City" style="width:100%;padding:12px 14px;border:2px solid var(--border-beige);border-radius:8px;font-size:1rem;font-family:var(--font-body);" />
+        </div>
+        <div>
+          <label style="display:block;font-weight:600;font-size:0.85rem;margin-bottom:4px;">State *</label>
+          <input type="text" id="state" placeholder="State" style="width:100%;padding:12px 14px;border:2px solid var(--border-beige);border-radius:8px;font-size:1rem;font-family:var(--font-body);" />
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
+        <div>
+          <label style="display:block;font-weight:600;font-size:0.85rem;margin-bottom:4px;">Pincode *</label>
+          <input type="text" id="pincode" placeholder="Pincode" style="width:100%;padding:12px 14px;border:2px solid var(--border-beige);border-radius:8px;font-size:1rem;font-family:var(--font-body);" />
+        </div>
+        <div>
+          <label style="display:block;font-weight:600;font-size:0.85rem;margin-bottom:4px;">Country</label>
+          <select id="country" style="width:100%;padding:12px 14px;border:2px solid var(--border-beige);border-radius:8px;font-size:1rem;font-family:var(--font-body);">
+            <option value="India" selected>India</option>
+          </select>
+        </div>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="display:block;font-weight:600;font-size:0.85rem;margin-bottom:4px;">🎫 Coupon Code</label>
+        <div style="display:flex;gap:10px;">
+          <input type="text" id="couponInput" placeholder="Enter coupon code" style="flex:1;padding:10px 14px;border:2px solid var(--border-beige);border-radius:8px;font-size:0.95rem;font-family:var(--font-body);text-transform:uppercase;" />
+          <button onclick="applyCoupon()" style="padding:10px 20px;background:var(--gold);color:var(--white);border:none;border-radius:8px;font-family:var(--font-heading);font-weight:400;font-style:italic;font-size:0.9rem;cursor:pointer;border:2px solid var(--gold);">Apply</button>
+        </div>
+        <div id="couponMessage" style="font-size:0.8rem;margin-top:6px;font-weight:600;"></div>
+      </div>
+      <div style="background:var(--ivory);border-radius:14px;padding:16px;border:2px solid var(--border-beige);margin-bottom:16px;">
+        <div style="display:flex;justify-content:space-between;padding:4px 0;font-size:0.95rem;"><span style="color:var(--text-muted);">Subtotal</span><span id="summarySubtotal">₹999</span></div>
+        <div style="display:flex;justify-content:space-between;padding:4px 0;font-size:0.95rem;"><span style="color:var(--text-muted);">Shipping</span><span style="color:var(--success);">FREE</span></div>
+        <div id="discountRow" style="display:none;justify-content:space-between;padding:4px 0;font-size:0.95rem;"><span style="color:var(--text-muted);">Discount</span><span id="summaryDiscount" style="color:var(--success);">-₹0</span></div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0 4px;font-family:var(--font-heading);font-style:italic;font-size:1.2rem;border-top:2px solid var(--gold);margin-top:4px;"><span>Total</span><span id="summaryTotal">₹999</span></div>
+      </div>
+      <div style="margin-bottom:16px;">
+        <div style="font-weight:600;margin-bottom:8px;">Payment Method</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
+          <div class="payment-method active" onclick="selectPayment(this)" style="padding:12px;border:2px solid var(--gold);border-radius:8px;text-align:center;cursor:pointer;background:rgba(184,155,94,0.08);font-weight:600;font-size:0.85rem;">
+            <span style="font-size:1.6rem;display:block;margin-bottom:4px;">💵</span>
+            Cash on Delivery
+            <span style="display:block;font-size:0.55rem;background:var(--success);color:white;padding:1px 10px;border-radius:20px;margin-top:4px;font-weight:700;">Available</span>
+          </div>
+          <div style="padding:12px;border:2px solid var(--border-beige);border-radius:8px;text-align:center;opacity:0.5;cursor:not-allowed;font-weight:600;font-size:0.85rem;">
+            <span style="font-size:1.6rem;display:block;margin-bottom:4px;">💳</span>
+            Credit/Debit
+            <span style="display:block;font-size:0.55rem;color:var(--text-muted);">Coming Soon</span>
+          </div>
+          <div style="padding:12px;border:2px solid var(--border-beige);border-radius:8px;text-align:center;opacity:0.5;cursor:not-allowed;font-weight:600;font-size:0.85rem;">
+            <span style="font-size:1.6rem;display:block;margin-bottom:4px;">📱</span>
+            UPI / GPay
+            <span style="display:block;font-size:0.55rem;color:var(--text-muted);">Coming Soon</span>
+          </div>
+        </div>
+      </div>
+      <button onclick="placeOrder()" style="width:100%;padding:16px;background:var(--gold);color:var(--white);border:none;border-radius:10px;font-family:var(--font-heading);font-weight:400;font-style:italic;font-size:1.2rem;text-transform:uppercase;cursor:pointer;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);border:2px solid var(--gold);">Place Order · ₹<span id="orderTotalBtn">999</span></button>
     </div>
   </section>
 
@@ -1751,7 +1640,6 @@
           <li><a href="#big-product">Featured</a></li>
           <li><a href="#fast-scroll">Bestsellers</a></li>
           <li><a href="#product-details">All Products</a></li>
-          <li><a href="shop.html">Shop All</a></li>
         </ul>
       </div>
       <div class="directory-column">
@@ -1797,122 +1685,7 @@
     }
 
     // ============================================================
-    // 2. CART SYSTEM
-    // ============================================================
-    let cart = JSON.parse(localStorage.getItem('snooq_cart')) || [];
-
-    function saveCart() {
-      localStorage.setItem('snooq_cart', JSON.stringify(cart));
-      updateCartUI();
-    }
-
-    function updateCartUI() {
-      const badge = document.getElementById('cartBadge');
-      const total = cart.reduce((sum, item) => sum + item.quantity, 0);
-      badge.textContent = total;
-    }
-
-    function addToCart(name, price) {
-      const existing = cart.find(item => item.name === name);
-      if (existing) {
-        existing.quantity += 1;
-      } else {
-        cart.push({ name, price, quantity: 1 });
-      }
-      saveCart();
-      showNotification(`${name} added to cart! 🛒`);
-      showLiveNotification('Someone', `just bought <strong>${name}</strong>`);
-    }
-
-    function addBigCombo() {
-      const items = [
-        'Shelf Rack', 'Soap Holder', 'Hook Hanger', 'Cleaning Brush', 'Strainer',
-        'Scrub Brush', 'Soap Pump', 'Mesh Cloth', 'Spice Jar', 'Oil Bottle',
-        'Funnel', 'Spatula Brush'
-      ];
-      const comboCount = cart.filter(item => items.includes(item.name)).length;
-      if (comboCount >= 12) {
-        showNotification('Combo already in cart! 🛒');
-        return;
-      }
-      cart = cart.filter(item => !items.includes(item.name));
-      items.forEach(name => {
-        cart.push({ name, price: 83.25, quantity: 1 });
-      });
-      saveCart();
-      showNotification('🎉 20-in-1 Combo added to cart!');
-      showLiveNotification('Someone', 'just bought the <strong>20-in-1 Combo</strong>');
-      const btn = document.getElementById('bigAddBtn');
-      btn.textContent = '✅ Added!';
-      btn.style.background = '#9a7f4a';
-      btn.style.borderColor = '#9a7f4a';
-      btn.style.transform = 'scale(1.05)';
-      setTimeout(() => {
-        btn.textContent = '🛒 Add to Cart · ₹999';
-        btn.style.background = 'var(--gold)';
-        btn.style.borderColor = 'var(--gold)';
-        btn.style.transform = 'scale(1)';
-      }, 2500);
-    }
-
-    document.getElementById('bigAddBtn').addEventListener('click', addBigCombo);
-
-    // ============================================================
-    // 3. LIVE NOTIFICATION
-    // ============================================================
-    const customerNames = ['Arjun', 'Priya', 'Ravi', 'Ananya', 'Vikram', 'Sneha', 'Karan', 'Meera', 'Rahul', 'Swati'];
-    const actions = ['just bought', 'purchased', 'added to cart', 'ordered'];
-
-    function getRandomItem(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
-
-    function showLiveNotification(name, action) {
-      const notif = document.getElementById('liveNotif');
-      const nameEl = document.getElementById('notifName');
-      const actionEl = document.getElementById('notifAction');
-      const timeEl = document.getElementById('notifTime');
-      const avatarEl = document.getElementById('notifAvatar');
-
-      const product = getRandomItem(['Shelf Rack', 'Soap Holder', 'Cleaning Brush', 'Oil Bottle', 'Spice Jar']);
-      nameEl.textContent = name || getRandomItem(customerNames);
-      actionEl.innerHTML = (action || getRandomItem(actions)) + ` <strong>${product}</strong>`;
-      timeEl.textContent = 'Just now';
-      avatarEl.textContent = ['🛍️', '🍳', '🔪', '🥄', '🧂'][Math.floor(Math.random() * 5)];
-
-      notif.classList.add('show');
-      clearTimeout(window.notifTimeout);
-      window.notifTimeout = setTimeout(() => {
-        notif.classList.remove('show');
-      }, 5000);
-    }
-
-    function showNotification(message) {
-      const notif = document.getElementById('liveNotif');
-      const nameEl = document.getElementById('notifName');
-      const actionEl = document.getElementById('notifAction');
-      const timeEl = document.getElementById('notifTime');
-      const avatarEl = document.getElementById('notifAvatar');
-
-      nameEl.textContent = '🛒 SNOOQ';
-      actionEl.innerHTML = message;
-      timeEl.textContent = 'Just now';
-      avatarEl.textContent = '🛒';
-      notif.classList.add('show');
-      clearTimeout(window.notifTimeout);
-      window.notifTimeout = setTimeout(() => {
-        notif.classList.remove('show');
-      }, 4000);
-    }
-
-    function startLiveNotifications() {
-      setInterval(() => {
-        if (Math.random() > 0.3) {
-          showLiveNotification();
-        }
-      }, 8000 + Math.random() * 7000);
-    }
-
-    // ============================================================
-    // 4. DROPDOWN MENU (Left Side)
+    // 2. DROPDOWN MENU (Left Side)
     // ============================================================
     const menuToggle = document.getElementById('menuToggle');
     const dropdownMenu = document.getElementById('dropdownMenu');
@@ -1941,7 +1714,7 @@
     dropdownMenu.querySelectorAll('a').forEach(function(link) { link.addEventListener('click', closeMenu); });
 
     // ============================================================
-    // 5. STICKY HEADER
+    // 3. STICKY HEADER
     // ============================================================
     const header = document.querySelector('.main-header');
     window.addEventListener('scroll', function() {
@@ -1953,7 +1726,244 @@
     });
 
     // ============================================================
-    // 6. NEWSLETTER
+    // 4. LIVE NOTIFICATION - SLOWER & EVEN (ONLY COMBO)
+    // ============================================================
+    const indianGirlNames = [
+      'Priya', 'Ananya', 'Sneha', 'Meera', 'Kavya', 'Riya', 'Isha', 'Anjali', 'Neha', 'Swati',
+      'Pooja', 'Ritu', 'Divya', 'Nisha', 'Rekha', 'Shreya', 'Tanya', 'Vani', 'Yamini', 'Zara',
+      'Aanya', 'Bhavna', 'Chaitra', 'Disha', 'Esha', 'Farah', 'Gauri', 'Hema', 'Ishita', 'Jaya',
+      'Khushi', 'Lavanya', 'Mitali', 'Nandini', 'Ojasvi', 'Pallavi', 'Radhika', 'Sana', 'Tara'
+    ];
+    let usedNames = [];
+    let notificationInterval;
+
+    function getRandomIndianName() {
+      if (usedNames.length >= indianGirlNames.length) {
+        usedNames = [];
+      }
+      const available = indianGirlNames.filter(name => !usedNames.includes(name));
+      const randomName = available[Math.floor(Math.random() * available.length)];
+      usedNames.push(randomName);
+      return randomName;
+    }
+
+    const actions = ['just bought', 'purchased', 'ordered', 'added to cart'];
+
+    function showLiveNotification(name, action) {
+      const notif = document.getElementById('liveNotif');
+      const nameEl = document.getElementById('notifName');
+      const actionEl = document.getElementById('notifAction');
+      const timeEl = document.getElementById('notifTime');
+
+      const displayName = name || getRandomIndianName();
+      nameEl.textContent = displayName;
+      actionEl.innerHTML = (action || actions[Math.floor(Math.random() * actions.length)]) + ' <strong>20-in-1 Combo Set</strong>';
+      timeEl.textContent = 'Just now';
+
+      notif.classList.add('show');
+      clearTimeout(window.notifTimeout);
+      window.notifTimeout = setTimeout(() => {
+        notif.classList.remove('show');
+      }, 5000);
+    }
+
+    function showNotification(message) {
+      const notif = document.getElementById('liveNotif');
+      const nameEl = document.getElementById('notifName');
+      const actionEl = document.getElementById('notifAction');
+      const timeEl = document.getElementById('notifTime');
+
+      nameEl.textContent = '🛒 SNOOQ';
+      actionEl.innerHTML = message;
+      timeEl.textContent = 'Just now';
+      notif.classList.add('show');
+      clearTimeout(window.notifTimeout);
+      window.notifTimeout = setTimeout(() => {
+        notif.classList.remove('show');
+      }, 4000);
+    }
+
+    function startLiveNotifications() {
+      setTimeout(() => {
+        showLiveNotification();
+      }, 5000);
+      
+      notificationInterval = setInterval(() => {
+        if (Math.random() > 0.4) {
+          showLiveNotification();
+        }
+      }, 12000 + Math.random() * 6000);
+    }
+
+    // ============================================================
+    // 5. CHECKOUT FUNCTIONS
+    // ============================================================
+    let quantity = 1;
+    const price = 999;
+    let couponDiscount = 0;
+
+    function updateQty(change) {
+      quantity += change;
+      if (quantity < 1) quantity = 1;
+      document.getElementById('qtyDisplay').textContent = quantity;
+      updateSummary();
+    }
+
+    function updateSummary() {
+      const subtotal = price * quantity;
+      const total = subtotal - couponDiscount;
+      document.getElementById('summarySubtotal').textContent = '₹' + subtotal;
+      document.getElementById('summaryTotal').textContent = '₹' + total.toFixed(2);
+      document.getElementById('orderTotalBtn').textContent = total.toFixed(2);
+    }
+
+    function applyCoupon() {
+      const input = document.getElementById('couponInput');
+      const message = document.getElementById('couponMessage');
+      const code = input.value.trim().toUpperCase();
+
+      const coupons = {
+        'SAVE10': 10,
+        'SAVE20': 20,
+        'SNOOQ15': 15,
+        'WELCOME': 5,
+        'FIRST': 10
+      };
+
+      if (!code) {
+        message.textContent = 'Please enter a coupon code';
+        message.style.color = 'var(--danger)';
+        return;
+      }
+
+      if (coupons[code]) {
+        const discountPercent = coupons[code];
+        const subtotal = price * quantity;
+        couponDiscount = (subtotal * discountPercent) / 100;
+        if (couponDiscount > 200) couponDiscount = 200;
+
+        document.getElementById('discountRow').style.display = 'flex';
+        document.getElementById('summaryDiscount').textContent = '-₹' + couponDiscount.toFixed(2);
+        message.textContent = '✅ Coupon applied! You saved ₹' + couponDiscount.toFixed(2);
+        message.style.color = 'var(--success)';
+        input.style.borderColor = 'var(--success)';
+        updateSummary();
+      } else {
+        message.textContent = '❌ Invalid coupon code. Try SAVE10, SAVE20, SNOOQ15';
+        message.style.color = 'var(--danger)';
+        input.style.borderColor = 'var(--danger)';
+      }
+    }
+
+    document.getElementById('couponInput').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') applyCoupon();
+    });
+
+    function selectPayment(el) {
+      const firstOption = document.querySelector('.payment-method');
+      document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('active'));
+      firstOption.classList.add('active');
+      if (el !== firstOption) {
+        showNotification('Only Cash on Delivery is available at the moment.');
+      }
+    }
+
+    // ============================================================
+    // 6. PLACE ORDER - WITH TELEGRAM NOTIFICATION
+    // ============================================================
+    function placeOrder() {
+      const name = document.getElementById('fullName').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const whatsapp = document.getElementById('whatsapp').value.trim();
+      const address = document.getElementById('address').value.trim();
+      const city = document.getElementById('city').value.trim();
+      const state = document.getElementById('state').value.trim();
+      const pincode = document.getElementById('pincode').value.trim();
+
+      if (!name || !phone || !whatsapp || !address || !city || !state || !pincode) {
+        showNotification('Please fill all required fields!');
+        return;
+      }
+
+      const orderId = 'SNOOQ-' + Date.now().toString().slice(-6);
+      const total = document.getElementById('summaryTotal').textContent.replace('₹', '');
+      const coupon = document.getElementById('couponInput').value || 'None';
+
+      // ===== TELEGRAM NOTIFICATION =====
+      // Bot: @Snooq_bot
+      const botToken = '8797651346:AAGKGVsY37o7WTiopQx2dDk60IjoB9B9tQ0';
+      const chatId = '8797651346';
+
+      const message = `
+🛒 *NEW ORDER RECEIVED!* 🛒
+━━━━━━━━━━━━━━━━━━━
+
+📋 *Order ID:* ${orderId}
+👤 *Customer:* ${name}
+📱 *Phone:* ${phone}
+📱 *WhatsApp:* ${whatsapp}
+🏠 *Address:* ${address}, ${city}, ${state} - ${pincode}
+📦 *Product:* 20-in-1 Combo Set (${quantity}x)
+💰 *Amount:* ₹${total}
+🎫 *Coupon:* ${coupon}
+📅 *Date:* ${new Date().toLocaleString()}
+━━━━━━━━━━━━━━━━━━━
+✅ *Payment:* Cash on Delivery
+      `;
+
+      console.log('📤 Sending to Telegram...');
+      console.log('Bot Token:', botToken);
+      console.log('Chat ID:', chatId);
+      console.log('Message:', message);
+
+      // Send to Telegram
+      fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: message,
+          parse_mode: 'Markdown'
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('📥 Telegram Response:', data);
+        if (data.ok) {
+          console.log('✅ Telegram notification sent to @Snooq_bot!');
+          showNotification('🎉 Order #' + orderId + ' placed successfully!');
+        } else {
+          console.error('❌ Telegram error:', data);
+          showNotification('⚠️ Order placed! Check console for error.');
+        }
+      })
+      .catch(error => {
+        console.error('❌ Telegram error:', error);
+        showNotification('⚠️ Order placed! Check your Telegram.');
+      });
+      
+      // Clear form
+      document.getElementById('fullName').value = '';
+      document.getElementById('phone').value = '';
+      document.getElementById('whatsapp').value = '';
+      document.getElementById('address').value = '';
+      document.getElementById('city').value = '';
+      document.getElementById('state').value = '';
+      document.getElementById('pincode').value = '';
+      document.getElementById('couponInput').value = '';
+      document.getElementById('discountRow').style.display = 'none';
+      couponDiscount = 0;
+      quantity = 1;
+      document.getElementById('qtyDisplay').textContent = '1';
+      updateSummary();
+      
+      setTimeout(() => {
+        showLiveNotification();
+      }, 1000);
+    }
+
+    // ============================================================
+    // 7. NEWSLETTER
     // ============================================================
     const newsletterForm = document.getElementById('newsletterForm');
     const emailInput = document.getElementById('emailInput');
@@ -1972,7 +1982,7 @@
     });
 
     // ============================================================
-    // 7. INTERSECTION OBSERVER
+    // 8. INTERSECTION OBSERVER
     // ============================================================
     const observer = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
@@ -1998,7 +2008,7 @@
     });
 
     // ============================================================
-    // 8. PROGRESS BAR ANIMATION
+    // 9. PROGRESS BAR ANIMATION
     // ============================================================
     const progressFill = document.querySelector('.progress-bar-fill');
     if (progressFill) {
@@ -2013,11 +2023,14 @@
     }
 
     // ============================================================
-    // 9. INIT
+    // 10. INIT
     // ============================================================
-    updateCartUI();
+    updateSummary();
     startLiveNotifications();
-    console.log('🏠 SNOOQ — Left to Right Scrolling Banner');
+    console.log('🏠 SNOOQ — Home Gadgets Store with Telegram Notifications');
+    console.log('🤖 Telegram Bot: @Snooq_bot');
+    console.log('📱 Bot Token:', '8797651346:AAGKGVsY37o7WTiopQx2dDk60IjoB9B9tQ0');
+    console.log('👤 Chat ID:', '8797651346');
   </script>
 </body>
 </html>
