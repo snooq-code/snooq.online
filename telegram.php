@@ -1,7 +1,7 @@
 <?php
 // telegram.php - Place this in your website root folder
 
-// Allow from any origin
+// Allow CORS
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Accept');
