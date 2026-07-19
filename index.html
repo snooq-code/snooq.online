@@ -132,7 +132,6 @@
 <div class="toast" id="toast">
   <div id="toastMessage">Order placed!</div>
 </div>
-
 <script>
   // ============================================================
   // SHOW TOAST NOTIFICATION
@@ -150,10 +149,14 @@
   }
 
   // ============================================================
-  // PLACE ORDER - EMAIL METHOD (WORKS 100% ON GITHUB PAGES)
+  // PLACE ORDER - TELEGRAM METHOD (WORKS 100% ON GITHUB PAGES)
   // ============================================================
   document.getElementById('orderForm').addEventListener('submit', function(e) {
     e.preventDefault();
+
+    // 1. TELEGRAM CONFIGURATION
+    const BOT_TOKEN = '8797651346:AAGKGVsY37o7WTiopQx2dDk60IjoB9B9tQ0'; 
+    const CHAT_ID = '8797651346'; 
 
     // Get form values
     const name = document.getElementById('fullName').value.trim();
@@ -172,43 +175,63 @@
 
     const orderId = 'SNOOQ-' + Date.now().toString().slice(-6);
     const btn = document.getElementById('submitBtn');
+    
+    // Disable button to prevent double submission
     btn.disabled = true;
-    btn.textContent = '⏳ Opening email...';
+    btn.textContent = '⏳ Processing Order...';
 
-    // Build email content
-    const subject = encodeURIComponent('🛒 NEW ORDER: ' + orderId);
-    const body = encodeURIComponent(`
-🛒 NEW ORDER RECEIVED! 🛒
-━━━━━━━━━━━━━━━━━━━
+    // Clean up WhatsApp number (removes extra spaces or plus symbols if entered)
+    const cleanWhatsapp = whatsapp.replace(/\D/g, '');
 
-📋 Order ID: ${orderId}
-👤 Customer: ${name}
-📱 Phone: ${phone}
-📱 WhatsApp: ${whatsapp}
-🏠 Address: ${address}, ${city}, ${state} - ${pincode}
-📦 Product: 20-in-1 Combo Set (1x)
-💰 Amount: ₹999.00
-🎫 Coupon: None
-📅 Date: ${new Date().toLocaleString()}
-━━━━━━━━━━━━━━━━━━━
-✅ Payment: Cash on Delivery
+    // 2. BUILD CLEAN TELEGRAM MESSAGE LAYOUT
+    const message = `🛍️ *NEW ORDER RECEIVED!* 🛍️\n` +
+                    `━━━━━━━━━━━━━━━━━━━\n\n` +
+                    `📋 *Order ID:* \`${orderId}\`\n` +
+                    `👤 *Customer:* ${name}\n` +
+                    `📱 *Phone:* ${phone}\n` +
+                    `💬 *WhatsApp:* [Chat with Customer](https://wa.me{cleanWhatsapp})\n\n` +
+                    `🏠 *Address:* ${address},\n` +
+                    `📍 ${city}, ${state} - ${pincode}\n\n` +
+                    `📦 *Product:* 20-in-1 Combo Set (1x)\n` +
+                    `💰 *Amount:* ₹999.00\n` +
+                    `📅 *Date:* ${new Date().toLocaleString()}\n` +
+                    `━━━━━━━━━━━━━━━━━━━\n` +
+                    `✅ *Payment:* Cash on Delivery`;
 
-━━━━━━━━━━━━━━━━━━━
-Please process this order.
-    `);
-
-    // ===== OPEN EMAIL =====
-    // 🔴 REPLACE YOUR_EMAIL@gmail.com WITH YOUR ACTUAL EMAIL ADDRESS
-    const yourEmail = 'abusabith262626@gmail.com';
+    // 3. SEND TO TELEGRAM API USING FETCH
+    const telegramUrl = `https://telegram.org{BOT_TOKEN}/sendMessage`;
     
-    window.location.href = `mailto:${yourEmail}?subject=${subject}&body=${body}`;
-
-    showToast('📧 Opening email... Please click Send!', 'success');
-    
-    // Reset form
-    document.getElementById('orderForm').reset();
-    btn.disabled = false;
-    btn.textContent = 'Place Order · ₹999';
+    fetch(telegramUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        chat_id: CHAT_ID,
+        text: message,
+        parse_mode: 'Markdown',
+        disable_web_page_preview: true
+      })
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response failed');
+      }
+      return response.json();
+    })
+    .then(data => {
+      showToast('🎉 Order Placed Successfully!', 'success');
+      document.getElementById('orderForm').reset();
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      showToast('❌ Failed to place order. Try again!', 'error');
+    })
+    .finally(() => {
+      // Re-enable button
+      btn.disabled = false;
+      btn.textContent = 'Place Order · ₹999';
+    });
   });
 </script>
 
