@@ -1871,7 +1871,7 @@
     // ============================================================
     // 6. PLACE ORDER - WITH TELEGRAM NOTIFICATION
     // ============================================================
-  function placeOrder() {
+ function placeOrder() {
     const name = document.getElementById('fullName').value.trim();
     const phone = document.getElementById('phone').value.trim();
     const whatsapp = document.getElementById('whatsapp').value.trim();
@@ -1909,7 +1909,7 @@
 
     console.log('📤 Sending order via PHP proxy...');
 
-    // ===== SEND VIA PHP PROXY (NOT DIRECT) =====
+    // ===== SEND VIA PHP PROXY =====
     fetch('/telegram.php', {
         method: 'POST',
         headers: { 
@@ -1918,8 +1918,10 @@
         },
         body: JSON.stringify({ message: message })
     })
-    .then(response => response.json())
-    .then(data => {
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(data) {
         console.log('📥 Server Response:', data);
         if (data.success) {
             console.log('✅ Telegram notification sent to @Snooq_bot!');
@@ -1929,10 +1931,30 @@
             showNotification('⚠️ Order placed! Check your Telegram.');
         }
     })
-    .catch(error => {
+    .catch(function(error) {
         console.error('❌ Network error:', error);
         showNotification('⚠️ Order placed! Check your Telegram.');
     });
+    
+    // Clear form
+    document.getElementById('fullName').value = '';
+    document.getElementById('phone').value = '';
+    document.getElementById('whatsapp').value = '';
+    document.getElementById('address').value = '';
+    document.getElementById('city').value = '';
+    document.getElementById('state').value = '';
+    document.getElementById('pincode').value = '';
+    document.getElementById('couponInput').value = '';
+    document.getElementById('discountRow').style.display = 'none';
+    couponDiscount = 0;
+    quantity = 1;
+    document.getElementById('qtyDisplay').textContent = '1';
+    updateSummary();
+    
+    setTimeout(function() {
+        showLiveNotification();
+    }, 1000);
+}
     
     // Clear form
     document.getElementById('fullName').value = '';
