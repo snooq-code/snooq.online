@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SNOOQ — Kitchen Gadgets</title>
+  <title>SNOOQ — Home Gadgets</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,900&family=Public+Sans:ital,wght@0,400;0,600;1,700&display=swap" rel="stylesheet" />
@@ -27,6 +27,8 @@
       --shadow-hover: rgba(0, 0, 0, 0.05);
       --font-heading: 'Montserrat', sans-serif;
       --font-body: 'Public Sans', sans-serif;
+      --cod-red: #c0392b;
+      --cod-gold: #f1c40f;
     }
 
     body {
@@ -80,6 +82,42 @@
       vertical-align: middle;
     }
     .announcement-banner .close-banner:hover { opacity: 1; transform: scale(1.2); }
+
+    /* ---------- COD MEGA BANNER ---------- */
+    .cod-mega-banner {
+      background: linear-gradient(135deg, #c0392b 0%, #e74c3c 100%);
+      color: var(--white);
+      text-align: center;
+      padding: 14px 16px;
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      border-bottom: 4px solid var(--gold);
+      position: relative;
+      z-index: 1099;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .cod-mega-banner span {
+      background: var(--white);
+      color: #c0392b;
+      padding: 2px 14px;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 900;
+    }
+    .cod-mega-banner .cod-icon {
+      font-size: 1.6rem;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+    }
 
     /* ---------- GLOBAL ---------- */
     .fade-in-up {
@@ -372,7 +410,7 @@
     }
     .overlay.active { opacity: 1; pointer-events: all; }
 
-    /* ---------- HERO (FIXED) ---------- */
+    /* ---------- HERO ---------- */
     .hero-section {
       position: relative;
       height: 90vh;
@@ -380,7 +418,7 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      padding: 30px 20px 40px 20px;
+      padding: 40px 20px 50px 20px;
       background: linear-gradient(135deg, #2d2a24 0%, #5a4d3a 100%);
       overflow: hidden;
     }
@@ -412,6 +450,21 @@
       margin: 12px 0 24px 0;
       text-shadow: 0 2px 12px rgba(0,0,0,0.3);
       font-weight: 500;
+    }
+    .hero-cod-strip {
+      display: inline-block;
+      background: rgba(192, 57, 43, 0.92);
+      color: var(--white);
+      padding: 10px 24px;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 20px;
+      border: 2px solid var(--gold);
+      backdrop-filter: blur(4px);
+      box-shadow: 0 4px 20px rgba(192, 57, 43, 0.3);
     }
 
     /* ---------- BIG PRODUCT CARD (SQUARE) ---------- */
@@ -498,20 +551,6 @@
       color: var(--text-muted);
       margin-bottom: 10px;
     }
-    .big-product-card .big-details {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 6px 12px;
-      font-size: 0.7rem;
-      color: var(--text-muted);
-      margin-bottom: 12px;
-      background: var(--ivory);
-      padding: 8px 10px;
-      border-radius: 10px;
-      border: 1px solid var(--border-beige);
-    }
-    .big-product-card .big-details span { display: inline-flex; align-items: center; gap: 3px; }
     .big-product-card .big-actions {
       display: flex;
       gap: 10px;
@@ -566,7 +605,7 @@
       box-shadow: 0 8px 24px var(--shadow-hover);
     }
 
-    /* ---------- FAST SCROLLING COLLECTIONS ---------- */
+    /* ---------- FAST SCROLLING COLLECTIONS (SQUARE & COMPACT) ---------- */
     .fast-scroll-section {
       padding: 10px 0 35px 0;
       overflow: hidden;
@@ -575,9 +614,9 @@
     }
     .fast-scroll-track {
       display: flex;
-      gap: 16px;
+      gap: 12px;
       width: max-content;
-      animation: scrollLeft 20s linear infinite;
+      animation: scrollLeft 25s linear infinite;
     }
     .fast-scroll-track:hover { animation-play-state: paused; }
     @keyframes scrollLeft {
@@ -587,8 +626,9 @@
     .fast-scroll-item {
       background: var(--white);
       border-radius: 14px;
-      padding: 12px 12px;
-      min-width: 140px;
+      padding: 10px 10px 12px;
+      min-width: 120px;
+      max-width: 130px;
       text-align: center;
       border: 2px solid var(--border-beige);
       box-shadow: var(--shadow-sm);
@@ -602,11 +642,11 @@
     }
     .fast-scroll-item img {
       width: 100%;
-      height: 100px;
+      aspect-ratio: 1 / 1;
       object-fit: cover;
       border-radius: 10px;
       border: 2px solid var(--border-beige);
-      margin-bottom: 6px;
+      margin-bottom: 4px;
       transition: transform 0.5s ease;
     }
     .fast-scroll-item:hover img { transform: scale(1.05); }
@@ -614,25 +654,68 @@
       font-family: var(--font-heading);
       font-weight: 900;
       font-style: italic;
-      font-size: 0.8rem;
+      font-size: 0.65rem;
       color: var(--text-dark);
       text-transform: uppercase;
+      line-height: 1.1;
+      margin-bottom: 2px;
     }
     .fast-scroll-item .price {
       font-family: var(--font-heading);
       font-weight: 900;
       font-style: italic;
-      font-size: 0.8rem;
-      color: var(--text-dark);
+      font-size: 0.7rem;
+      color: var(--gold-dark);
     }
-    .fast-scroll-item .price small {
-      font-size: 0.6rem;
-      color: var(--text-muted);
-      text-decoration: line-through;
-      margin-left: 4px;
+    .fast-scroll-item .cod-tag {
+      font-size: 0.5rem;
+      background: #c0392b;
+      color: white;
+      padding: 1px 8px;
+      border-radius: 20px;
+      display: inline-block;
+      font-weight: 700;
+      margin-top: 2px;
+      letter-spacing: 0.3px;
     }
 
-    /* ---------- PRODUCT DETAILS SECTION (TWO-COLUMN CARD) ---------- */
+    /* ---------- COD HIGHLIGHT BANNER (mid-page) ---------- */
+    .cod-highlight-banner {
+      background: linear-gradient(135deg, #b89b5e);
+      color: var(--white);
+      text-align: center;
+      padding: 18px 20px;
+      margin: 30px 16px 30px 16px;
+      border-radius: 16px;
+      border: 3px solid var(--gold);
+      box-shadow: 0 8px 32px rgba(192, 57, 43, 0.3);
+      font-family: var(--font-heading);
+      font-weight: 900;
+      font-style: italic;
+      font-size: 1.4rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .cod-highlight-banner .small-text {
+      font-size: 0.8rem;
+      font-weight: 600;
+      font-style: normal;
+      opacity: 0.9;
+    }
+    .cod-highlight-banner .cod-badge {
+      background: var(--white);
+      color: #c0392b;
+      padding: 4px 18px;
+      border-radius: 30px;
+      font-size: 1rem;
+    }
+
+    /* ---------- PRODUCT DETAILS SECTION ---------- */
     .product-details-section {
       padding: 20px 16px 45px 16px;
     }
@@ -691,41 +774,42 @@
       font-family: var(--font-heading);
       font-weight: 900;
       font-style: italic;
-      font-size: 1rem;
+      font-size: 0.85rem;
       color: var(--text-dark);
       text-transform: uppercase;
       margin-bottom: 2px;
+      line-height: 1.1;
     }
     .product-detail-item .detail-info .detail-price {
       font-family: var(--font-heading);
       font-weight: 900;
       font-style: italic;
-      font-size: 0.95rem;
-      color: var(--text-dark);
+      font-size: 0.85rem;
+      color: var(--gold-dark);
     }
     .product-detail-item .detail-info .detail-price small {
-      font-size: 0.7rem;
+      font-size: 0.65rem;
       color: var(--text-muted);
       text-decoration: line-through;
       margin-left: 5px;
     }
     .product-detail-item .detail-info .detail-desc {
-      font-size: 0.7rem;
+      font-size: 0.6rem;
       color: var(--text-muted);
       margin: 2px 0 6px;
-      line-height: 1.3;
+      line-height: 1.2;
     }
     .product-detail-item .detail-buy {
       align-self: flex-start;
       background: var(--gold);
       color: var(--white);
       border: 2px solid var(--gold);
-      padding: 5px 16px;
+      padding: 4px 14px;
       border-radius: 30px;
       font-family: var(--font-heading);
       font-weight: 900;
       font-style: italic;
-      font-size: 0.65rem;
+      font-size: 0.55rem;
       text-transform: uppercase;
       cursor: pointer;
       transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -738,6 +822,18 @@
       background: var(--gold-dark);
       border-color: var(--gold-dark);
       transform: scale(1.08);
+    }
+    .product-detail-item .detail-cod-tag {
+      font-size: 0.45rem;
+      background: #c0392b;
+      color: white;
+      padding: 1px 10px;
+      border-radius: 20px;
+      display: inline-block;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      margin-top: 2px;
+      width: fit-content;
     }
 
     /* ---------- INFO CARDS ---------- */
@@ -1057,24 +1153,24 @@
       border-top: 2px solid var(--gold-dark);
     }
 
-    /* ---------- CART POPUP ---------- */
+    /* ---------- CART POPUP (SMALL, RED BG, WHITE TEXT) ---------- */
     .cart-popup {
       position: fixed;
       top: 80px;
       right: 20px;
-      width: 340px;
-      max-height: 80vh;
-      background: var(--white);
-      border-radius: 16px;
-      border: 2px solid var(--border-beige);
-      box-shadow: 0 20px 60px var(--shadow-hover);
+      width: 260px;
+      max-height: 60vh;
+      background: #f3210a;
+      border-radius: 10px;
+      border: 2px solid var(--gold);
+      box-shadow: 0 10px 40px rgba(192, 57, 43, 0.3);
       z-index: 9999;
       display: none;
       overflow-y: auto;
-      padding: 20px;
+      padding: 12px 14px;
       transform: translateX(20px);
       opacity: 0;
-      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
     .cart-popup.open {
       display: block;
@@ -1085,102 +1181,120 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 14px;
+      margin-bottom: 8px;
     }
     .cart-popup .popup-header h3 {
       font-family: var(--font-heading);
-      color: var(--gold-dark);
+      color: var(--white);
       font-style: italic;
       font-weight: 900;
       text-transform: uppercase;
-      font-size: 1.1rem;
+      font-size: 0.8rem;
     }
     .cart-popup .popup-close {
       background: none;
       border: none;
-      color: var(--text-muted);
-      font-size: 1.4rem;
+      color: var(--white);
+      font-size: 1.1rem;
       cursor: pointer;
       transition: 0.3s;
     }
     .cart-popup .popup-close:hover { color: var(--gold); transform: rotate(90deg); }
     .cart-popup .popup-item {
       display: flex;
-      gap: 10px;
-      padding: 10px 0;
-      border-bottom: 2px solid var(--border-beige);
+      gap: 8px;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
       align-items: center;
-      transition: background 0.3s ease;
     }
-    .cart-popup .popup-item:hover { background: var(--ivory); border-radius: 8px; padding: 10px; }
     .cart-popup .popup-item img {
-      width: 45px;
-      height: 45px;
+      width: 32px;
+      height: 32px;
       object-fit: cover;
-      border-radius: 8px;
-      border: 2px solid var(--border-beige);
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.3);
     }
     .cart-popup .popup-item .info { flex: 1; }
     .cart-popup .popup-item .info h4 {
       font-family: var(--font-heading);
       font-weight: 900;
       font-style: italic;
-      font-size: 0.8rem;
-      color: var(--text-dark);
+      font-size: 0.65rem;
+      color: var(--white);
     }
-    .cart-popup .popup-item .info .price { font-size: 0.8rem; color: var(--text-muted); }
+    .cart-popup .popup-item .info .price {
+      font-size: 0.65rem;
+      color: var(--white);
+      font-weight: 600;
+      opacity: 0.9;
+    }
     .cart-popup .popup-item .remove {
       background: none;
       border: none;
-      color: var(--text-muted);
+      color: var(--white);
       cursor: pointer;
-      font-size: 0.9rem;
+      font-size: 0.7rem;
       transition: 0.3s;
     }
-    .cart-popup .popup-item .remove:hover { color: #b33; transform: scale(1.2); }
-    .cart-popup .popup-total { padding: 14px 0; text-align: center; }
+    .cart-popup .popup-item .remove:hover { color: var(--gold); transform: scale(1.2); }
+    .cart-popup .popup-total {
+      padding: 8px 0;
+      text-align: center;
+      border-top: 2px solid var(--gold);
+      margin-top: 6px;
+    }
     .cart-popup .popup-total .total {
       font-family: var(--font-heading);
       font-weight: 900;
       font-style: italic;
-      font-size: 1.2rem;
-      color: var(--gold-dark);
+      font-size: 0.9rem;
+      color: var(--white);
     }
-    .cart-popup .popup-actions { display: flex; gap: 8px; }
+    .cart-popup .popup-actions {
+      display: flex;
+      gap: 6px;
+      margin-top: 6px;
+    }
     .cart-popup .popup-actions a {
       flex: 1;
       text-align: center;
-      padding: 8px;
-      border-radius: 8px;
+      padding: 5px 8px;
+      border-radius: 6px;
       font-family: var(--font-heading);
       font-weight: 900;
       font-style: italic;
-      font-size: 0.7rem;
+      font-size: 0.55rem;
       text-transform: uppercase;
       text-decoration: none;
       transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
     .cart-popup .popup-actions .btn-checkout {
-      background: var(--gold);
-      color: var(--white);
-      border: 2px solid var(--gold);
+      background: var(--white);
+      color: #c0392b;
+      border: 2px solid var(--white);
     }
     .cart-popup .popup-actions .btn-checkout:hover {
       transform: scale(1.05);
-      background: var(--gold-dark);
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--white);
     }
     .cart-popup .popup-actions .btn-view {
       background: transparent;
-      border: 2px solid var(--border-beige);
-      color: var(--text-dark);
+      border: 2px solid var(--white);
+      color: var(--white);
     }
     .cart-popup .popup-actions .btn-view:hover {
-      border-color: var(--gold);
-      color: var(--gold);
+      background: var(--white);
+      color: #c0392b;
       transform: scale(1.05);
     }
-    .cart-popup-empty { text-align: center; padding: 24px 0; color: var(--text-muted); }
-    .cart-popup-empty .icon { font-size: 2.5rem; margin-bottom: 10px; }
+    .cart-popup-empty {
+      text-align: center;
+      padding: 14px 0;
+      color: var(--white);
+    }
+    .cart-popup-empty .icon { font-size: 1.8rem; margin-bottom: 4px; }
 
     /* ---------- LIVE NOTIFICATION ---------- */
     .live-notification {
@@ -1247,26 +1361,109 @@
     }
     .live-notification .notif-close:hover { color: var(--gold); transform: scale(1.2); }
 
+   /* ---------- STICKY COD POPUP (BOTTOM LEFT) ---------- */
+.cod-sticky-popup {
+  position: fixed;
+  bottom: 30px;
+  left: 20px;
+  background: linear-gradient(135deg, #ff0000, #cc0000);
+  color: var(--white);
+  padding: 10px 18px;
+  border-radius: 50px;
+  border: 3px solid var(--gold);
+  box-shadow: 0 8px 32px rgba(192, 57, 43, 0.4);
+  z-index: 9997;
+  font-family: var(--font-heading);
+  font-weight: 900;
+  font-style: italic;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  animation: float 3s ease-in-out infinite;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: default;
+  max-width: 90vw;
+  white-space: nowrap;
+}
+.cod-sticky-popup:hover {
+  transform: scale(1.05) translateY(-4px);
+  box-shadow: 0 12px 40px rgba(192, 57, 43, 0.5);
+}
+.cod-sticky-popup .popup-icon {
+  font-size: 1.4rem;
+  animation: pulse 2s ease-in-out infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cod-sticky-popup .popup-text {
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+.cod-sticky-popup .popup-badge {
+  background: var(--white);
+  color: #ff0000;
+  padding: 2px 12px;
+  border-radius: 30px;
+  font-size: 0.6rem;
+  font-weight: 900;
+  font-style: normal;
+  display: inline-block;
+  text-align: center;
+  line-height: 1.4;
+}
+@media (max-width: 500px) {
+  .cod-sticky-popup {
+    bottom: 16px;
+    left: 12px;
+    padding: 8px 14px;
+    font-size: 0.7rem;
+    border-width: 2px;
+    gap: 6px;
+  }
+  .cod-sticky-popup .popup-icon {
+    font-size: 1.1rem;
+  }
+  .cod-sticky-popup .popup-badge {
+    font-size: 0.5rem;
+    padding: 1px 8px;
+  }
+  .cod-sticky-popup .popup-text {
+    gap: 4px;
+  }
+}
     /* ---------- RESPONSIVE ---------- */
     @media (max-width: 500px) {
       .reviews-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
       .product-info-grid { grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
       .section-title-italic { font-size: 1.4rem; }
       .headline-heavy { font-size: 1.8rem; }
-      .cart-popup { width: 290px; right: 10px; }
+      .cart-popup { width: 220px; right: 10px; padding: 10px 12px; }
       .live-notification { max-width: 260px; right: 10px; bottom: 16px; }
       .announcement-banner { font-size: 0.7rem; padding: 6px 10px; }
       .big-product-card h2 { font-size: 1.2rem; }
       .big-product-card .big-price { font-size: 1.3rem; }
       .big-product-card { padding: 16px 14px 18px; }
       .big-product-card .big-img { aspect-ratio: 1/1; }
-      .fast-scroll-item { min-width: 110px; padding: 10px 8px; }
-      .fast-scroll-item img { height: 80px; }
+      .fast-scroll-item { min-width: 100px; padding: 8px 6px; }
+      .fast-scroll-item img { aspect-ratio: 1/1; height: auto; }
+      .fast-scroll-item h4 { font-size: 0.55rem; }
       .product-detail-item .detail-image { flex: 0 0 40%; min-height: 100px; }
       .product-detail-item { min-height: 100px; }
-      .product-detail-item .detail-info h4 { font-size: 0.85rem; }
-      .product-detail-item .detail-info .detail-desc { font-size: 0.6rem; }
-      .product-detail-item .detail-buy { font-size: 0.5rem; padding: 4px 12px; }
+      .product-detail-item .detail-info h4 { font-size: 0.7rem; }
+      .product-detail-item .detail-info .detail-desc { font-size: 0.5rem; }
+      .product-detail-item .detail-buy { font-size: 0.45rem; padding: 3px 10px; }
+      .cod-highlight-banner { font-size: 1rem; padding: 14px 12px; margin: 20px 12px 20px 12px; }
+      .cod-mega-banner { font-size: 0.85rem; padding: 10px 12px; }
+      .hero-cod-strip { font-size: 0.7rem; padding: 8px 16px; margin-bottom: 14px; }
+      .hero-section { padding: 30px 16px 40px 16px; }
     }
     @media (min-width: 768px) {
       .hero-section,
@@ -1288,7 +1485,7 @@
 
   <!-- ANNOUNCEMENT BANNER -->
   <div class="announcement-banner" id="announcementBanner">
-    <span>✨ Free Shipping - Cash On Delivery - 7 Day Return</span>
+    <span>✨ 20-IN-1 COMBO @ ₹999 ONLY — LIMITED STOCK</span>
     <a href="#big-product">Shop now →</a>
     <button class="close-banner" id="closeBannerBtn">✕</button>
   </div>
@@ -1321,7 +1518,7 @@
       <li><a href="contact.html">📞 Contact</a></li>
     </ul>
     <div class="menu-divider"></div>
-    <div class="menu-gold-text">✦ Kitchen Essentials ✦</div>
+    <div class="menu-gold-text">✦ Home Essentials ✦</div>
   </nav>
 
   <!-- CART POPUP -->
@@ -1355,39 +1552,55 @@
     </div>
   </div>
 
-  <!-- HERO SECTION - FIXED WITH RELIABLE BACKGROUND -->
+  <!-- STICKY COD POPUP (BOTTOM LEFT) -->
+  <div class="cod-sticky-popup">
+    
+    <span class="popup-text">COD <span class="popup-badge">Only</span></span>
+  </div>
+
+  <!-- HERO SECTION -->
   <section class="hero-section">
     <div class="hero-bg-wrapper">
       <img src="image/IMG_2445.PNG" alt="Hero Background" />
     </div>
     <div class="hero-content">
-      <h1 class="headline-heavy">Kitchen<br />Essentials</h1>
-      <p class="subtext-light">Premium gadgets for every cook</p>
+      <h1 class="headline-heavy">20 Useful<br/>Home gadgets<br/>just ₹999</h1>
+      <p class="subtext-light">Premium quality · COD · Free Shipping · 7 Day Return</p>
       <div class="button-group" style="display:flex; flex-direction:column; gap:12px; max-width:400px; margin:0 auto;">
-        <a href="#big-product" class="btn-solid-primary">BUY COMBO ₹999</a>
+        <a href="#big-product" class="btn-solid-primary">BUY 20-IN-1 COMBO ₹999</a>
         <a href="#fast-scroll" class="btn-solid-dark">View PRODUCT DETAILS</a>
       </div>
     </div>
   </section>
 
-  <!-- FAST SCROLLING COLLECTIONS -->
+  <!-- COD HIGHLIGHT BANNER (mid-page) -->
+  <div class="cod-highlight-banner">
+    <span>💵</span>
+    <span>PAY ON DELIVERY</span>
+    <span class="cod-badge">COD</span>
+    <span class="small-text">· No hidden charges ·</span>
+  </div>
+
+  <!-- FAST SCROLLING COLLECTIONS (SQUARE & COMPACT) -->
   <section class="fast-scroll-section" id="fast-scroll">
-    <h2 class="section-title-italic">COMBO LIST</h2>
+    <h2 class="section-title-italic">✨ Bestsellers</h2>
     <div class="fast-scroll-track" id="fastTrack">
-      <div class="fast-scroll-item"><img src="image/IMG_2414.PNG" alt="Chef Knife" /><h4>Chef Knife</h4><div class="price">₹149 <small>₹199</small></div></div>
-      <div class="fast-scroll-item"><img src="image/IMG_2430.PNG" alt="Chef Knife" /><h4>Chef Knife</h4><div class="price">₹149 <small>₹199</small></div></div>
-      <div class="fast-scroll-item"><img src="image/IMG_2432.PNG" alt="Chef Knife" /><h4>Chef Knife</h4><div class="price">₹149 <small>₹199</small></div></div>
-      <div class="fast-scroll-item"><img src="image/IMG_2433.PNG" alt="Chef Knife" /><h4>Chef Knife</h4><div class="price">₹149 <small>₹199</small></div></div>
-      <div class="fast-scroll-item"><img src="image/IMG_2435.PNG" alt="Chef Knife" /><h4>Chef Knife</h4><div class="price">₹149 <small>₹199</small></div></div>
-      <div class="fast-scroll-item"><img src="image/IMG_2438.PNG" alt="Chef Knife" /><h4>Chef Knife</h4><div class="price">₹149 <small>₹199</small></div></div>
-      <div class="fast-scroll-item"><img src="image/IMG_2439.PNG" alt="Chef Knife" /><h4>Chef Knife</h4><div class="price">₹149 <small>₹199</small></div></div>
-      <div class="fast-scroll-item"><img src="image/IMG_2442.PNG" alt="Chef Knife" /><h4>Chef Knife</h4><div class="price">₹149 <small>₹199</small></div></div>
-      <div class="fast-scroll-item"><img src="image/IMG_2443.PNG" alt="Chef Knife" /><h4>Chef Knife</h4><div class="price">₹149 <small>₹199</small></div></div>
-      <div class="fast-scroll-item"><img src="image/IMG_2445.PNG" alt="Chef Knife" /><h4>Chef Knife</h4><div class="price">₹149 <small>₹199</small></div></div>
-      <div class="fast-scroll-item"><img src="image/IMG_2449.PNG" alt="Chef Knife" /><h4>Chef Knife</h4><div class="price">₹149 <small>₹199</small></div></div>
-      <div class="fast-scroll-item"><img src="image/IMG_2450.PNG" alt="Chef Knife" /><h4>Chef Knife</h4><div class="price">₹149 <small>₹199</small></div></div>
-      <div class="fast-scroll-item"><img src="image/IMG_2451.PNG" alt="Chef Knife" /><h4>Chef Knife</h4><div class="price">₹149 <small>₹199</small></div></div>
-      <div class="fast-scroll-item"><img src="image/IMG_2451.PNG" alt="Chef Knife" /><h4>Chef Knife</h4><div class="price">₹149 <small>₹199</small></div></div>
+      <div class="fast-scroll-item"><img src="image/IMG_2430.PNG" alt="Shelf Rack" /><h4>Bathroom Shelf</h4><div class="price">₹149</div><span class="cod-tag">PACK OF 2</span></div>
+      <div class="fast-scroll-item"><img src="image/IMG_2432.PNG" alt="Soap Holder" /><h4>Soap Holder</h4><div class="price">₹149</div><span class="cod-tag">PACK OF 2</span></div>
+      <div class="fast-scroll-item"><img src="image/IMG_2433.PNG" alt="Cleaning Brush" /><h4>Cleaning Brush</h4><div class="price">₹149</div><span class="cod-tag">PACK OF 1</span></div>
+      <div class="fast-scroll-item"><img src="image/IMG_2435.PNG" alt="Strainer" /><h4>Sink Strainer</h4><div class="price">₹149</div><span class="cod-tag">PACK OF 1</span></div>
+      <div class="fast-scroll-item"><img src="image/IMG_2438.PNG" alt="Scrub Brush" /><h4>Scrub Brush</h4><div class="price">₹149</div><span class="cod-tag">PACK OF 1</span></div>
+      <div class="fast-scroll-item"><img src="image/IMG_2439.PNG" alt="Soap Pump" /><h4>3in1 Soap Pump</h4><div class="price">₹149</div><span class="cod-tag">PACK OF 1</span></div>
+      <div class="fast-scroll-item"><img src="image/IMG_2442.PNG" alt="Mesh Cloth" /><h4>Mesh Cloths</h4><div class="price">₹149</div><span class="cod-tag">PACK OF 10</span></div>
+      <div class="fast-scroll-item"><img src="image/IMG_2443.PNG" alt="Spice Jar" /><h4>Spice Jar</h4><div class="price">₹149</div><span class="cod-tag">PACK OF 4</span></div>
+      <div class="fast-scroll-item"><img src="image/IMG_2445.PNG" alt="Oil Bottle" /><h4>Oil Bottle</h4><div class="price">₹149</div><span class="cod-tag">PACK OF 2</span></div>
+      <div class="fast-scroll-item"><img src="image/IMG_2449.PNG" alt="Spatula Brush" /><h4>Spatula Brush</h4><div class="price">₹149</div><span class="cod-tag">PACK OF 2</span></div>
+      <div class="fast-scroll-item"><img src="image/IMG_2451.PNG" alt="Funnel" /><h4>Silicone Funnel</h4><div class="price">₹149</div><span class="cod-tag">PACK OF 1S</span></div>
+      <div class="fast-scroll-item"><img src="image/IMG_2451.PNG" alt="Hook Hanger" /><h4>6 Hook Hanger</h4><div class="price">₹149</div><span class="cod-tag">PACK OF 1</span></div>
+      <!-- duplicate for seamless loop -->
+      <div class="fast-scroll-item"><img src="image/IMG_2430.PNG" alt="Shelf Rack" /><h4>Bathroom Shelf</h4><div class="price">₹149</div><span class="cod-tag">PACK OF 2</span></div>
+      <div class="fast-scroll-item"><img src="image/IMG_2432.PNG" alt="Soap Holder" /><h4>Soap Holder</h4><div class="price">₹149</div><span class="cod-tag">PACK OF 2</span></div>
+      <div class="fast-scroll-item"><img src="image/IMG_2433.PNG" alt="Cleaning Brush" /><h4>Cleaning Brush</h4><div class="price">₹149</div><span class="cod-tag">PACK OF 1</span></div>
     </div>
   </section>
 
@@ -1395,11 +1608,11 @@
   <section class="big-product-section" id="big-product">
     <div class="big-product-card">
       <img src="image/IMG_2431.PNG" alt="Kitchen Combo" class="big-img" />
-      <h2>18 IN 1 Pro Kitchen Set</h2>
-      <div class="big-price">₹999 <small>₹3000</small></div>
+      <h2>20 IN 1 Pro Combo Set</h2>
+      <div class="big-price">₹999 <small>₹4500</small></div>
       <div class="big-stars">★★★★★</div>
-      <div class="big-sold">🔥 2,847 sold</div>
-      <p class="big-desc">10 essential gadgets · premium quality · one click</p>
+      <div class="big-sold">🔥 9,847 sold</div>
+      <p class="big-desc">20 essential gadgets · premium quality · COD</p>
       <div class="big-actions">
         <button class="btn-big-add" id="bigAddBtn"> BUY NOW</button>
         <a href="product.html" class="btn-big-details">View Details</a>
@@ -1407,138 +1620,116 @@
     </div>
   </section>
 
-  <!-- PRODUCT DETAILS SECTION (TWO-COLUMN: square image left, info right) -->
+  <!-- PRODUCT DETAILS SECTION -->
   <section class="product-details-section" id="product-details">
-    <h2 class="section-title-italic">All Products</h2>
+    <h2 class="section-title-italic">20-IN-1 COMBO PRODUCTS</h2>
     <div class="product-details-grid">
-      <!-- Product 1 -->
-      <a href="product.html?name=Chef%20Knife" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
-        <div class="detail-image"><img src="image/IMG_2430.PNG" alt="Chef Knife" /></div>
+      <a href="product.html" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
+        <div class="detail-image"><img src="image/IMG_2430.PNG" alt="Shelf Rack" /></div>
         <div class="detail-info">
-          <h4>Chef Knife</h4>
+          <h4>Bathroom Shelf Rack</h4>
           <div class="detail-price">₹149 <small>₹199</small></div>
-          <div class="detail-desc">Premium stainless steel · ergonomic grip</div>
-          <span class="detail-buy" onclick="event.stopPropagation(); addToCart('Chef Knife', 149)">Add to Cart</span>
+          <div class="detail-desc">Stainless steel · wall mount</div>
+          <span class="detail-buy" onclick="event.stopPropagation(); addToCart('Shelf Rack', 149)">Add to Cart</span>
         </div>
       </a>
-      <!-- Product 2 -->
-      <a href="product.html?name=Chef%20Knife" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
-        <div class="detail-image"><img src="image/IMG_2432.PNG" alt="Chef Knife" /></div>
+      <a href="product.html" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
+        <div class="detail-image"><img src="image/IMG_2432.PNG" alt="Soap Holder" /></div>
         <div class="detail-info">
-          <h4>Chef Knife</h4>
+          <h4>Wall Mounted Soap Holder</h4>
           <div class="detail-price">₹149 <small>₹199</small></div>
-          <div class="detail-desc">Premium stainless steel · ergonomic grip</div>
-          <span class="detail-buy" onclick="event.stopPropagation(); addToCart('Chef Knife', 149)">Add to Cart</span>
+          <div class="detail-desc">Premium · rust-proof</div>
+          <span class="detail-buy" onclick="event.stopPropagation(); addToCart('Soap Holder', 149)">Add to Cart</span>
         </div>
       </a>
-      <!-- Product 3 -->
-      <a href="product.html?name=Chef%20Knife" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
-        <div class="detail-image"><img src="image/IMG_2433.PNG" alt="Chef Knife" /></div>
+      <a href="product.html" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
+        <div class="detail-image"><img src="image/IMG_2514.PNG" alt="Hook Hanger" /></div>
         <div class="detail-info">
-          <h4>Chef Knife</h4>
+          <h4>6 Hook Hanger</h4>
           <div class="detail-price">₹149 <small>₹199</small></div>
-          <div class="detail-desc">Premium stainless steel · ergonomic grip</div>
-          <span class="detail-buy" onclick="event.stopPropagation(); addToCart('Chef Knife', 149)">Add to Cart</span>
+          <div class="detail-desc">Strong adhesive · multi-use</div>
+          <span class="detail-buy" onclick="event.stopPropagation(); addToCart('Hook Hanger', 149)">Add to Cart</span>
         </div>
       </a>
-      <!-- Product 4 -->
-      <a href="product.html?name=Chef%20Knife" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
-        <div class="detail-image"><img src="image/IMG_2435.PNG" alt="Chef Knife" /></div>
+      <a href="product.html" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
+        <div class="detail-image"><img src="image/IMG_2433.PNG" alt="Cleaning Brush" /></div>
         <div class="detail-info">
-          <h4>Chef Knife</h4>
+          <h4>Long Handle Cleaning Brush</h4>
           <div class="detail-price">₹149 <small>₹199</small></div>
-          <div class="detail-desc">Premium stainless steel · ergonomic grip</div>
-          <span class="detail-buy" onclick="event.stopPropagation(); addToCart('Chef Knife', 149)">Add to Cart</span>
+          <div class="detail-desc">Ergonomic · durable bristles</div>
+          <span class="detail-buy" onclick="event.stopPropagation(); addToCart('Cleaning Brush', 149)">Add to Cart</span>
         </div>
       </a>
-      <!-- Product 5 -->
-      <a href="product.html?name=Chef%20Knife" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
-        <div class="detail-image"><img src="image/IMG_2438.PNG" alt="Chef Knife" /></div>
+      <a href="product.html" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
+        <div class="detail-image"><img src="image/IMG_2435.PNG" alt="Strainer" /></div>
         <div class="detail-info">
-          <h4>Chef Knife</h4>
+          <h4>Sink Strainer Basket</h4>
           <div class="detail-price">₹149 <small>₹199</small></div>
-          <div class="detail-desc">Premium stainless steel · ergonomic grip</div>
-          <span class="detail-buy" onclick="event.stopPropagation(); addToCart('Chef Knife', 149)">Add to Cart</span>
+          <div class="detail-desc">Stainless steel · easy clean</div>
+          <span class="detail-buy" onclick="event.stopPropagation(); addToCart('Strainer', 149)">Add to Cart</span>
         </div>
       </a>
-      <!-- Product 6 -->
-      <a href="product.html?name=Chef%20Knife" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
-        <div class="detail-image"><img src="image/IMG_2439.PNG" alt="Chef Knife" /></div>
+      <a href="product.html" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
+        <div class="detail-image"><img src="image/IMG_2438.PNG" alt="Scrub Brush" /></div>
         <div class="detail-info">
-          <h4>Chef Knife</h4>
+          <h4>Scrub Brush</h4>
           <div class="detail-price">₹149 <small>₹199</small></div>
-          <div class="detail-desc">Premium stainless steel · ergonomic grip</div>
-          <span class="detail-buy" onclick="event.stopPropagation(); addToCart('Chef Knife', 149)">Add to Cart</span>
+          <div class="detail-desc">Heavy duty · non-scratch</div>
+          <span class="detail-buy" onclick="event.stopPropagation(); addToCart('Scrub Brush', 149)">Add to Cart</span>
         </div>
       </a>
-      <!-- Product 7 -->
-      <a href="product.html?name=Chef%20Knife" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
-        <div class="detail-image"><img src="image/IMG_2442.PNG" alt="Chef Knife" /></div>
+      <a href="product.html" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
+        <div class="detail-image"><img src="image/IMG_2439.PNG" alt="Soap Pump" /></div>
         <div class="detail-info">
-          <h4>Chef Knife</h4>
+          <h4>3in1 Soap Pump Dispenser</h4>
           <div class="detail-price">₹149 <small>₹199</small></div>
-          <div class="detail-desc">Premium stainless steel · ergonomic grip</div>
-          <span class="detail-buy" onclick="event.stopPropagation(); addToCart('Chef Knife', 149)">Add to Cart</span>
+          <div class="detail-desc">Multi-purpose · leak-proof</div>
+          <span class="detail-buy" onclick="event.stopPropagation(); addToCart('Soap Pump', 149)">Add to Cart</span>
         </div>
       </a>
-      <!-- Product 8 -->
-      <a href="product.html?name=Chef%20Knife" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
-        <div class="detail-image"><img src="image/IMG_2443.PNG" alt="Chef Knife" /></div>
+      <a href="product.html" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
+        <div class="detail-image"><img src="image/IMG_2442.PNG" alt="Mesh Cloth" /></div>
         <div class="detail-info">
-          <h4>Chef Knife</h4>
+          <h4>Mesh Cleaning Cloths</h4>
           <div class="detail-price">₹149 <small>₹199</small></div>
-          <div class="detail-desc">Premium stainless steel · ergonomic grip</div>
-          <span class="detail-buy" onclick="event.stopPropagation(); addToCart('Chef Knife', 149)">Add to Cart</span>
+          <div class="detail-desc">Scratch-free · reusable</div>
+          <span class="detail-buy" onclick="event.stopPropagation(); addToCart('Mesh Cloth', 149)">Add to Cart</span>
         </div>
       </a>
-      <!-- Product 9 -->
-      <a href="product.html?name=Chef%20Knife" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
-        <div class="detail-image"><img src="image/IMG_2445.PNG" alt="Chef Knife" /></div>
+      <a href="product.html" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
+        <div class="detail-image"><img src="image/IMG_2443.PNG" alt="Spice Jar" /></div>
         <div class="detail-info">
-          <h4>Chef Knife</h4>
+          <h4>Spice Jar Set</h4>
           <div class="detail-price">₹149 <small>₹199</small></div>
-          <div class="detail-desc">Premium stainless steel · ergonomic grip</div>
-          <span class="detail-buy" onclick="event.stopPropagation(); addToCart('Chef Knife', 149)">Add to Cart</span>
+          <div class="detail-desc">Airtight · glass bottles</div>
+          <span class="detail-buy" onclick="event.stopPropagation(); addToCart('Spice Jar', 149)">Add to Cart</span>
         </div>
       </a>
-      <!-- Product 10 -->
-      <a href="product.html?name=Chef%20Knife" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
-        <div class="detail-image"><img src="image/IMG_2449.PNG" alt="Chef Knife" /></div>
+      <a href="product.html" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
+        <div class="detail-image"><img src="image/IMG_2445.PNG" alt="Oil Bottle" /></div>
         <div class="detail-info">
-          <h4>Chef Knife</h4>
+          <h4>Glass Oil Bottles</h4>
           <div class="detail-price">₹149 <small>₹199</small></div>
-          <div class="detail-desc">Premium stainless steel · ergonomic grip</div>
-          <span class="detail-buy" onclick="event.stopPropagation(); addToCart('Chef Knife', 149)">Add to Cart</span>
+          <div class="detail-desc">Drip-free · premium glass</div>
+          <span class="detail-buy" onclick="event.stopPropagation(); addToCart('Oil Bottle', 149)">Add to Cart</span>
         </div>
       </a>
-      <!-- Product 11 -->
-      <a href="product.html?name=Chef%20Knife" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
-        <div class="detail-image"><img src="image/IMG_2450.PNG" alt="Chef Knife" /></div>
+      <a href="product.html" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
+        <div class="detail-image"><img src="image/IMG_2451.PNG" alt="Funnel" /></div>
         <div class="detail-info">
-          <h4>Chef Knife</h4>
+          <h4>Silicone Funnel</h4>
           <div class="detail-price">₹149 <small>₹199</small></div>
-          <div class="detail-desc">Premium stainless steel · ergonomic grip</div>
-          <span class="detail-buy" onclick="event.stopPropagation(); addToCart('Chef Knife', 149)">Add to Cart</span>
+          <div class="detail-desc">Flexible · heat resistant</div>
+          <span class="detail-buy" onclick="event.stopPropagation(); addToCart('Funnel', 149)">Add to Cart</span>
         </div>
       </a>
-      <!-- Product 12 -->
-      <a href="product.html?name=Chef%20Knife" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
-        <div class="detail-image"><img src="image/IMG_2451.PNG" alt="Chef Knife" /></div>
+      <a href="product.html" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
+        <div class="detail-image"><img src="image/IMG_2449.PNG" alt="Spatula Brush" /></div>
         <div class="detail-info">
-          <h4>Chef Knife</h4>
+          <h4>Spatula & Basting Brush</h4>
           <div class="detail-price">₹149 <small>₹199</small></div>
-          <div class="detail-desc">Premium stainless steel · ergonomic grip</div>
-          <span class="detail-buy" onclick="event.stopPropagation(); addToCart('Chef Knife', 149)">Add to Cart</span>
-        </div>
-      </a>
-      <!-- Product 13 -->
-      <a href="product.html?name=Chef%20Knife" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
-        <div class="detail-image"><img src="image/IMG_2514.PNG" alt="Chef Knife" /></div>
-        <div class="detail-info">
-          <h4>Chef Knife</h4>
-          <div class="detail-price">₹149 <small>₹199</small></div>
-          <div class="detail-desc">Premium stainless steel · ergonomic grip</div>
-          <span class="detail-buy" onclick="event.stopPropagation(); addToCart('Chef Knife', 149)">Add to Cart</span>
+          <div class="detail-desc">Silicone · non-stick safe</div>
+          <span class="detail-buy" onclick="event.stopPropagation(); addToCart('Spatula Brush', 149)">Add to Cart</span>
         </div>
       </a>
     </div>
@@ -1573,22 +1764,23 @@
 
   <!-- MILESTONE -->
   <section class="milestone-tracker-section">
+    <h2 class="section-title-italic">Milestone</h2>
     <div class="red-milestone-box">
-      <h2 class="giant-counter-title">15,742</h2>
-      <p class="milestone-explainer-text">Gadgets sold worldwide. Join thousands of happy cooks.</p>
-      <div class="progress-bar-container"><div class="progress-bar-fill" style="width:78%;"></div><span class="avatar-tracker-icon" style="left:78%;">🕐</span></div>
-      <div class="progress-metrics-row"><span>78%</span><span>Goal: 20K</span></div>
+      <h2 class="giant-counter-title">9,847</h2>
+      <p class="milestone-explainer-text">Gadgets sold worldwide. Join thousands of happy customers.</p>
+      <div class="progress-bar-container"><div class="progress-bar-fill" style="width:90%;"></div><span class="avatar-tracker-icon" style="left:90%;">🏆</span></div>
+      <div class="progress-metrics-row"><span>90%</span><span>Few Products Left</span></div>
       <a href="#big-product" class="btn-solid-dark">Shop now</a>
     </div>
   </section>
 
   <!-- SOCIAL -->
   <section class="social-feed-section">
-    <h2 class="section-title-italic">Community</h2>
+    <h2 class="section-title-italic">Awards</h2>
     <div class="horizontal-media-scroller">
-      <div class="media-card card-rounded-video"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect width='400' height='300' fill='%23d4b87a'/%3E%3Ctext x='100' y='170' font-size='30' fill='%239a7f4a'%3E🍳 Kitchen%3C/text%3E%3C/svg%3E" alt="Community" /></div>
-      <div class="media-card card-rounded-video"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect width='400' height='300' fill='%23d4b87a'/%3E%3Ctext x='80' y='170' font-size='30' fill='%239a7f4a'%3E👩‍🍳 Lovers%3C/text%3E%3C/svg%3E" alt="Kitchen lovers" /></div>
-      <div class="media-card card-rounded-video"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect width='400' height='300' fill='%23d4b87a'/%3E%3Ctext x='100' y='170' font-size='30' fill='%239a7f4a'%3E🏠 Interior%3C/text%3E%3C/svg%3E" alt="Interior" /></div>
+      <div class="media-card card-rounded-video"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect width='400' height='300' fill='%23d4b87a'/%3E%3Ctext x='100' y='170' font-size='30' fill='%239a7f4a'%3E🏆 Best Seller%3C/text%3E%3C/svg%3E" alt="Award" /></div>
+      <div class="media-card card-rounded-video"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect width='400' height='300' fill='%23d4b87a'/%3E%3Ctext x='80' y='170' font-size='30' fill='%239a7f4a'%3E⭐ Top Rated%3C/text%3E%3C/svg%3E" alt="Top Rated" /></div>
+      <div class="media-card card-rounded-video"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect width='400' height='300' fill='%23d4b87a'/%3E%3Ctext x='80' y='170' font-size='30' fill='%239a7f4a'%3E💵 COD Available%3C/text%3E%3C/svg%3E" alt="COD" /></div>
     </div>
   </section>
 
@@ -1712,21 +1904,22 @@
 
     function addBigCombo() {
       const items = [
-        'Chef Knife', 'Non-stick Pan', 'Spatula Set', 'Grater', 'Whisk',
-        'Peeler', 'Cutting Board', 'Tongs', 'Sieve', 'Mixing Bowl'
+        'Shelf Rack', 'Soap Holder', 'Hook Hanger', 'Cleaning Brush', 'Strainer',
+        'Scrub Brush', 'Soap Pump', 'Mesh Cloth', 'Spice Jar', 'Oil Bottle',
+        'Funnel', 'Spatula Brush'
       ];
       const comboCount = cart.filter(item => items.includes(item.name)).length;
-      if (comboCount >= 10) {
+      if (comboCount >= 12) {
         showNotification('Combo already in cart! 🛒');
         return;
       }
       cart = cart.filter(item => !items.includes(item.name));
       items.forEach(name => {
-        cart.push({ name, price: 99.9, quantity: 1 });
+        cart.push({ name, price: 83.25, quantity: 1 });
       });
       saveCart();
-      showNotification('🎉 Pro Kitchen Set added to cart!');
-      showLiveNotification('Someone', 'just bought the <strong>Pro Kitchen Set</strong>');
+      showNotification('🎉 20-in-1 Combo added to cart!');
+      showLiveNotification('Someone', 'just bought the <strong>20-in-1 Combo</strong>');
       const btn = document.getElementById('bigAddBtn');
       btn.textContent = '✅ Added!';
       btn.style.background = '#9a7f4a';
@@ -1779,7 +1972,7 @@
       const timeEl = document.getElementById('notifTime');
       const avatarEl = document.getElementById('notifAvatar');
 
-      const product = getRandomItem(['Chef Knife', 'Non-stick Pan', 'Spatula Set', 'Pro Kitchen Set', 'Grater']);
+      const product = getRandomItem(['Shelf Rack', 'Soap Holder', 'Cleaning Brush', 'Oil Bottle', 'Spice Jar']);
       nameEl.textContent = name || getRandomItem(customerNames);
       actionEl.innerHTML = (action || getRandomItem(actions)) + ` <strong>${product}</strong>`;
       timeEl.textContent = 'Just now';
@@ -1848,7 +2041,7 @@
     dropdownMenu.querySelectorAll('a').forEach(function(link) { link.addEventListener('click', closeMenu); });
 
     // ============================================================
-    // 5. STICKY HEADER with smooth transition
+    // 5. STICKY HEADER
     // ============================================================
     const header = document.querySelector('.main-header');
     window.addEventListener('scroll', function() {
@@ -1879,7 +2072,7 @@
     });
 
     // ============================================================
-    // 7. INTERSECTION OBSERVER with smoother reveal
+    // 7. INTERSECTION OBSERVER
     // ============================================================
     const observer = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
@@ -1905,14 +2098,14 @@
     });
 
     // ============================================================
-    // 8. PROGRESS BAR ANIMATION ON SCROLL
+    // 8. PROGRESS BAR ANIMATION
     // ============================================================
     const progressFill = document.querySelector('.progress-bar-fill');
     if (progressFill) {
       const progressObserver = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
           if (entry.isIntersecting) {
-            progressFill.style.width = '78%';
+            progressFill.style.width = '90%';
           }
         });
       }, { threshold: 0.3 });
@@ -1924,7 +2117,7 @@
     // ============================================================
     updateCartUI();
     startLiveNotifications();
-    console.log('🍳 SNOOQ — Luxury Kitchen Gadgets with Gold Accent');
+    console.log('🏠 SNOOQ — Home Gadgets with COD Highlight');
   </script>
 </body>
 </html>
