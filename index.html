@@ -4,9 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SNOOQ — Home Gadgets</title>
+  <!-- Canela & Neue Haas Grotesk Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,900&family=Public+Sans:ital,wght@0,400;0,600;1,700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
     * {
       margin: 0;
@@ -25,8 +26,8 @@
       --text-muted: #6b6b6b;
       --border-beige: #e7e0d6;
       --shadow-hover: rgba(0, 0, 0, 0.05);
-      --font-heading: 'Montserrat', sans-serif;
-      --font-body: 'Public Sans', sans-serif;
+      --font-heading: 'DM Serif Display', serif;
+      --font-body: 'Inter', sans-serif;
       --cod-red: #c0392b;
       --cod-gold: #f1c40f;
     }
@@ -41,47 +42,75 @@
 
     html { scroll-behavior: smooth; }
 
-    /* ---------- ANNOUNCEMENT BANNER ---------- */
+    /* ---------- SCROLLING ANNOUNCEMENT BANNER (LEFT TO RIGHT) ---------- */
     .announcement-banner {
       background: var(--gold);
       color: var(--white);
       text-align: center;
-      padding: 10px 16px;
+      padding: 10px 0;
       font-size: 0.9rem;
       font-weight: 600;
       letter-spacing: 0.3px;
       border-bottom: 2px solid var(--gold-dark);
       position: relative;
       z-index: 1100;
-      transform: translateY(0);
-      transition: transform 0.4s ease, opacity 0.4s ease;
+      overflow: hidden;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      font-family: var(--font-body);
     }
-    .announcement-banner.hidden {
-      transform: translateY(-100%);
-      opacity: 0;
-      position: absolute;
-      width: 100%;
-      pointer-events: none;
+    .announcement-banner .banner-track {
+      display: flex;
+      white-space: nowrap;
+      animation: scrollLeftToRight 20s linear infinite;
+      width: max-content;
     }
-    .announcement-banner a {
+    .announcement-banner .banner-slide {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      padding: 0 20px;
+      flex-shrink: 0;
+    }
+    .announcement-banner .banner-slide span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .announcement-banner .banner-slide a {
       color: var(--white);
       text-decoration: underline;
       font-weight: 700;
-      margin-left: 6px;
     }
-    .announcement-banner a:hover { text-decoration: none; }
+    .announcement-banner .banner-slide a:hover { text-decoration: none; }
+    .announcement-banner .banner-slide .separator {
+      color: rgba(255,255,255,0.4);
+      font-weight: 300;
+    }
     .announcement-banner .close-banner {
       background: none;
       border: none;
       color: var(--white);
       font-size: 1.2rem;
       cursor: pointer;
-      margin-left: 14px;
       opacity: 0.8;
       transition: 0.2s;
-      vertical-align: middle;
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
     }
-    .announcement-banner .close-banner:hover { opacity: 1; transform: scale(1.2); }
+    .announcement-banner .close-banner:hover { opacity: 1; transform: translateY(-50%) scale(1.2); }
+    .announcement-banner.hidden {
+      display: none;
+    }
+
+    @keyframes scrollLeftToRight {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
 
     /* ---------- COD MEGA BANNER ---------- */
     .cod-mega-banner {
@@ -101,6 +130,7 @@
       justify-content: center;
       gap: 12px;
       flex-wrap: wrap;
+      font-family: var(--font-body);
     }
     .cod-mega-banner span {
       background: var(--white);
@@ -152,7 +182,7 @@
 
     .headline-heavy {
       font-family: var(--font-heading);
-      font-weight: 900;
+      font-weight: 400;
       font-style: italic;
       font-size: 2.6rem;
       line-height: 0.95;
@@ -166,7 +196,7 @@
       color: var(--text-dark);
       font-size: 2rem;
       font-style: italic;
-      font-weight: 900;
+      font-weight: 400;
       text-transform: uppercase;
       line-height: 1.05;
       margin-bottom: 16px;
@@ -180,7 +210,7 @@
       padding: 16px;
       border-radius: 8px;
       font-family: var(--font-heading);
-      font-weight: 900;
+      font-weight: 400;
       font-style: italic;
       font-size: 1.15rem;
       text-transform: uppercase;
@@ -206,7 +236,7 @@
       padding: 16px;
       border-radius: 8px;
       font-family: var(--font-heading);
-      font-weight: 900;
+      font-weight: 400;
       font-style: italic;
       font-size: 1.15rem;
       text-transform: uppercase;
@@ -224,7 +254,7 @@
       border-color: var(--gold-light);
     }
 
-    /* ---------- HEADER ---------- */
+    /* ---------- HEADER (Logo Center, Menu Left, Cart Right) ---------- */
     .main-header {
       position: sticky;
       top: 0;
@@ -243,6 +273,24 @@
       box-shadow: 0 4px 30px var(--shadow-hover);
       background: rgba(255,255,255,0.95);
     }
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+    }
+    .header-center {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+      justify-content: flex-end;
+    }
     .logo-pill {
       background: var(--gold);
       padding: 6px 22px;
@@ -253,14 +301,13 @@
     .logo-pill:hover { transform: scale(1.05) rotate(-1deg); border-color: var(--gold); }
     .logo-text {
       font-family: var(--font-heading);
-      font-weight: 900;
+      font-weight: 400;
       font-style: italic;
       font-size: 1.6rem;
       color: var(--white);
       letter-spacing: -1px;
       text-decoration: none;
     }
-    .header-right { display: flex; align-items: center; gap: 10px; }
     .cart-icon {
       position: relative;
       width: 44px;
@@ -334,18 +381,18 @@
     .dropdown-menu {
       position: fixed;
       top: 0;
-      right: -100%;
+      left: -100%;
       width: 280px;
       height: 100vh;
       background: var(--white);
       padding: 80px 30px 30px;
-      transition: right 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: left 0.5s cubic-bezier(0.22, 1, 0.36, 1);
       z-index: 999;
-      border-left: 2px solid var(--gold);
-      box-shadow: -10px 0 40px var(--shadow-hover);
+      border-right: 2px solid var(--gold);
+      box-shadow: 10px 0 40px var(--shadow-hover);
       overflow-y: auto;
     }
-    .dropdown-menu.open { right: 0; }
+    .dropdown-menu.open { left: 0; }
     .dropdown-menu .menu-close {
       position: absolute;
       top: 20px;
@@ -371,6 +418,7 @@
       border-radius: 12px;
       transition: all 0.3s ease;
       border: 2px solid transparent;
+      font-family: var(--font-body);
     }
     .dropdown-menu ul li a:hover {
       color: var(--white);
@@ -388,7 +436,7 @@
     .dropdown-menu .menu-gold-text {
       color: var(--gold);
       font-family: var(--font-heading);
-      font-weight: 900;
+      font-weight: 400;
       font-style: italic;
       font-size: 0.9rem;
       text-transform: uppercase;
@@ -450,6 +498,7 @@
       margin: 12px 0 24px 0;
       text-shadow: 0 2px 12px rgba(0,0,0,0.3);
       font-weight: 500;
+      font-family: var(--font-body);
     }
     .hero-cod-strip {
       display: inline-block;
@@ -465,6 +514,7 @@
       border: 2px solid var(--gold);
       backdrop-filter: blur(4px);
       box-shadow: 0 4px 20px rgba(192, 57, 43, 0.3);
+      font-family: var(--font-body);
     }
 
     /* ---------- BIG PRODUCT CARD (SQUARE) ---------- */
@@ -502,7 +552,7 @@
       background: var(--gold);
       color: var(--white);
       font-family: var(--font-heading);
-      font-weight: 900;
+      font-weight: 400;
       font-style: italic;
       padding: 2px 16px;
       border-radius: 30px;
@@ -513,7 +563,7 @@
     }
     .big-product-card h2 {
       font-family: var(--font-heading);
-      font-weight: 900;
+      font-weight: 400;
       font-style: italic;
       font-size: 1.5rem;
       color: var(--text-dark);
@@ -522,7 +572,7 @@
     }
     .big-product-card .big-price {
       font-family: var(--font-heading);
-      font-weight: 900;
+      font-weight: 400;
       font-style: italic;
       font-size: 1.6rem;
       color: var(--gold-dark);
@@ -539,6 +589,7 @@
       font-size: 0.85rem;
       color: var(--text-muted);
       margin-bottom: 8px;
+      font-family: var(--font-body);
     }
     .big-product-card .big-stars {
       color: var(--gold);
@@ -550,7 +601,23 @@
       font-size: 0.75rem;
       color: var(--text-muted);
       margin-bottom: 10px;
+      font-family: var(--font-body);
     }
+    .big-product-card .big-details {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 6px 12px;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      background: var(--ivory);
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid var(--border-beige);
+      font-family: var(--font-body);
+    }
+    .big-product-card .big-details span { display: inline-flex; align-items: center; gap: 3px; }
     .big-product-card .big-actions {
       display: flex;
       gap: 10px;
@@ -564,7 +631,7 @@
       padding: 10px 16px;
       border-radius: 40px;
       font-family: var(--font-heading);
-      font-weight: 900;
+      font-weight: 400;
       font-style: italic;
       font-size: 0.85rem;
       text-transform: uppercase;
@@ -587,7 +654,7 @@
       padding: 10px 14px;
       border-radius: 40px;
       font-family: var(--font-heading);
-      font-weight: 900;
+      font-weight: 400;
       font-style: italic;
       font-size: 0.7rem;
       text-transform: uppercase;
@@ -652,7 +719,7 @@
     .fast-scroll-item:hover img { transform: scale(1.05); }
     .fast-scroll-item h4 {
       font-family: var(--font-heading);
-      font-weight: 900;
+      font-weight: 400;
       font-style: italic;
       font-size: 0.65rem;
       color: var(--text-dark);
@@ -662,7 +729,7 @@
     }
     .fast-scroll-item .price {
       font-family: var(--font-heading);
-      font-weight: 900;
+      font-weight: 400;
       font-style: italic;
       font-size: 0.7rem;
       color: var(--gold-dark);
@@ -677,6 +744,7 @@
       font-weight: 700;
       margin-top: 2px;
       letter-spacing: 0.3px;
+      font-family: var(--font-body);
     }
 
     /* ---------- COD HIGHLIGHT BANNER (mid-page) ---------- */
@@ -690,7 +758,7 @@
       border: 3px solid var(--gold);
       box-shadow: 0 8px 32px rgba(192, 57, 43, 0.3);
       font-family: var(--font-heading);
-      font-weight: 900;
+      font-weight: 400;
       font-style: italic;
       font-size: 1.4rem;
       text-transform: uppercase;
@@ -706,6 +774,7 @@
       font-weight: 600;
       font-style: normal;
       opacity: 0.9;
+      font-family: var(--font-body);
     }
     .cod-highlight-banner .cod-badge {
       background: var(--white);
@@ -713,6 +782,7 @@
       padding: 4px 18px;
       border-radius: 30px;
       font-size: 1rem;
+      font-family: var(--font-body);
     }
 
     /* ---------- PRODUCT DETAILS SECTION ---------- */
@@ -772,7 +842,7 @@
     }
     .product-detail-item .detail-info h4 {
       font-family: var(--font-heading);
-      font-weight: 900;
+      font-weight: 400;
       font-style: italic;
       font-size: 0.85rem;
       color: var(--text-dark);
@@ -782,7 +852,7 @@
     }
     .product-detail-item .detail-info .detail-price {
       font-family: var(--font-heading);
-      font-weight: 900;
+      font-weight: 400;
       font-style: italic;
       font-size: 0.85rem;
       color: var(--gold-dark);
@@ -798,6 +868,7 @@
       color: var(--text-muted);
       margin: 2px 0 6px;
       line-height: 1.2;
+      font-family: var(--font-body);
     }
     .product-detail-item .detail-buy {
       align-self: flex-start;
@@ -807,7 +878,7 @@
       padding: 4px 14px;
       border-radius: 30px;
       font-family: var(--font-heading);
-      font-weight: 900;
+      font-weight: 400;
       font-style: italic;
       font-size: 0.55rem;
       text-transform: uppercase;
@@ -834,6 +905,7 @@
       letter-spacing: 0.3px;
       margin-top: 2px;
       width: fit-content;
+      font-family: var(--font-body);
     }
 
     /* ---------- INFO CARDS ---------- */
@@ -870,14 +942,14 @@
     .info-card:hover .info-icon { transform: scale(1.2) rotate(-5deg); }
     .info-card h4 {
       font-family: var(--font-heading);
-      font-weight: 900;
+      font-weight: 400;
       font-style: italic;
       font-size: 0.75rem;
       color: var(--text-dark);
       text-transform: uppercase;
       margin-bottom: 3px;
     }
-    .info-card p { font-size: 0.7rem; color: var(--text-muted); line-height: 1.3; }
+    .info-card p { font-size: 0.7rem; color: var(--text-muted); line-height: 1.3; font-family: var(--font-body); }
 
     /* ---------- REVIEWS ---------- */
     .reviews-section {
@@ -886,7 +958,7 @@
     .reviews-header { text-align: center; margin-bottom: 20px; }
     .reviews-total {
       font-family: var(--font-heading);
-      font-weight: 900;
+      font-weight: 400;
       font-style: italic;
       font-size: 1rem;
       color: var(--gold-dark);
@@ -922,10 +994,10 @@
       border-color: var(--gold);
     }
     .review-card .stars { color: var(--gold); font-size: 1rem; letter-spacing: 2px; margin-bottom: 4px; }
-    .review-card .review-text { font-size: 0.85rem; line-height: 1.4; color: var(--text-dark); margin-bottom: 6px; }
+    .review-card .review-text { font-size: 0.85rem; line-height: 1.4; color: var(--text-dark); margin-bottom: 6px; font-family: var(--font-body); }
     .review-card .reviewer {
       font-family: var(--font-heading);
-      font-weight: 900;
+      font-weight: 400;
       font-style: italic;
       font-size: 0.8rem;
       color: var(--gold-dark);
@@ -950,7 +1022,7 @@
     }
     .giant-counter-title {
       font-family: var(--font-heading);
-      font-weight: 900;
+      font-weight: 400;
       font-style: italic;
       font-size: 2.8rem;
       text-transform: uppercase;
@@ -966,6 +1038,7 @@
       margin-bottom: 24px;
       opacity: 0.9;
       color: var(--text-dark);
+      font-family: var(--font-body);
     }
     .progress-bar-container {
       position: relative;
@@ -998,7 +1071,7 @@
       justify-content: space-between;
       font-family: var(--font-heading);
       font-style: italic;
-      font-weight: 900;
+      font-weight: 400;
       font-size: 1rem;
       margin-bottom: 28px;
       color: var(--gold-dark);
@@ -1047,7 +1120,8 @@
     }
     .footer-logo-massive {
       font-family: var(--font-heading);
-      font-weight: 900;
+      font-weight: 400;
+      font-style: italic;
       font-size: 3.2rem;
       color: var(--gold-dark);
       line-height: 0.9;
@@ -1060,7 +1134,7 @@
       font-family: var(--font-heading);
       color: var(--text-dark);
       font-style: italic;
-      font-weight: 900;
+      font-weight: 400;
       font-size: 1.2rem;
       text-transform: uppercase;
       margin-bottom: 10px;
@@ -1073,6 +1147,7 @@
       font-size: 1rem;
       font-weight: 600;
       transition: all 0.3s ease;
+      font-family: var(--font-body);
     }
     .directory-column ul li a:hover {
       color: var(--gold);
@@ -1085,6 +1160,7 @@
       font-size: 1rem;
       line-height: 1.4;
       font-weight: 600;
+      font-family: var(--font-body);
     }
     .footer-directory-grid { display: flex; flex-direction: column; gap: 28px; }
 
@@ -1105,7 +1181,7 @@
       font-family: var(--font-heading);
       color: var(--text-dark);
       font-style: italic;
-      font-weight: 900;
+      font-weight: 400;
       font-size: 1.2rem;
       text-transform: uppercase;
       margin-bottom: 8px;
@@ -1115,6 +1191,7 @@
       font-size: 0.95rem;
       line-height: 1.35;
       margin-bottom: 18px;
+      font-family: var(--font-body);
     }
     .input-field {
       width: 100%;
@@ -1125,6 +1202,7 @@
       font-size: 1rem;
       color: var(--text-dark);
       transition: all 0.3s ease;
+      font-family: var(--font-body);
     }
     .input-field:focus {
       outline: none;
@@ -1140,6 +1218,7 @@
       font-size: 0.85rem;
       margin: 24px 0;
       font-weight: 600;
+      font-family: var(--font-body);
     }
     .sponsorship-red-ribbon-bar {
       background: var(--gold);
@@ -1151,150 +1230,8 @@
       line-height: 1.4;
       text-transform: uppercase;
       border-top: 2px solid var(--gold-dark);
+      font-family: var(--font-body);
     }
-
-    /* ---------- CART POPUP (SMALL, RED BG, WHITE TEXT) ---------- */
-    .cart-popup {
-      position: fixed;
-      top: 80px;
-      right: 20px;
-      width: 260px;
-      max-height: 60vh;
-      background: #f3210a;
-      border-radius: 10px;
-      border: 2px solid var(--gold);
-      box-shadow: 0 10px 40px rgba(192, 57, 43, 0.3);
-      z-index: 9999;
-      display: none;
-      overflow-y: auto;
-      padding: 12px 14px;
-      transform: translateX(20px);
-      opacity: 0;
-      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-    .cart-popup.open {
-      display: block;
-      transform: translateX(0);
-      opacity: 1;
-    }
-    .cart-popup .popup-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 8px;
-    }
-    .cart-popup .popup-header h3 {
-      font-family: var(--font-heading);
-      color: var(--white);
-      font-style: italic;
-      font-weight: 900;
-      text-transform: uppercase;
-      font-size: 0.8rem;
-    }
-    .cart-popup .popup-close {
-      background: none;
-      border: none;
-      color: var(--white);
-      font-size: 1.1rem;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    .cart-popup .popup-close:hover { color: var(--gold); transform: rotate(90deg); }
-    .cart-popup .popup-item {
-      display: flex;
-      gap: 8px;
-      padding: 6px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.2);
-      align-items: center;
-    }
-    .cart-popup .popup-item img {
-      width: 32px;
-      height: 32px;
-      object-fit: cover;
-      border-radius: 6px;
-      border: 1px solid rgba(255,255,255,0.3);
-    }
-    .cart-popup .popup-item .info { flex: 1; }
-    .cart-popup .popup-item .info h4 {
-      font-family: var(--font-heading);
-      font-weight: 900;
-      font-style: italic;
-      font-size: 0.65rem;
-      color: var(--white);
-    }
-    .cart-popup .popup-item .info .price {
-      font-size: 0.65rem;
-      color: var(--white);
-      font-weight: 600;
-      opacity: 0.9;
-    }
-    .cart-popup .popup-item .remove {
-      background: none;
-      border: none;
-      color: var(--white);
-      cursor: pointer;
-      font-size: 0.7rem;
-      transition: 0.3s;
-    }
-    .cart-popup .popup-item .remove:hover { color: var(--gold); transform: scale(1.2); }
-    .cart-popup .popup-total {
-      padding: 8px 0;
-      text-align: center;
-      border-top: 2px solid var(--gold);
-      margin-top: 6px;
-    }
-    .cart-popup .popup-total .total {
-      font-family: var(--font-heading);
-      font-weight: 900;
-      font-style: italic;
-      font-size: 0.9rem;
-      color: var(--white);
-    }
-    .cart-popup .popup-actions {
-      display: flex;
-      gap: 6px;
-      margin-top: 6px;
-    }
-    .cart-popup .popup-actions a {
-      flex: 1;
-      text-align: center;
-      padding: 5px 8px;
-      border-radius: 6px;
-      font-family: var(--font-heading);
-      font-weight: 900;
-      font-style: italic;
-      font-size: 0.55rem;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-    .cart-popup .popup-actions .btn-checkout {
-      background: var(--white);
-      color: #c0392b;
-      border: 2px solid var(--white);
-    }
-    .cart-popup .popup-actions .btn-checkout:hover {
-      transform: scale(1.05);
-      background: var(--gold);
-      border-color: var(--gold);
-      color: var(--white);
-    }
-    .cart-popup .popup-actions .btn-view {
-      background: transparent;
-      border: 2px solid var(--white);
-      color: var(--white);
-    }
-    .cart-popup .popup-actions .btn-view:hover {
-      background: var(--white);
-      color: #c0392b;
-      transform: scale(1.05);
-    }
-    .cart-popup-empty {
-      text-align: center;
-      padding: 14px 0;
-      color: var(--white);
-    }
-    .cart-popup-empty .icon { font-size: 1.8rem; margin-bottom: 4px; }
 
     /* ---------- LIVE NOTIFICATION ---------- */
     .live-notification {
@@ -1345,12 +1282,14 @@
       font-weight: 700;
       color: var(--gold-dark);
       font-size: 0.8rem;
+      font-family: var(--font-body);
     }
     .live-notification .notif-content .text .action {
       color: var(--text-dark);
       font-size: 0.75rem;
+      font-family: var(--font-body);
     }
-    .live-notification .notif-content .text .time { color: var(--text-muted); font-size: 0.65rem; }
+    .live-notification .notif-content .text .time { color: var(--text-muted); font-size: 0.65rem; font-family: var(--font-body); }
     .live-notification .notif-close {
       background: none;
       border: none;
@@ -1358,96 +1297,99 @@
       cursor: pointer;
       font-size: 0.8rem;
       transition: 0.3s;
+      font-family: var(--font-body);
     }
     .live-notification .notif-close:hover { color: var(--gold); transform: scale(1.2); }
 
    /* ---------- STICKY COD POPUP (BOTTOM LEFT) ---------- */
-.cod-sticky-popup {
-  position: fixed;
-  bottom: 30px;
-  left: 20px;
-  background: linear-gradient(135deg, #ff0000, #cc0000);
-  color: var(--white);
-  padding: 10px 18px;
-  border-radius: 50px;
-  border: 3px solid var(--gold);
-  box-shadow: 0 8px 32px rgba(192, 57, 43, 0.4);
-  z-index: 9997;
-  font-family: var(--font-heading);
-  font-weight: 900;
-  font-style: italic;
-  font-size: 0.95rem;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  animation: float 3s ease-in-out infinite;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: default;
-  max-width: 90vw;
-  white-space: nowrap;
-}
-.cod-sticky-popup:hover {
-  transform: scale(1.05) translateY(-4px);
-  box-shadow: 0 12px 40px rgba(192, 57, 43, 0.5);
-}
-.cod-sticky-popup .popup-icon {
-  font-size: 1.4rem;
-  animation: pulse 2s ease-in-out infinite;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.cod-sticky-popup .popup-text {
-  line-height: 1.2;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  white-space: nowrap;
-}
-.cod-sticky-popup .popup-badge {
-  background: var(--white);
-  color: #ff0000;
-  padding: 2px 12px;
-  border-radius: 30px;
-  font-size: 0.6rem;
-  font-weight: 900;
-  font-style: normal;
-  display: inline-block;
-  text-align: center;
-  line-height: 1.4;
-}
-@media (max-width: 500px) {
-  .cod-sticky-popup {
-    bottom: 16px;
-    left: 12px;
-    padding: 8px 14px;
-    font-size: 0.7rem;
-    border-width: 2px;
-    gap: 6px;
-  }
-  .cod-sticky-popup .popup-icon {
-    font-size: 1.1rem;
-  }
-  .cod-sticky-popup .popup-badge {
-    font-size: 0.5rem;
-    padding: 1px 8px;
-  }
-  .cod-sticky-popup .popup-text {
-    gap: 4px;
-  }
-}
+    .cod-sticky-popup {
+      position: fixed;
+      bottom: 30px;
+      left: 20px;
+      background: linear-gradient(135deg, #ff0000, #cc0000);
+      color: var(--white);
+      padding: 10px 18px;
+      border-radius: 50px;
+      border: 3px solid var(--gold);
+      box-shadow: 0 8px 32px rgba(192, 57, 43, 0.4);
+      z-index: 9997;
+      font-family: var(--font-heading);
+      font-weight: 400;
+      font-style: italic;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      animation: float 3s ease-in-out infinite;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: default;
+      max-width: 90vw;
+      white-space: nowrap;
+    }
+    .cod-sticky-popup:hover {
+      transform: scale(1.05) translateY(-4px);
+      box-shadow: 0 12px 40px rgba(192, 57, 43, 0.5);
+    }
+    .cod-sticky-popup .popup-icon {
+      font-size: 1.4rem;
+      animation: pulse 2s ease-in-out infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cod-sticky-popup .popup-text {
+      line-height: 1.2;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+    .cod-sticky-popup .popup-badge {
+      background: var(--white);
+      color: #ff0000;
+      padding: 2px 12px;
+      border-radius: 30px;
+      font-size: 0.6rem;
+      font-weight: 900;
+      font-style: normal;
+      display: inline-block;
+      text-align: center;
+      line-height: 1.4;
+      font-family: var(--font-body);
+    }
+    @media (max-width: 500px) {
+      .cod-sticky-popup {
+        bottom: 16px;
+        left: 12px;
+        padding: 8px 14px;
+        font-size: 0.7rem;
+        border-width: 2px;
+        gap: 6px;
+      }
+      .cod-sticky-popup .popup-icon {
+        font-size: 1.1rem;
+      }
+      .cod-sticky-popup .popup-badge {
+        font-size: 0.5rem;
+        padding: 1px 8px;
+      }
+      .cod-sticky-popup .popup-text {
+        gap: 4px;
+      }
+    }
+
     /* ---------- RESPONSIVE ---------- */
     @media (max-width: 500px) {
       .reviews-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
       .product-info-grid { grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
       .section-title-italic { font-size: 1.4rem; }
       .headline-heavy { font-size: 1.8rem; }
-      .cart-popup { width: 220px; right: 10px; padding: 10px 12px; }
       .live-notification { max-width: 260px; right: 10px; bottom: 16px; }
-      .announcement-banner { font-size: 0.7rem; padding: 6px 10px; }
+      .announcement-banner { font-size: 0.7rem; padding: 6px 0; height: 36px; }
+      .announcement-banner .banner-slide { gap: 20px; padding: 0 10px; }
       .big-product-card h2 { font-size: 1.2rem; }
       .big-product-card .big-price { font-size: 1.3rem; }
       .big-product-card { padding: 16px 14px 18px; }
@@ -1483,28 +1425,62 @@
 </head>
 <body>
 
-  <!-- ANNOUNCEMENT BANNER -->
+  <!-- SCROLLING ANNOUNCEMENT BANNER (LEFT TO RIGHT) -->
   <div class="announcement-banner" id="announcementBanner">
-    <span>✨ 20-IN-1 COMBO @ ₹999 ONLY — LIMITED STOCK</span>
-    <a href="#big-product">Shop now →</a>
+    <div class="banner-track">
+      <div class="banner-slide">
+        <span>💵 CASH ON DELIVERY</span>
+        <span class="separator">|</span>
+        <span>🚚 FREE SHIPPING</span>
+        <span class="separator">|</span>
+        <span>🔄 7 DAY RETURN</span>
+        <span class="separator">|</span>
+        <span>🎯 20-IN-1 COMBO @ ₹999</span>
+        <span class="separator">|</span>
+        <span><a href="#big-product">Shop now →</a></span>
+        <span class="separator">|</span>
+        <span>🔥 LIMITED STOCK</span>
+        <span class="separator">|</span>
+        <span><a href="#fast-scroll">View Bestsellers →</a></span>
+      </div>
+      <div class="banner-slide">
+        <span>💵 CASH ON DELIVERY</span>
+        <span class="separator">|</span>
+        <span>🚚 FREE SHIPPING</span>
+        <span class="separator">|</span>
+        <span>🔄 7 DAY RETURN</span>
+        <span class="separator">|</span>
+        <span>🎯 20-IN-1 COMBO @ ₹999</span>
+        <span class="separator">|</span>
+        <span><a href="#big-product">Shop now →</a></span>
+        <span class="separator">|</span>
+        <span>🔥 LIMITED STOCK</span>
+        <span class="separator">|</span>
+        <span><a href="#fast-scroll">View Bestsellers →</a></span>
+      </div>
+    </div>
     <button class="close-banner" id="closeBannerBtn">✕</button>
   </div>
 
-  <!-- HEADER -->
+  <!-- HEADER (Menu Left, Logo Center, Cart Right) -->
   <header class="main-header" id="mainHeader">
-    <div class="logo-pill"><a href="index.html" style="text-decoration:none;"><span class="logo-text">SNOOQ</span></a></div>
+    <div class="header-left">
+      <button class="menu-btn" id="menuToggle"><span></span><span></span><span></span></button>
+    </div>
+    <div class="header-center">
+      <div class="logo-pill"><a href="index.html" style="text-decoration:none;"><span class="logo-text">SNOOQ</span></a></div>
+    </div>
     <div class="header-right">
-      <a href="#" class="cart-icon" id="cartToggle" onclick="toggleCart(event)">
+      <a href="cart.html" class="cart-icon" id="cartLink">
         🛒<span class="badge" id="cartBadge">0</span>
       </a>
-      <button class="menu-btn" id="menuToggle"><span></span><span></span><span></span></button>
     </div>
   </header>
 
   <!-- OVERLAY -->
   <div class="overlay" id="overlay"></div>
 
-  <!-- DROPDOWN -->
+  <!-- DROPDOWN (Left Side) -->
   <nav class="dropdown-menu" id="dropdownMenu">
     <button class="menu-close" id="menuClose">✕</button>
     <ul>
@@ -1521,24 +1497,6 @@
     <div class="menu-gold-text">✦ Home Essentials ✦</div>
   </nav>
 
-  <!-- CART POPUP -->
-  <div class="cart-popup" id="cartPopup">
-    <div class="popup-header">
-      <h3>🛒 Your Cart</h3>
-      <button class="popup-close" onclick="toggleCart(event)">✕</button>
-    </div>
-    <div id="cartItems">
-      <div class="cart-popup-empty"><div class="icon">🛒</div><p>Your cart is empty</p></div>
-    </div>
-    <div class="popup-total" id="cartTotal" style="display:none;">
-      <span class="total">Total: ₹<span id="cartTotalAmount">0</span></span>
-    </div>
-    <div class="popup-actions" id="cartActions" style="display:none;">
-      <a href="cart.html" class="btn-view">View Cart</a>
-      <a href="checkout.html" class="btn-checkout">Checkout</a>
-    </div>
-  </div>
-
   <!-- LIVE NOTIFICATION -->
   <div class="live-notification" id="liveNotif">
     <div class="notif-content">
@@ -1554,7 +1512,6 @@
 
   <!-- STICKY COD POPUP (BOTTOM LEFT) -->
   <div class="cod-sticky-popup">
-    
     <span class="popup-text">COD <span class="popup-badge">Only</span></span>
   </div>
 
@@ -1575,7 +1532,7 @@
 
   <!-- COD HIGHLIGHT BANNER (mid-page) -->
   <div class="cod-highlight-banner">
-    <span>💵</span>
+    
     <span>PAY ON DELIVERY</span>
     <span class="cod-badge">COD</span>
     <span class="small-text">· No hidden charges ·</span>
@@ -1583,24 +1540,24 @@
 
   <!-- FAST SCROLLING COLLECTIONS (SQUARE & COMPACT) -->
   <section class="fast-scroll-section" id="fast-scroll">
-    <h2 class="section-title-italic">✨ Bestsellers</h2>
+    <h2 class="section-title-italic">Bestsellers</h2>
     <div class="fast-scroll-track" id="fastTrack">
-      <div class="fast-scroll-item"><img src="image/IMG_2430.PNG" alt="Shelf Rack" /><h4>Bathroom Shelf</h4><div class="price">₹149</div><span class="cod-tag">PACK OF 2</span></div>
-      <div class="fast-scroll-item"><img src="image/IMG_2432.PNG" alt="Soap Holder" /><h4>Soap Holder</h4><div class="price">₹149</div><span class="cod-tag">PACK OF 2</span></div>
-      <div class="fast-scroll-item"><img src="image/IMG_2433.PNG" alt="Cleaning Brush" /><h4>Cleaning Brush</h4><div class="price">₹149</div><span class="cod-tag">PACK OF 1</span></div>
-      <div class="fast-scroll-item"><img src="image/IMG_2435.PNG" alt="Strainer" /><h4>Sink Strainer</h4><div class="price">₹149</div><span class="cod-tag">PACK OF 1</span></div>
-      <div class="fast-scroll-item"><img src="image/IMG_2438.PNG" alt="Scrub Brush" /><h4>Scrub Brush</h4><div class="price">₹149</div><span class="cod-tag">PACK OF 1</span></div>
-      <div class="fast-scroll-item"><img src="image/IMG_2439.PNG" alt="Soap Pump" /><h4>3in1 Soap Pump</h4><div class="price">₹149</div><span class="cod-tag">PACK OF 1</span></div>
-      <div class="fast-scroll-item"><img src="image/IMG_2442.PNG" alt="Mesh Cloth" /><h4>Mesh Cloths</h4><div class="price">₹149</div><span class="cod-tag">PACK OF 10</span></div>
-      <div class="fast-scroll-item"><img src="image/IMG_2443.PNG" alt="Spice Jar" /><h4>Spice Jar</h4><div class="price">₹149</div><span class="cod-tag">PACK OF 4</span></div>
-      <div class="fast-scroll-item"><img src="image/IMG_2445.PNG" alt="Oil Bottle" /><h4>Oil Bottle</h4><div class="price">₹149</div><span class="cod-tag">PACK OF 2</span></div>
-      <div class="fast-scroll-item"><img src="image/IMG_2449.PNG" alt="Spatula Brush" /><h4>Spatula Brush</h4><div class="price">₹149</div><span class="cod-tag">PACK OF 2</span></div>
-      <div class="fast-scroll-item"><img src="image/IMG_2451.PNG" alt="Funnel" /><h4>Silicone Funnel</h4><div class="price">₹149</div><span class="cod-tag">PACK OF 1S</span></div>
-      <div class="fast-scroll-item"><img src="image/IMG_2451.PNG" alt="Hook Hanger" /><h4>6 Hook Hanger</h4><div class="price">₹149</div><span class="cod-tag">PACK OF 1</span></div>
+      <div class="fast-scroll-item"><img src="image/IMG_2430.PNG" alt="Shelf Rack" /><h4>Bathroom Shelf</h4><span class="cod-tag">PACK OF 2</span></div>
+      <div class="fast-scroll-item"><img src="image/IMG_2432.PNG" alt="Soap Holder" /><h4>Soap Holder</h4><span class="cod-tag">PACK OF 2</span></div>
+      <div class="fast-scroll-item"><img src="image/IMG_2433.PNG" alt="Cleaning Brush" /><h4>Cleaning Brush</h4><span class="cod-tag">PACK OF 1</span></div>
+      <div class="fast-scroll-item"><img src="image/IMG_2435.PNG" alt="Strainer" /><h4>Sink Strainer</h4><span class="cod-tag">PACK OF 1</span></div>
+      <div class="fast-scroll-item"><img src="image/IMG_2438.PNG" alt="Scrub Brush" /><h4>Scrub Brush</h4><span class="cod-tag">PACK OF 1</span></div>
+      <div class="fast-scroll-item"><img src="image/IMG_2439.PNG" alt="Soap Pump" /><h4>3in1 Soap Pump</h4><span class="cod-tag">PACK OF 1</span></div>
+      <div class="fast-scroll-item"><img src="image/IMG_2442.PNG" alt="Mesh Cloth" /><h4>Mesh Cloths</h4><span class="cod-tag">PACK OF 10</span></div>
+      <div class="fast-scroll-item"><img src="image/IMG_2443.PNG" alt="Spice Jar" /><h4>Spice Jar</h4><span class="cod-tag">PACK OF 4</span></div>
+      <div class="fast-scroll-item"><img src="image/IMG_2445.PNG" alt="Oil Bottle" /><h4>Oil Bottle</h4><span class="cod-tag">PACK OF 2</span></div>
+      <div class="fast-scroll-item"><img src="image/IMG_2449.PNG" alt="Spatula Brush" /><h4>Spatula Brush</h4><span class="cod-tag">PACK OF 2</span></div>
+      <div class="fast-scroll-item"><img src="image/IMG_2451.PNG" alt="Funnel" /><h4>Silicone Funnel</h4><span class="cod-tag">PACK OF 1S</span></div>
+      <div class="fast-scroll-item"><img src="image/IMG_2451.PNG" alt="Hook Hanger" /><h4>6 Hook Hanger</h4><span class="cod-tag">PACK OF 1</span></div>
       <!-- duplicate for seamless loop -->
-      <div class="fast-scroll-item"><img src="image/IMG_2430.PNG" alt="Shelf Rack" /><h4>Bathroom Shelf</h4><div class="price">₹149</div><span class="cod-tag">PACK OF 2</span></div>
-      <div class="fast-scroll-item"><img src="image/IMG_2432.PNG" alt="Soap Holder" /><h4>Soap Holder</h4><div class="price">₹149</div><span class="cod-tag">PACK OF 2</span></div>
-      <div class="fast-scroll-item"><img src="image/IMG_2433.PNG" alt="Cleaning Brush" /><h4>Cleaning Brush</h4><div class="price">₹149</div><span class="cod-tag">PACK OF 1</span></div>
+      <div class="fast-scroll-item"><img src="image/IMG_2430.PNG" alt="Shelf Rack" /><h4>Bathroom Shelf</h4><span class="cod-tag">PACK OF 2</span></div>
+      <div class="fast-scroll-item"><img src="image/IMG_2432.PNG" alt="Soap Holder" /><h4>Soap Holder</h4><span class="cod-tag">PACK OF 2</span></div>
+      <div class="fast-scroll-item"><img src="image/IMG_2433.PNG" alt="Cleaning Brush" /><h4>Cleaning Brush</h4><span class="cod-tag">PACK OF 1</span></div>
     </div>
   </section>
 
@@ -1628,7 +1585,7 @@
         <div class="detail-image"><img src="image/IMG_2430.PNG" alt="Shelf Rack" /></div>
         <div class="detail-info">
           <h4>Bathroom Shelf Rack</h4>
-          <div class="detail-price">₹149 <small>₹199</small></div>
+          
           <div class="detail-desc">Stainless steel · wall mount</div>
           <span class="detail-buy" onclick="event.stopPropagation(); addToCart('Shelf Rack', 149)">Add to Cart</span>
         </div>
@@ -1637,16 +1594,16 @@
         <div class="detail-image"><img src="image/IMG_2432.PNG" alt="Soap Holder" /></div>
         <div class="detail-info">
           <h4>Wall Mounted Soap Holder</h4>
-          <div class="detail-price">₹149 <small>₹199</small></div>
+          
           <div class="detail-desc">Premium · rust-proof</div>
           <span class="detail-buy" onclick="event.stopPropagation(); addToCart('Soap Holder', 149)">Add to Cart</span>
         </div>
       </a>
       <a href="product.html" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
-        <div class="detail-image"><img src="image/IMG_2514.png" alt="Hook Hanger" /></div>
+        <div class="detail-image"><img src="image/IMG_2514.PNG" alt="Hook Hanger" /></div>
         <div class="detail-info">
           <h4>6 Hook Hanger</h4>
-          <div class="detail-price">₹149 <small>₹199</small></div>
+          
           <div class="detail-desc">Strong adhesive · multi-use</div>
           <span class="detail-buy" onclick="event.stopPropagation(); addToCart('Hook Hanger', 149)">Add to Cart</span>
         </div>
@@ -1655,7 +1612,7 @@
         <div class="detail-image"><img src="image/IMG_2433.PNG" alt="Cleaning Brush" /></div>
         <div class="detail-info">
           <h4>Long Handle Cleaning Brush</h4>
-          <div class="detail-price">₹149 <small>₹199</small></div>
+          
           <div class="detail-desc">Ergonomic · durable bristles</div>
           <span class="detail-buy" onclick="event.stopPropagation(); addToCart('Cleaning Brush', 149)">Add to Cart</span>
         </div>
@@ -1664,7 +1621,7 @@
         <div class="detail-image"><img src="image/IMG_2435.PNG" alt="Strainer" /></div>
         <div class="detail-info">
           <h4>Sink Strainer Basket</h4>
-          <div class="detail-price">₹149 <small>₹199</small></div>
+          
           <div class="detail-desc">Stainless steel · easy clean</div>
           <span class="detail-buy" onclick="event.stopPropagation(); addToCart('Strainer', 149)">Add to Cart</span>
         </div>
@@ -1673,7 +1630,7 @@
         <div class="detail-image"><img src="image/IMG_2438.PNG" alt="Scrub Brush" /></div>
         <div class="detail-info">
           <h4>Scrub Brush</h4>
-          <div class="detail-price">₹149 <small>₹199</small></div>
+          
           <div class="detail-desc">Heavy duty · non-scratch</div>
           <span class="detail-buy" onclick="event.stopPropagation(); addToCart('Scrub Brush', 149)">Add to Cart</span>
         </div>
@@ -1682,7 +1639,7 @@
         <div class="detail-image"><img src="image/IMG_2439.PNG" alt="Soap Pump" /></div>
         <div class="detail-info">
           <h4>3in1 Soap Pump Dispenser</h4>
-          <div class="detail-price">₹149 <small>₹199</small></div>
+          
           <div class="detail-desc">Multi-purpose · leak-proof</div>
           <span class="detail-buy" onclick="event.stopPropagation(); addToCart('Soap Pump', 149)">Add to Cart</span>
         </div>
@@ -1691,7 +1648,7 @@
         <div class="detail-image"><img src="image/IMG_2442.PNG" alt="Mesh Cloth" /></div>
         <div class="detail-info">
           <h4>Mesh Cleaning Cloths</h4>
-          <div class="detail-price">₹149 <small>₹199</small></div>
+          
           <div class="detail-desc">Scratch-free · reusable</div>
           <span class="detail-buy" onclick="event.stopPropagation(); addToCart('Mesh Cloth', 149)">Add to Cart</span>
         </div>
@@ -1700,7 +1657,7 @@
         <div class="detail-image"><img src="image/IMG_2443.PNG" alt="Spice Jar" /></div>
         <div class="detail-info">
           <h4>Spice Jar Set</h4>
-          <div class="detail-price">₹149 <small>₹199</small></div>
+          
           <div class="detail-desc">Airtight · glass bottles</div>
           <span class="detail-buy" onclick="event.stopPropagation(); addToCart('Spice Jar', 149)">Add to Cart</span>
         </div>
@@ -1709,7 +1666,7 @@
         <div class="detail-image"><img src="image/IMG_2445.PNG" alt="Oil Bottle" /></div>
         <div class="detail-info">
           <h4>Glass Oil Bottles</h4>
-          <div class="detail-price">₹149 <small>₹199</small></div>
+          
           <div class="detail-desc">Drip-free · premium glass</div>
           <span class="detail-buy" onclick="event.stopPropagation(); addToCart('Oil Bottle', 149)">Add to Cart</span>
         </div>
@@ -1718,7 +1675,7 @@
         <div class="detail-image"><img src="image/IMG_2451.PNG" alt="Funnel" /></div>
         <div class="detail-info">
           <h4>Silicone Funnel</h4>
-          <div class="detail-price">₹149 <small>₹199</small></div>
+          
           <div class="detail-desc">Flexible · heat resistant</div>
           <span class="detail-buy" onclick="event.stopPropagation(); addToCart('Funnel', 149)">Add to Cart</span>
         </div>
@@ -1727,7 +1684,7 @@
         <div class="detail-image"><img src="image/IMG_2449.PNG" alt="Spatula Brush" /></div>
         <div class="detail-info">
           <h4>Spatula & Basting Brush</h4>
-          <div class="detail-price">₹149 <small>₹199</small></div>
+          
           <div class="detail-desc">Silicone · non-stick safe</div>
           <span class="detail-buy" onclick="event.stopPropagation(); addToCart('Spatula Brush', 149)">Add to Cart</span>
         </div>
@@ -1751,7 +1708,7 @@
   <section class="reviews-section">
     <div class="reviews-header">
       <h2 class="section-title-italic">Customer Reviews</h2>
-      <span class="reviews-total">⭐ 4.9 · 2,118 reviews</span>
+      <span class="reviews-total">⭐ 4.6 · 5,639 reviews</span>
     </div>
     <div class="reviews-grid">
       <div class="review-card"><div class="stars">★★★★★</div><p class="review-text">"Amazing kitchen gadgets! The knife set is top quality."</p><span class="reviewer">— Arjun S.</span></div>
@@ -1759,7 +1716,7 @@
       <div class="review-card"><div class="stars">★★★★☆</div><p class="review-text">"Great value for money. The spatula set is very durable."</p><span class="reviewer">— Ravi K.</span></div>
       <div class="review-card"><div class="stars">★★★★★</div><p class="review-text">"Best kitchen gadgets I've ever bought. Will buy again!"</p><span class="reviewer">— Ananya R.</span></div>
     </div>
-    <div style="text-align:center;margin-top:16px;"><a href="reviews.html" class="btn-solid-primary" style="max-width:200px;margin:0 auto;">Read all reviews →</a></div>
+    <div style="text-align:center;margin-top:16px;"><a href="reviews.html" class="btn-solid-primary" style="max-width:200px;margin:0 auto;">Read all reviews</a></div>
   </section>
 
   <!-- MILESTONE -->
@@ -1778,9 +1735,9 @@
   <section class="social-feed-section">
     <h2 class="section-title-italic">Awards</h2>
     <div class="horizontal-media-scroller">
-      <div class="media-card card-rounded-video"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect width='400' height='300' fill='%23d4b87a'/%3E%3Ctext x='100' y='170' font-size='30' fill='%239a7f4a'%3E🏆 Best Seller%3C/text%3E%3C/svg%3E" alt="Award" /></div>
-      <div class="media-card card-rounded-video"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect width='400' height='300' fill='%23d4b87a'/%3E%3Ctext x='80' y='170' font-size='30' fill='%239a7f4a'%3E⭐ Top Rated%3C/text%3E%3C/svg%3E" alt="Top Rated" /></div>
-      <div class="media-card card-rounded-video"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect width='400' height='300' fill='%23d4b87a'/%3E%3Ctext x='80' y='170' font-size='30' fill='%239a7f4a'%3E💵 COD Available%3C/text%3E%3C/svg%3E" alt="COD" /></div>
+      <div class="media-card card-rounded-video"><img src="image/IMG_2414.PNG" /></div>
+      <div class="media-card card-rounded-video"><img src="image/IMG_2431.PNG"/></div>
+      <div class="media-card card-rounded-video"><img src="image/IMG_2431.PNG" /></div>
     </div>
   </section>
 
@@ -1829,14 +1786,13 @@
 
   <script>
     // ============================================================
-    // 1. ANNOUNCEMENT BANNER – closeable with smooth animation
+    // 1. ANNOUNCEMENT BANNER – closeable
     // ============================================================
     const banner = document.getElementById('announcementBanner');
     const closeBannerBtn = document.getElementById('closeBannerBtn');
     if (closeBannerBtn) {
       closeBannerBtn.addEventListener('click', function() {
         banner.classList.add('hidden');
-        setTimeout(() => { banner.style.display = 'none'; }, 500);
       });
     }
 
@@ -1854,40 +1810,6 @@
       const badge = document.getElementById('cartBadge');
       const total = cart.reduce((sum, item) => sum + item.quantity, 0);
       badge.textContent = total;
-
-      const itemsContainer = document.getElementById('cartItems');
-      const totalContainer = document.getElementById('cartTotal');
-      const actionsContainer = document.getElementById('cartActions');
-      const totalAmount = document.getElementById('cartTotalAmount');
-
-      if (cart.length === 0) {
-        itemsContainer.innerHTML =
-          `<div class="cart-popup-empty"><div class="icon">🛒</div><p>Your cart is empty</p></div>`;
-        totalContainer.style.display = 'none';
-        actionsContainer.style.display = 'none';
-        return;
-      }
-
-      let html = '';
-      let totalPrice = 0;
-      cart.forEach((item, index) => {
-        totalPrice += item.price * item.quantity;
-        html += `
-            <div class="popup-item">
-              <img src="image/IMG_2430.PNG" alt="${item.name}">
-              <div class="info">
-                <h4>${item.name}</h4>
-                <div class="price">₹${item.price} × ${item.quantity}</div>
-              </div>
-              <button class="remove" onclick="removeFromCart(${index})">✕</button>
-            </div>
-          `;
-      });
-
-      itemsContainer.innerHTML = html;
-      totalContainer.style.display = 'block';
-      actionsContainer.style.display = 'flex';
-      totalAmount.textContent = totalPrice.toFixed(0);
     }
 
     function addToCart(name, price) {
@@ -1934,28 +1856,6 @@
     }
 
     document.getElementById('bigAddBtn').addEventListener('click', addBigCombo);
-
-    function removeFromCart(index) {
-      cart.splice(index, 1);
-      saveCart();
-      if (cart.length === 0) {
-        document.getElementById('cartPopup').classList.remove('open');
-      }
-    }
-
-    function toggleCart(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      document.getElementById('cartPopup').classList.toggle('open');
-    }
-
-    document.addEventListener('click', function(e) {
-      const popup = document.getElementById('cartPopup');
-      const toggle = document.getElementById('cartToggle');
-      if (!popup.contains(e.target) && !toggle.contains(e.target)) {
-        popup.classList.remove('open');
-      }
-    });
 
     // ============================================================
     // 3. LIVE NOTIFICATION
@@ -2012,7 +1912,7 @@
     }
 
     // ============================================================
-    // 4. DROPDOWN MENU
+    // 4. DROPDOWN MENU (Left Side)
     // ============================================================
     const menuToggle = document.getElementById('menuToggle');
     const dropdownMenu = document.getElementById('dropdownMenu');
@@ -2117,7 +2017,7 @@
     // ============================================================
     updateCartUI();
     startLiveNotifications();
-    console.log('🏠 SNOOQ — Home Gadgets with COD Highlight');
+    console.log('🏠 SNOOQ — Left to Right Scrolling Banner');
   </script>
 </body>
 </html>
