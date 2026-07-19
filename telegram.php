@@ -1,5 +1,6 @@
 <?php
 // telegram.php - Place this in your website root folder
+// This file acts as a proxy to send messages to Telegram
 
 // Allow CORS
 header('Access-Control-Allow-Origin: *');
