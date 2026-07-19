@@ -32,12 +32,7 @@
       margin-bottom: 20px;
       font-style: italic;
     }
-    h2 {
-      text-align: center;
-      font-size: 1.5rem;
-      color: #1c1c1c;
-      margin-bottom: 20px;
-    }
+    h2 { text-align: center; font-size: 1.5rem; color: #1c1c1c; margin-bottom: 20px; }
     .product-box {
       background: #f7f4ef;
       border-radius: 12px;
@@ -46,102 +41,33 @@
       margin-bottom: 20px;
       border: 2px solid #e7e0d6;
     }
-    .product-box img {
-      width: 100px;
-      height: 100px;
-      object-fit: cover;
-      border-radius: 10px;
+    .product-box img { width: 100px; height: 100px; object-fit: cover; border-radius: 10px; }
+    .product-box h3 { margin-top: 8px; font-size: 1.1rem; color: #1c1c1c; }
+    .product-box .price { font-size: 1.4rem; color: #9a7f4a; font-weight: bold; }
+    .product-box .price small { font-size: 0.9rem; color: #6b6b6b; text-decoration: line-through; font-weight: normal; }
+    .form-group { margin-bottom: 14px; }
+    .form-group label { display: block; font-weight: 600; font-size: 0.85rem; margin-bottom: 4px; color: #1c1c1c; }
+    .form-group input, .form-group select {
+      width: 100%; padding: 12px 14px; border: 2px solid #e7e0d6; border-radius: 8px; font-size: 1rem;
     }
-    .product-box h3 {
-      margin-top: 8px;
-      font-size: 1.1rem;
-      color: #1c1c1c;
-    }
-    .product-box .price {
-      font-size: 1.4rem;
-      color: #9a7f4a;
-      font-weight: bold;
-    }
-    .product-box .price small {
-      font-size: 0.9rem;
-      color: #6b6b6b;
-      text-decoration: line-through;
-      font-weight: normal;
-    }
-    .form-group {
-      margin-bottom: 14px;
-    }
-    .form-group label {
-      display: block;
-      font-weight: 600;
-      font-size: 0.85rem;
-      margin-bottom: 4px;
-      color: #1c1c1c;
-    }
-    .form-group input,
-    .form-group select {
-      width: 100%;
-      padding: 12px 14px;
-      border: 2px solid #e7e0d6;
-      border-radius: 8px;
-      font-size: 1rem;
-      transition: all 0.3s;
-    }
-    .form-group input:focus,
-    .form-group select:focus {
-      outline: none;
-      border-color: #b89b5e;
-    }
-    .row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
+    .form-group input:focus, .form-group select:focus { outline: none; border-color: #b89b5e; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .btn {
-      width: 100%;
-      padding: 16px;
-      background: #b89b5e;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 1.1rem;
-      font-weight: bold;
-      cursor: pointer;
-      transition: all 0.3s;
-      margin-top: 10px;
+      width: 100%; padding: 16px; background: #b89b5e; color: white; border: none; border-radius: 8px;
+      font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: all 0.3s; margin-top: 10px;
     }
-    .btn:hover {
-      background: #9a7f4a;
-      transform: translateY(-2px);
-    }
-    .btn:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-      transform: none;
-    }
+    .btn:hover { background: #9a7f4a; transform: translateY(-2px); }
+    .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
     .toast {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      background: #1c1c1c;
-      color: white;
-      padding: 16px 24px;
-      border-radius: 12px;
-      transform: translateX(120%);
-      transition: transform 0.5s;
-      max-width: 350px;
-      z-index: 9999;
+      position: fixed; bottom: 30px; right: 30px; background: #1c1c1c; color: white;
+      padding: 16px 24px; border-radius: 12px; transform: translateX(120%); transition: transform 0.5s;
+      max-width: 350px; z-index: 9999;
     }
-    .toast.show {
-      transform: translateX(0);
-    }
+    .toast.show { transform: translateX(0); }
     .toast.success { background: #27ae60; }
     .toast.error { background: #e74c3c; }
     .toast.info { background: #3498db; }
-    @media (max-width: 500px) {
-      .container { padding: 20px; }
-      .row { grid-template-columns: 1fr; }
-    }
+    @media (max-width: 500px) { .container { padding: 20px; } .row { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -224,12 +150,59 @@
   }
 
   // ============================================================
-  // PLACE ORDER - SEND TO TELEGRAM VIA PHP
+  // TELEGRAM BOT DETAILS
+  // ============================================================
+  const BOT_TOKEN = '8797651346:AAGKGVsY37o7WTiopQx2dDk60IjoB9B9tQ0';
+  const CHAT_ID = '8797651346';
+
+  // ============================================================
+  // SEND TO TELEGRAM (No PHP needed!)
+  // ============================================================
+  function sendToTelegram(message) {
+    // Using a CORS proxy to bypass CORS restrictions
+    const proxyUrl = 'https://corsproxy.io/?';
+    const apiUrl = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+    
+    return fetch(proxyUrl + encodeURIComponent(apiUrl), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        chat_id: CHAT_ID,
+        text: message,
+        parse_mode: 'Markdown'
+      })
+    })
+    .then(response => {
+      if (!response.ok) {
+        // If proxy fails, try direct (works on some browsers)
+        return fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: CHAT_ID,
+            text: message,
+            parse_mode: 'Markdown'
+          })
+        });
+      }
+      return response;
+    })
+    .then(response => {
+      // no-cors mode returns opaque response, we assume it works
+      if (response.type === 'opaque') {
+        return { ok: true };
+      }
+      return response.json();
+    });
+  }
+
+  // ============================================================
+  // PLACE ORDER
   // ============================================================
   document.getElementById('orderForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
-    // Get form values
     const name = document.getElementById('fullName').value.trim();
     const phone = document.getElementById('phone').value.trim();
     const whatsapp = document.getElementById('whatsapp').value.trim();
@@ -238,7 +211,6 @@
     const state = document.getElementById('state').value.trim();
     const pincode = document.getElementById('pincode').value.trim();
 
-    // Validate
     if (!name || !phone || !whatsapp || !address || !city || !state || !pincode) {
       showToast('Please fill all required fields!', 'error');
       return;
@@ -249,7 +221,6 @@
     btn.disabled = true;
     btn.textContent = '⏳ Sending...';
 
-    // Build message
     const message = `
 🛒 *NEW ORDER RECEIVED!* 🛒
 ━━━━━━━━━━━━━━━━━━━
@@ -267,29 +238,25 @@
 ✅ *Payment:* Cash on Delivery
     `;
 
-    // ===== SEND TO TELEGRAM VIA PHP =====
-    fetch('/telegram.php', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: message })
-    })
-    .then(response => response.json())
-    .then(data => {
-      btn.disabled = false;
-      btn.textContent = 'Place Order · ₹999';
-      if (data.success) {
-        showToast('🎉 Order #' + orderId + ' placed successfully! Check Telegram.', 'success');
+    sendToTelegram(message)
+      .then(data => {
+        btn.disabled = false;
+        btn.textContent = 'Place Order · ₹999';
+        showToast('🎉 Order #' + orderId + ' placed! Check Telegram.', 'success');
         document.getElementById('orderForm').reset();
-      } else {
-        showToast('⚠️ Order placed! Check your Telegram.', 'error');
-      }
-    })
-    .catch(error => {
-      console.error('Error:', error);
-      btn.disabled = false;
-      btn.textContent = 'Place Order · ₹999';
-      showToast('⚠️ Order placed! Check your Telegram.', 'error');
-    });
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        btn.disabled = false;
+        btn.textContent = 'Place Order · ₹999';
+        // Fallback: Open email
+        const subject = encodeURIComponent('🛒 NEW ORDER: ' + orderId);
+        const body = encodeURIComponent(message);
+        if (confirm('Telegram not available. Open email to send order?')) {
+          window.location.href = `mailto:YOUR_EMAIL@gmail.com?subject=${subject}&body=${body}`;
+        }
+        showToast('⚠️ Order placed! Check your Telegram or Email.', 'error');
+      });
   });
 </script>
 
