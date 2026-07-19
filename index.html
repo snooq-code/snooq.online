@@ -1397,7 +1397,7 @@
         </div>
       </a>
       <a href="#checkout-section" class="product-detail-item fade-in-up-delay-1" style="text-decoration:none;">
-        <div class="detail-image"><img src="image/IMG_2514.PNG" alt="Hook Hanger" /></div>
+        <div class="detail-image"><img src="image/IMG_2451.PNG" alt="Hook Hanger" /></div>
         <div class="detail-info">
           <h4>6 Hook Hanger</h4>
           <div class="detail-desc">Strong adhesive · multi-use</div>
@@ -1869,28 +1869,28 @@
     }
 
     // ============================================================
-    // 6. PLACE ORDER - WITH TELEGRAM NOTIFICATION
+    // 6. PLACE ORDER - WITH TELEGRAM NOTIFICATION VIA PHP PROXY
     // ============================================================
- function placeOrder() {
-    const name = document.getElementById('fullName').value.trim();
-    const phone = document.getElementById('phone').value.trim();
-    const whatsapp = document.getElementById('whatsapp').value.trim();
-    const address = document.getElementById('address').value.trim();
-    const city = document.getElementById('city').value.trim();
-    const state = document.getElementById('state').value.trim();
-    const pincode = document.getElementById('pincode').value.trim();
+    function placeOrder() {
+      const name = document.getElementById('fullName').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const whatsapp = document.getElementById('whatsapp').value.trim();
+      const address = document.getElementById('address').value.trim();
+      const city = document.getElementById('city').value.trim();
+      const state = document.getElementById('state').value.trim();
+      const pincode = document.getElementById('pincode').value.trim();
 
-    if (!name || !phone || !whatsapp || !address || !city || !state || !pincode) {
+      if (!name || !phone || !whatsapp || !address || !city || !state || !pincode) {
         showNotification('Please fill all required fields!');
         return;
-    }
+      }
 
-    const orderId = 'SNOOQ-' + Date.now().toString().slice(-6);
-    const total = document.getElementById('summaryTotal').textContent.replace('₹', '');
-    const coupon = document.getElementById('couponInput').value || 'None';
+      const orderId = 'SNOOQ-' + Date.now().toString().slice(-6);
+      const total = document.getElementById('summaryTotal').textContent.replace('₹', '');
+      const coupon = document.getElementById('couponInput').value || 'None';
 
-    // ===== TELEGRAM MESSAGE =====
-    const message = `
+      // ===== TELEGRAM MESSAGE =====
+      const message = `
 🛒 *NEW ORDER RECEIVED!* 🛒
 ━━━━━━━━━━━━━━━━━━━
 
@@ -1905,96 +1905,37 @@
 📅 *Date:* ${new Date().toLocaleString()}
 ━━━━━━━━━━━━━━━━━━━
 ✅ *Payment:* Cash on Delivery
-    `;
+      `;
 
-    console.log('📤 Sending order via PHP proxy...');
+      console.log('📤 Sending order via PHP proxy...');
 
-    // ===== SEND VIA PHP PROXY =====
-    fetch('/telegram.php', {
+      // ===== SEND VIA PHP PROXY =====
+      fetch('/telegram.php', {
         method: 'POST',
         headers: { 
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
         },
         body: JSON.stringify({ message: message })
-    })
-    .then(function(response) {
+      })
+      .then(function(response) {
         return response.json();
-    })
-    .then(function(data) {
+      })
+      .then(function(data) {
         console.log('📥 Server Response:', data);
         if (data.success) {
-            console.log('✅ Telegram notification sent to @Snooq_bot!');
-            showNotification('🎉 Order #' + orderId + ' placed successfully!');
+          console.log('✅ Telegram notification sent to @Snooq_bot!');
+          showNotification('🎉 Order #' + orderId + ' placed successfully!');
         } else {
-            console.error('❌ Error:', data);
-            showNotification('⚠️ Order placed! Check your Telegram.');
+          console.error('❌ Error:', data);
+          showNotification('⚠️ Order placed! Check your Telegram.');
         }
-    })
-    .catch(function(error) {
+      })
+      .catch(function(error) {
         console.error('❌ Network error:', error);
         showNotification('⚠️ Order placed! Check your Telegram.');
-    });
-    
-    // Clear form
-    document.getElementById('fullName').value = '';
-    document.getElementById('phone').value = '';
-    document.getElementById('whatsapp').value = '';
-    document.getElementById('address').value = '';
-    document.getElementById('city').value = '';
-    document.getElementById('state').value = '';
-    document.getElementById('pincode').value = '';
-    document.getElementById('couponInput').value = '';
-    document.getElementById('discountRow').style.display = 'none';
-    couponDiscount = 0;
-    quantity = 1;
-    document.getElementById('qtyDisplay').textContent = '1';
-    updateSummary();
-    
-    setTimeout(function() {
-        showLiveNotification();
-    }, 1000);
-}
-    
-    // Clear form
-    document.getElementById('fullName').value = '';
-    document.getElementById('phone').value = '';
-    document.getElementById('whatsapp').value = '';
-    document.getElementById('address').value = '';
-    document.getElementById('city').value = '';
-    document.getElementById('state').value = '';
-    document.getElementById('pincode').value = '';
-    document.getElementById('couponInput').value = '';
-    document.getElementById('discountRow').style.display = 'none';
-    couponDiscount = 0;
-    quantity = 1;
-    document.getElementById('qtyDisplay').textContent = '1';
-    updateSummary();
-    
-    setTimeout(() => {
-        showLiveNotification();
-    }, 1000);
-}
-
-    // Clear form
-    document.getElementById('fullName').value = '';
-    document.getElementById('phone').value = '';
-    document.getElementById('whatsapp').value = '';
-    document.getElementById('address').value = '';
-    document.getElementById('city').value = '';
-    document.getElementById('state').value = '';
-    document.getElementById('pincode').value = '';
-    document.getElementById('couponInput').value = '';
-    document.getElementById('discountRow').style.display = 'none';
-    couponDiscount = 0;
-    quantity = 1;
-    document.getElementById('qtyDisplay').textContent = '1';
-    updateSummary();
-    
-    setTimeout(() => {
-        showLiveNotification();
-    }, 1000);
-} 
+      });
+      
       // Clear form
       document.getElementById('fullName').value = '';
       document.getElementById('phone').value = '';
@@ -2010,7 +1951,7 @@
       document.getElementById('qtyDisplay').textContent = '1';
       updateSummary();
       
-      setTimeout(() => {
+      setTimeout(function() {
         showLiveNotification();
       }, 1000);
     }
