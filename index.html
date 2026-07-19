@@ -150,59 +150,12 @@
   }
 
   // ============================================================
-  // TELEGRAM BOT DETAILS
-  // ============================================================
-  const BOT_TOKEN = '8797651346:AAGKGVsY37o7WTiopQx2dDk60IjoB9B9tQ0';
-  const CHAT_ID = '8797651346';
-
-  // ============================================================
-  // SEND TO TELEGRAM (No PHP needed!)
-  // ============================================================
-  function sendToTelegram(message) {
-    // Using a CORS proxy to bypass CORS restrictions
-    const proxyUrl = 'https://corsproxy.io/?';
-    const apiUrl = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
-    
-    return fetch(proxyUrl + encodeURIComponent(apiUrl), {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        chat_id: CHAT_ID,
-        text: message,
-        parse_mode: 'Markdown'
-      })
-    })
-    .then(response => {
-      if (!response.ok) {
-        // If proxy fails, try direct (works on some browsers)
-        return fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            chat_id: CHAT_ID,
-            text: message,
-            parse_mode: 'Markdown'
-          })
-        });
-      }
-      return response;
-    })
-    .then(response => {
-      // no-cors mode returns opaque response, we assume it works
-      if (response.type === 'opaque') {
-        return { ok: true };
-      }
-      return response.json();
-    });
-  }
-
-  // ============================================================
-  // PLACE ORDER
+  // PLACE ORDER - EMAIL METHOD (WORKS 100% ON GITHUB PAGES)
   // ============================================================
   document.getElementById('orderForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
+    // Get form values
     const name = document.getElementById('fullName').value.trim();
     const phone = document.getElementById('phone').value.trim();
     const whatsapp = document.getElementById('whatsapp').value.trim();
@@ -211,6 +164,7 @@
     const state = document.getElementById('state').value.trim();
     const pincode = document.getElementById('pincode').value.trim();
 
+    // Validate
     if (!name || !phone || !whatsapp || !address || !city || !state || !pincode) {
       showToast('Please fill all required fields!', 'error');
       return;
@@ -219,44 +173,42 @@
     const orderId = 'SNOOQ-' + Date.now().toString().slice(-6);
     const btn = document.getElementById('submitBtn');
     btn.disabled = true;
-    btn.textContent = '⏳ Sending...';
+    btn.textContent = '⏳ Opening email...';
 
-    const message = `
-🛒 *NEW ORDER RECEIVED!* 🛒
+    // Build email content
+    const subject = encodeURIComponent('🛒 NEW ORDER: ' + orderId);
+    const body = encodeURIComponent(`
+🛒 NEW ORDER RECEIVED! 🛒
 ━━━━━━━━━━━━━━━━━━━
 
-📋 *Order ID:* ${orderId}
-👤 *Customer:* ${name}
-📱 *Phone:* ${phone}
-📱 *WhatsApp:* ${whatsapp}
-🏠 *Address:* ${address}, ${city}, ${state} - ${pincode}
-📦 *Product:* 20-in-1 Combo Set (1x)
-💰 *Amount:* ₹999.00
-🎫 *Coupon:* None
-📅 *Date:* ${new Date().toLocaleString()}
+📋 Order ID: ${orderId}
+👤 Customer: ${name}
+📱 Phone: ${phone}
+📱 WhatsApp: ${whatsapp}
+🏠 Address: ${address}, ${city}, ${state} - ${pincode}
+📦 Product: 20-in-1 Combo Set (1x)
+💰 Amount: ₹999.00
+🎫 Coupon: None
+📅 Date: ${new Date().toLocaleString()}
 ━━━━━━━━━━━━━━━━━━━
-✅ *Payment:* Cash on Delivery
-    `;
+✅ Payment: Cash on Delivery
 
-    sendToTelegram(message)
-      .then(data => {
-        btn.disabled = false;
-        btn.textContent = 'Place Order · ₹999';
-        showToast('🎉 Order #' + orderId + ' placed! Check Telegram.', 'success');
-        document.getElementById('orderForm').reset();
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        btn.disabled = false;
-        btn.textContent = 'Place Order · ₹999';
-        // Fallback: Open email
-        const subject = encodeURIComponent('🛒 NEW ORDER: ' + orderId);
-        const body = encodeURIComponent(message);
-        if (confirm('Telegram not available. Open email to send order?')) {
-          window.location.href = `mailto:YOUR_EMAIL@gmail.com?subject=${subject}&body=${body}`;
-        }
-        showToast('⚠️ Order placed! Check your Telegram or Email.', 'error');
-      });
+━━━━━━━━━━━━━━━━━━━
+Please process this order.
+    `);
+
+    // ===== OPEN EMAIL =====
+    // 🔴 REPLACE YOUR_EMAIL@gmail.com WITH YOUR ACTUAL EMAIL ADDRESS
+    const yourEmail = 'abusabith262626@gmail.com';
+    
+    window.location.href = `mailto:${yourEmail}?subject=${subject}&body=${body}`;
+
+    showToast('📧 Opening email... Please click Send!', 'success');
+    
+    // Reset form
+    document.getElementById('orderForm').reset();
+    btn.disabled = false;
+    btn.textContent = 'Place Order · ₹999';
   });
 </script>
 
