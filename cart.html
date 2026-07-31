@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SNOOQ — Checkout</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #b89b5e;
+            --gold-light: #d4b87a;
+            --gold-dark: #9a7f4a;
+            --ivory: #f7f4ef;
+            --white: #ffffff;
+            --text-dark: #1c1c1c;
+            --text-muted: #6b6b6b;
+            --border-beige: #e7e0d6;
+            --shadow-hover: rgba(0, 0, 0, 0.05);
+            --font-heading: 'DM Serif Display', serif;
+            --font-body: 'Inter', sans-serif;
+            --cod-red: #c0392b;
+            --success: #27ae60;
+            --danger: #e74c3c;
+        }
+
+        body {
+            background: var(--ivory);
+            color: var(--text-dark);
+            font-family: var(--font-body);
+            min-height: 100vh;
+        }
+
+        /* ===== HEADER ===== */
+        .main-header {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            z-index: 1000;
+            background: var(--white);
+            backdrop-filter: blur(12px);
+            border-bottom: 2px solid var(--border-beige);
+            transition: box-shadow 0.4s ease, background 0.4s ease;
+        }
+        .main-header.scrolled {
+            box-shadow: 0 4px 30px var(--shadow-hover);
+            background: rgba(255,255,255,0.95);
+        }
+        .header-left { display: flex; align-items: center; gap: 10px; flex: 1; }
+        .header-center { flex: 1; display: flex; justify-content: center; }
+        .header-right { display: flex; align-items: center; gap: 10px; flex: 1; justify-content: flex-end; }
+        
+        .logo-pill {
+            background: var(--gold);
+            padding: 6px 22px;
+            border-radius: 50px;
+            border: 2px solid var(--white);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .logo-pill:hover { transform: scale(1.05) rotate(-1deg); border-color: var(--gold); }
+        .logo-text {
+            font-family: var(--font-heading);
+            font-weight: 400;
+            font-style: italic;
+            font-size: 1.6rem;
+            color: var(--white);
+            letter-spacing: -1px;
+            text-decoration: none;
+        }
+        
+        .cart-icon {
+            position: relative;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--white);
+            border: 2px solid var(--border-beige);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            color: var(--text-dark);
+            font-size: 1.2rem;
+            text-decoration: none;
+        }
+        .cart-icon:hover {
+            transform: scale(1.1) rotate(-5deg);
+            background: var(--gold);
+            color: var(--white);
+            border-color: var(--gold);
+        }
+        .cart-icon .badge {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            background: var(--gold);
+            color: var(--white);
+            font-size: 0.65rem;
+            font-weight: 700;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-body);
+            border: 2px solid var(--white);
+            transition: transform 0.3s ease;
+        }
+        .cart-icon:hover .badge { transform: scale(1.2); }
+        
+        .user-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--white);
+            border: 2px solid var(--border-beige);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            color: var(--text-dark);
+            font-size: 1.2rem;
+            text-decoration: none;
+        }
+        .user-icon:hover {
+            transform: scale(1.1);
+            background: var(--gold);
+            color: var(--white);
+            border-color: var(--gold);
+        }
+
+        .menu-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--white);
+            border: 2px solid var(--border-beige);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            z-index: 1001;
+        }
+        .menu-btn:hover { transform: scale(1.1); border-color: var(--gold); }
+        .menu-btn:hover span { background: var(--gold); }
+        .menu-btn span {
+            width: 18px;
+            height: 2px;
+            background: var(--text-dark);
+            transition: 0.3s;
+        }
+        .menu-btn.active span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
+        .menu-btn.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .menu-btn.active span:nth-child(3) { transform: rotate(-45deg) translate(4px, -4px); }
+
+        /* ===== DROPDOWN ===== */
+        .dropdown-menu {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 280px;
+            height: 100vh;
+            background: var(--white);
+            padding: 80px 30px 30px;
+            transition: left 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: 999;
+            border-right: 2px solid var(--gold);
+            box-shadow: 10px 0 40px var(--shadow-hover);
+            overflow-y: auto;
+        }
+        .dropdown-menu.open { left: 0; }
+        .dropdown-menu .menu-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--text-dark);
+            font-size: 2rem;
+            cursor: pointer;
+            font-family: var(--font-heading);
+            transition: 0.3s;
+        }
+        .dropdown-menu .menu-close:hover { transform: rotate(90deg) scale(1.1); color: var(--gold); }
+        .dropdown-menu ul { list-style: none; padding: 0; }
+        .dropdown-menu ul li { margin-bottom: 6px; }
+        .dropdown-menu ul li a {
+            display: block;
+            padding: 14px 18px;
+            color: var(--text-dark);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            font-family: var(--font-body);
+        }
+        .dropdown-menu ul li a:hover {
+            color: var(--white);
+            background: var(--gold);
+            border-color: var(--gold);
+            padding-left: 28px;
+            transform: translateX(4px);
+        }
+        .dropdown-menu .menu-divider {
+            height: 2px;
+            background: var(--gold);
+            margin: 16px 0;
+            opacity: 0.2;
+        }
+        .dropdown-menu .menu-gold-text {
+            color: var(--gold);
+            font-family: var(--font-heading);
+            font-weight: 400;
+            font-style: italic;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0 18px;
+            margin-top: 20px;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.08);
+            z-index: 998;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+        .overlay.active { opacity: 1; pointer-events: all; }
+
+        /* ===== CHECKOUT PAGE ===== */
+        .checkout-page {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            width: 100%;
+        }
+        .checkout-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .checkout-header h1 {
+            font-family: var(--font-heading);
+            font-size: 2.4rem;
+            font-style: italic;
+            font-weight: 400;
+            color: var(--text-dark);
+        }
+        .checkout-header p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin-top: 4px;
+        }
+
+        /* ===== STEPS ===== */
+        .checkout-steps {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        .checkout-steps::after {
+            content: '';
+            position: absolute;
+            top: 24px;
+            left: 15%;
+            right: 15%;
+            height: 2px;
+            background: var(--border-beige);
+            z-index: 0;
+        }
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .step .circle {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--white);
+            border: 3px solid var(--border-beige);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            color: var(--text-muted);
+        }
+        .step.active .circle {
+            border-color: var(--gold);
+            background: var(--gold);
+            color: var(--white);
+        }
+        .step.completed .circle {
+            border-color: var(--success);
+            background: var(--success);
+            color: var(--white);
+        }
+        .step .label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .step.active .label {
+            color: var(--gold);
+        }
+        .step.completed .label {
+            color: var(--success);
+        }
+
+        /* ===== CHECKOUT CARD ===== */
+        .checkout-card {
+            background: var(--white);
+            border-radius: 20px;
+            border: 2px solid var(--border-beige);
+            padding: 40px;
+            box-shadow: 0 6px 24px var(--shadow-hover);
+        }
+        @media (max-width: 500px) {
+            .checkout-card {
+                padding: 20px;
+            }
+        }
+
+        .checkout-card .section-title {
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            font-style: italic;
+            font-weight: 400;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* ===== PRODUCT DISPLAY ===== */
+        .product-display {
+            display: flex;
+            gap: 24px;
+            padding: 20px;
+            background: var(--ivory);
+            border-radius: 14px;
+            border: 2px solid var(--border-beige);
+            margin-bottom: 30px;
+            align-items: center;
+        }
+        @media (max-width: 500px) {
+            .product-display {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+        .product-display img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 2px solid var(--border-beige);
+        }
+        @media (max-width: 500px) {
+            .product-display img {
+                width: 160px;
+                height: 160px;
+            }
+        }
+        .product-display .info {
+            flex: 1;
+        }
+        .product-display .info h2 {
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            font-style: italic;
+            font-weight: 400;
+            color: var(--text-dark);
+        }
+        .product-display .info .price {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-style: italic;
+            color: var(--gold-dark);
+            margin: 4px 0;
+        }
+        .product-display .info .price small {
+            font-size: 1rem;
+            color: var(--text-muted);
+            text-decoration: line-through;
+            margin-left: 8px;
+        }
+        .product-display .info .qty {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 8px;
+        }
+        @media (max-width: 500px) {
+            .product-display .info .qty {
+                justify-content: center;
+            }
+        }
+        .product-display .info .qty button {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            border: 2px solid var(--border-beige);
+            background: var(--white);
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        .product-display .info .qty button:hover {
+            border-color: var(--gold);
+            background: var(--gold);
+            color: var(--white);
+        }
+        .product-display .info .qty span {
+            font-size: 1.2rem;
+            font-weight: 600;
+            min-width: 30px;
+            text-align: center;
+        }
+
+        /* ===== FORM ===== */
+        .form-group {
+            margin-bottom: 16px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 4px;
+            color: var(--text-dark);
+            font-family: var(--font-body);
+        }
+        .form-group label .required {
+            color: var(--danger);
+        }
+        .form-group label .optional {
+            color: var(--text-muted);
+            font-weight: 400;
+            font-size: 0.75rem;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 2px solid var(--border-beige);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: var(--font-body);
+            transition: all 0.3s ease;
+            background: var(--white);
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 4px rgba(184, 155, 94, 0.08);
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        @media (max-width: 500px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ===== COUPON CODE ===== */
+        .coupon-section {
+            display: flex;
+            gap: 10px;
+            margin-top: 4px;
+        }
+        .coupon-section input {
+            flex: 1;
+            padding: 10px 14px;
+            border: 2px solid var(--border-beige);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-family: var(--font-body);
+            transition: all 0.3s ease;
+            background: var(--white);
+            text-transform: uppercase;
+        }
+        .coupon-section input:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 4px rgba(184, 155, 94, 0.08);
+        }
+        .coupon-section button {
+            padding: 10px 20px;
+            background: var(--gold);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-family: var(--font-heading);
+            font-weight: 400;
+            font-style: italic;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid var(--gold);
+            white-space: nowrap;
+        }
+        .coupon-section button:hover {
+            background: var(--gold-dark);
+            border-color: var(--gold-dark);
+        }
+        .coupon-message {
+            font-size: 0.8rem;
+            margin-top: 6px;
+            font-weight: 600;
+        }
+        .coupon-message.success {
+            color: var(--success);
+        }
+        .coupon-message.error {
+            color: var(--danger);
+        }
+
+        /* ===== PAYMENT METHODS ===== */
+        .payment-methods {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+            margin: 16px 0;
+        }
+        @media (max-width: 500px) {
+            .payment-methods {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        .payment-method {
+            padding: 14px;
+            border: 2px solid var(--border-beige);
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 0.85rem;
+            font-family: var(--font-body);
+        }
+        .payment-method:hover {
+            border-color: var(--gold);
+        }
+        .payment-method.active {
+            border-color: var(--gold);
+            background: rgba(184, 155, 94, 0.08);
+        }
+        .payment-method .icon {
+            font-size: 1.8rem;
+            display: block;
+            margin-bottom: 4px;
+        }
+        .payment-method .cod-badge {
+            display: inline-block;
+            background: var(--success);
+            color: var(--white);
+            font-size: 0.55rem;
+            padding: 1px 10px;
+            border-radius: 20px;
+            margin-top: 4px;
+            font-weight: 700;
+        }
+
+        /* ===== ORDER SUMMARY ===== */
+        .order-summary {
+            background: var(--ivory);
+            border-radius: 14px;
+            padding: 20px;
+            margin-top: 20px;
+            border: 2px solid var(--border-beige);
+        }
+        .order-summary .row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            font-size: 0.95rem;
+        }
+        .order-summary .row.total {
+            font-family: var(--font-heading);
+            font-style: italic;
+            font-size: 1.2rem;
+            color: var(--gold-dark);
+            border-top: 2px solid var(--gold);
+            padding-top: 12px;
+            margin-top: 4px;
+        }
+        .order-summary .row .label {
+            color: var(--text-muted);
+        }
+        .order-summary .row .value {
+            font-weight: 600;
+        }
+        .order-summary .row .value.discount {
+            color: var(--success);
+        }
+
+        /* ===== PLACE ORDER BUTTON ===== */
+        .place-order-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--gold);
+            color: var(--white);
+            border: none;
+            border-radius: 10px;
+            font-family: var(--font-heading);
+            font-weight: 400;
+            font-style: italic;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            margin-top: 20px;
+            border: 2px solid var(--gold);
+        }
+        .place-order-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            background: var(--gold-dark);
+            border-color: var(--gold-dark);
+            box-shadow: 0 8px 24px rgba(184, 155, 94, 0.3);
+        }
+
+        /* ===== SUCCESS MODAL ===== */
+        .success-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 99999;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .success-modal.show {
+            display: flex;
+        }
+        .success-modal .modal-content {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: modalPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        @keyframes modalPop {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .success-modal .modal-content .icon {
+            font-size: 4rem;
+            margin-bottom: 12px;
+        }
+        .success-modal .modal-content h2 {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-style: italic;
+            font-weight: 400;
+            color: var(--success);
+            margin-bottom: 8px;
+        }
+        .success-modal .modal-content p {
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            font-family: var(--font-body);
+        }
+        .success-modal .modal-content .order-id {
+            background: var(--ivory);
+            padding: 10px;
+            border-radius: 8px;
+            font-family: var(--font-body);
+            font-weight: 600;
+            margin: 12px 0;
+            border: 2px solid var(--border-beige);
+        }
+        .success-modal .modal-content .btn-close-modal {
+            padding: 14px 40px;
+            background: var(--gold);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-family: var(--font-heading);
+            font-weight: 400;
+            font-style: italic;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 12px;
+            border: 2px solid var(--gold);
+        }
+        .success-modal .modal-content .btn-close-modal:hover {
+            background: var(--gold-dark);
+            border-color: var(--gold-dark);
+            transform: scale(1.05);
+        }
+
+        /* ===== NOTIFICATION ===== */
+        .notification-toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--white);
+            padding: 16px 24px;
+            border-radius: 12px;
+            border-left: 4px solid var(--gold);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+            z-index: 9999;
+            transform: translateX(120%);
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            max-width: 400px;
+            font-family: var(--font-body);
+        }
+        .notification-toast.show {
+            transform: translateX(0);
+        }
+        .notification-toast .title {
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+        .notification-toast .message {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* ===== FOOTER ===== */
+        .global-footer {
+            background: var(--white);
+            padding: 40px 20px 0 20px;
+            border-top: 2px solid var(--border-beige);
+            margin-top: 40px;
+            border-radius: 30px 30px 0 0;
+        }
+        .footer-logo-massive {
+            font-family: var(--font-heading);
+            font-weight: 400;
+            font-style: italic;
+            font-size: 3.2rem;
+            color: var(--gold-dark);
+            line-height: 0.9;
+            letter-spacing: -2px;
+            margin-bottom: 30px;
+            transition: transform 0.4s ease;
+        }
+        .footer-logo-massive:hover { transform: scale(1.02); }
+        .footer-directory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 28px;
+        }
+        .directory-column h4 {
+            font-family: var(--font-heading);
+            color: var(--text-dark);
+            font-style: italic;
+            font-weight: 400;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        .directory-column ul { list-style: none; }
+        .directory-column ul li { margin-bottom: 8px; }
+        .directory-column ul li a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-family: var(--font-body);
+        }
+        .directory-column ul li a:hover {
+            color: var(--gold);
+            padding-left: 8px;
+            display: inline-block;
+        }
+        .location-block p {
+            color: var(--text-dark);
+            font-size: 1rem;
+            line-height: 1.4;
+            font-weight: 600;
+            font-family: var(--font-body);
+        }
+        .newsletter-subscription-box {
+            background: var(--ivory);
+            border-radius: 20px;
+            padding: 24px 18px;
+            margin-top: 40px;
+            border: 2px solid var(--border-beige);
+            transition: all 0.4s ease;
+        }
+        .newsletter-subscription-box:hover {
+            border-color: var(--gold);
+            box-shadow: 0 12px 32px var(--shadow-hover);
+        }
+        .newsletter-heading-italic {
+            font-family: var(--font-heading);
+            color: var(--text-dark);
+            font-style: italic;
+            font-weight: 400;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .newsletter-description {
+            color: var(--text-dark);
+            font-size: 0.95rem;
+            line-height: 1.35;
+            margin-bottom: 18px;
+            font-family: var(--font-body);
+        }
+        .input-field {
+            width: 100%;
+            padding: 14px;
+            border-radius: 8px;
+            border: 2px solid var(--border-beige);
+            background: var(--white);
+            font-size: 1rem;
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+            font-family: var(--font-body);
+        }
+        .input-field:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 4px rgba(184, 155, 94, 0.08);
+            transform: scale(1.01);
+        }
+        .input-field::placeholder { color: var(--text-muted); }
+        .form-wrapper { display: flex; flex-direction: column; gap: 10px; }
+        .health-warning-disclaimer {
+            color: var(--text-muted);
+            text-align: center;
+            font-size: 0.85rem;
+            margin: 24px 0;
+            font-weight: 600;
+            font-family: var(--font-body);
+        }
+        .sponsorship-red-ribbon-bar {
+            background: var(--gold);
+            margin: 0 -20px;
+            padding: 16px;
+            color: var(--white);
+            text-align: center;
+            font-size: 0.8rem;
+            line-height: 1.4;
+            text-transform: uppercase;
+            border-top: 2px solid var(--gold-dark);
+            font-family: var(--font-body);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .checkout-steps {
+                gap: 15px;
+            }
+            .checkout-steps::after {
+                left: 5%;
+                right: 5%;
+            }
+            .step .circle {
+                width: 38px;
+                height: 38px;
+                font-size: 0.9rem;
+            }
+            .step .label {
+                font-size: 0.65rem;
+            }
+            .checkout-card {
+                padding: 24px;
+            }
+        }
+        @media (max-width: 500px) {
+            .checkout-header h1 {
+                font-size: 1.8rem;
+            }
+            .checkout-steps {
+                gap: 10px;
+            }
+            .step .circle {
+                width: 32px;
+                height: 32px;
+                font-size: 0.75rem;
+            }
+            .step .label {
+                font-size: 0.55rem;
+            }
+            .checkout-card {
+                padding: 16px;
+            }
+            .product-display .info .price {
+                font-size: 1.4rem;
+            }
+            .payment-methods {
+                grid-template-columns: 1fr 1fr;
+            }
+            .coupon-section {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="main-header" id="mainHeader">
+        <div class="header-left">
+            <button class="menu-btn" id="menuToggle"><span></span><span></span><span></span></button>
+        </div>
+        <div class="header-center">
+            <div class="logo-pill"><a href="index.html" style="text-decoration:none;"><span class="logo-text">SNOOQ</span></a></div>
+        </div>
+        <div class="header-right">
+            <a href="login.html" class="user-icon">👤</a>
+            <a href="cart.html" class="cart-icon">
+                🛒<span class="badge" id="cartBadge">1</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- ===== OVERLAY ===== -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- ===== DROPDOWN ===== -->
+    <nav class="dropdown-menu" id="dropdownMenu">
+        <button class="menu-close" id="menuClose">✕</button>
+        <ul>
+            <li><a href="index.html">🏠 Home</a></li>
+            <li><a href="index.html#products">📦 All Products</a></li>
+            <li><a href="index.html#combo">⭐ Combo</a></li>
+            <li><a href="cart.html">🛒 Cart</a></li>
+            <li><a href="login.html">🔐 Login</a></li>
+            <li><a href="register.html">📝 Register</a></li>
+            <li><a href="contact.html">📞 Contact</a></li>
+        </ul>
+        <div class="menu-divider"></div>
+        <div class="menu-gold-text">✦ Home Essentials ✦</div>
+    </nav>
+
+    <!-- ===== NOTIFICATION TOAST ===== -->
+    <div class="notification-toast" id="notificationToast">
+        <div class="title" id="notifTitle">✅ Updated!</div>
+        <div class="message" id="notifMessage">Cart updated successfully</div>
+    </div>
+
+    <!-- ===== SUCCESS MODAL ===== -->
+    <div class="success-modal" id="successModal">
+        <div class="modal-content">
+            <div class="icon">🎉</div>
+            <h2>Order Placed!</h2>
+            <p>Your order has been placed successfully.</p>
+            <div class="order-id">
+                <span style="color:var(--text-muted);font-weight:400;">Order ID:</span> 
+                <span id="orderId">SNOOQ-2024-001</span>
+            </div>
+            <p style="font-size:0.85rem;">We've sent a confirmation to your email.</p>
+            <p style="font-size:0.85rem;color:var(--success);font-weight:600;">💵 Cash on Delivery Available</p>
+            <button class="btn-close-modal" onclick="closeModal()">Continue Shopping</button>
+        </div>
+    </div>
+
+    <!-- ===== CHECKOUT PAGE ===== -->
+    <main class="checkout-page">
+        <div class="checkout-header">
+            <h1>🛒 Checkout</h1>
+            <p>Complete your order in 3 easy steps</p>
+        </div>
+
+        <!-- ===== STEPS ===== -->
+        <div class="checkout-steps">
+            <div class="step active" id="step1">
+                <div class="circle">1</div>
+                <span class="label">Product</span>
+            </div>
+            <div class="step" id="step2">
+                <div class="circle">2</div>
+                <span class="label">Details</span>
+            </div>
+            <div class="step" id="step3">
+                <div class="circle">3</div>
+                <span class="label">Payment</span>
+            </div>
+        </div>
+
+        <!-- ===== CHECKOUT CARD ===== -->
+        <div class="checkout-card">
+
+            <!-- ===== STEP 1: PRODUCT ===== -->
+            <div id="step1Content">
+                <div class="section-title">📦 1. Your Product</div>
+                <div class="product-display">
+                    <img src="image/IMG_2431.PNG" alt="20-in-1 Combo Set" />
+                    <div class="info">
+                        <h2>20-in-1 Pro Combo Set</h2>
+                        <div class="price">
+                            ₹999 <small>₹4500</small>
+                        </div>
+                        <div class="qty">
+                            <button onclick="updateQty(-1)">−</button>
+                            <span id="qtyDisplay">1</span>
+                            <button onclick="updateQty(1)">+</button>
+                        </div>
+                        <div style="margin-top:8px;font-size:0.85rem;color:var(--text-muted);">
+                            <span>🔥 9,847 sold</span>
+                            <span style="margin-left:12px;">⭐ 4.9 (2,118 reviews)</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="place-order-btn" onclick="nextStep(2)" style="margin-top:0;">
+                    Continue to Details →
+                </button>
+            </div>
+
+            <!-- ===== STEP 2: CUSTOMER DETAILS ===== -->
+            <div id="step2Content" style="display:none;">
+                <div class="section-title">📋 2. Customer Details</div>
+                <form id="checkoutForm">
+                    <div class="form-group">
+                        <label>Full Name <span class="required">*</span></label>
+                        <input type="text" id="fullName" placeholder="Enter your full name" required />
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address <span class="optional">(Optional)</span></label>
+                        <input type="email" id="email" placeholder="Enter your email (optional)" />
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Phone Number <span class="required">*</span></label>
+                            <input type="tel" id="phone" placeholder="Enter your phone number" required />
+                        </div>
+                        <div class="form-group">
+                            <label>WhatsApp Number <span class="required">*</span></label>
+                            <input type="tel" id="whatsapp" placeholder="Enter your WhatsApp number" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Delivery Address <span class="required">*</span></label>
+                        <input type="text" id="address" placeholder="Street address, building, apartment" required />
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>City <span class="required">*</span></label>
+                            <input type="text" id="city" placeholder="City" required />
+                        </div>
+                        <div class="form-group">
+                            <label>State <span class="required">*</span></label>
+                            <input type="text" id="state" placeholder="State" required />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Pincode <span class="required">*</span></label>
+                            <input type="text" id="pincode" placeholder="Pincode" required />
+                        </div>
+                        <div class="form-group">
+                            <label>Country</label>
+                            <select id="country">
+                                <option value="India" selected>India</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Order Notes (Optional)</label>
+                        <input type="text" id="notes" placeholder="Any special instructions" />
+                    </div>
+                </form>
+                <div style="display:flex;gap:12px;margin-top:16px;">
+                    <button onclick="prevStep(1)" style="flex:1;padding:14px;background:transparent;color:var(--text-dark);border:2px solid var(--border-beige);border-radius:10px;cursor:pointer;font-weight:600;transition:all 0.3s ease;">← Back</button>
+                    <button onclick="nextStep(3)" class="place-order-btn" style="flex:2;margin:0;">Continue to Payment →</button>
+                </div>
+            </div>
+
+            <!-- ===== STEP 3: PAYMENT ===== -->
+            <div id="step3Content" style="display:none;">
+                <div class="section-title">💳 3. Payment</div>
+
+                <!-- ===== COUPON CODE SECTION ===== -->
+                <div style="margin-bottom:20px;">
+                    <label style="display:block;font-weight:600;font-size:0.85rem;margin-bottom:4px;color:var(--text-dark);">🎫 Coupon Code</label>
+                    <div class="coupon-section">
+                        <input type="text" id="couponInput" placeholder="Enter coupon code" maxlength="20" />
+                        <button onclick="applyCoupon()">Apply</button>
+                    </div>
+                    <div class="coupon-message" id="couponMessage"></div>
+                </div>
+
+                <div style="margin-bottom:20px;">
+                    <div style="font-weight:600;margin-bottom:8px;">Select Payment Method</div>
+                    <div class="payment-methods">
+                        <div class="payment-method active" onclick="selectPayment(this)">
+                            <span class="icon">💵</span>
+                            Cash on Delivery
+                            <span class="cod-badge">Available</span>
+                        </div>
+                        <div class="payment-method" onclick="selectPayment(this)" style="opacity:0.5;cursor:not-allowed;">
+                            <span class="icon">💳</span>
+                            Credit/Debit
+                            <span style="display:block;font-size:0.55rem;color:var(--text-muted);">Coming Soon</span>
+                        </div>
+                        <div class="payment-method" onclick="selectPayment(this)" style="opacity:0.5;cursor:not-allowed;">
+                            <span class="icon">📱</span>
+                            UPI / GPay
+                            <span style="display:block;font-size:0.55rem;color:var(--text-muted);">Coming Soon</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== ORDER SUMMARY ===== -->
+                <div class="order-summary">
+                    <div style="font-weight:600;margin-bottom:8px;font-size:1rem;">📦 Order Summary</div>
+                    <div class="row">
+                        <span class="label">Product</span>
+                        <span class="value">20-in-1 Combo Set</span>
+                    </div>
+                    <div class="row">
+                        <span class="label">Quantity</span>
+                        <span class="value" id="summaryQty">1</span>
+                    </div>
+                    <div class="row">
+                        <span class="label">Subtotal</span>
+                        <span class="value" id="summarySubtotal">₹999</span>
+                    </div>
+                    <div class="row">
+                        <span class="label">Shipping</span>
+                        <span class="value" style="color:var(--success);">FREE</span>
+                    </div>
+                    <div class="row" id="discountRow" style="display:none;">
+                        <span class="label">Coupon Discount</span>
+                        <span class="value discount" id="summaryDiscount">-₹0</span>
+                    </div>
+                    <div class="row total">
+                        <span class="label">Total</span>
+                        <span class="value" id="summaryTotal">₹999</span>
+                    </div>
+                </div>
+
+                <button class="place-order-btn" onclick="placeOrder()">🛒 Place Order · ₹<span id="orderTotalBtn">999</span></button>
+                <div style="display:flex;gap:12px;margin-top:12px;">
+                    <button onclick="prevStep(2)" style="flex:1;padding:12px;background:transparent;color:var(--text-dark);border:2px solid var(--border-beige);border-radius:10px;cursor:pointer;font-weight:600;transition:all 0.3s ease;">← Back</button>
+                </div>
+                <p style="text-align:center;font-size:0.75rem;color:var(--text-muted);margin-top:12px;">🔒 Secure checkout · 100% safe</p>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="global-footer">
+        <div class="footer-logo-massive">SNOOQ</div>
+        <div class="footer-directory-grid">
+            <div class="directory-column">
+                <h4>Explore</h4>
+                <ul>
+                    <li><a href="index.html#combo">Combo</a></li>
+                    <li><a href="index.html#products">Bestsellers</a></li>
+                    <li><a href="index.html#products">All Products</a></li>
+                    <li><a href="shop.html">Shop All</a></li>
+                </ul>
+            </div>
+            <div class="directory-column">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="#">Returns & exchanges</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Privacy</a></li>
+                </ul>
+            </div>
+            <div class="directory-column">
+                <h4>Visit us</h4>
+                <div class="location-block">
+                    <p>SNOOQ Atelier</p>
+                    <p>Clockmaker's Lane 12</p>
+                    <p>Bruges, Belgium</p>
+                </div>
+            </div>
+            <div class="directory-column">
+                <h4>Customer</h4>
+                <ul>
+                    <li><a href="login.html">Login</a></li>
+                    <li><a href="register.html">Register</a></li>
+                    <li><a href="dashboard.html">My Account</a></li>
+                    <li><a href="cart.html">Cart</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="newsletter-subscription-box">
+            <h3 class="newsletter-heading-italic">Kitchen updates</h3>
+            <p class="newsletter-description">Monthly recipes, new gadgets, and exclusive offers.</p>
+            <form id="newsletterForm" class="form-wrapper">
+                <input type="email" id="emailInput" class="input-field" placeholder="Your email address" required />
+                <button type="submit" class="btn-solid-primary" style="width:100%;padding:14px;font-size:1rem;border-radius:8px;font-family:var(--font-heading);font-weight:400;font-style:italic;background:var(--gold);color:var(--white);border:2px solid var(--gold);cursor:pointer;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);">Subscribe →</button>
+            </form>
+        </div>
+        <p class="health-warning-disclaimer">*Premium quality. Made with care.</p>
+        <div class="sponsorship-red-ribbon-bar">Crafted with support of FLANDERS INVESTMENT & TRADE</div>
+    </footer>
+
+    <script>
+        // ============================================================
+        // 1. HEADER SCROLL EFFECT
+        // ============================================================
+        const header = document.querySelector('.main-header');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 20) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // ============================================================
+        // 2. DROPDOWN MENU
+        // ============================================================
+        const menuToggle = document.getElementById('menuToggle');
+        const dropdownMenu = document.getElementById('dropdownMenu');
+        const menuClose = document.getElementById('menuClose');
+        const overlay = document.getElementById('overlay');
+
+        function openMenu() {
+            dropdownMenu.classList.add('open');
+            overlay.classList.add('active');
+            menuToggle.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMenu() {
+            dropdownMenu.classList.remove('open');
+            overlay.classList.remove('active');
+            menuToggle.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        menuToggle.addEventListener('click', function() {
+            dropdownMenu.classList.contains('open') ? closeMenu() : openMenu();
+        });
+        menuClose.addEventListener('click', closeMenu);
+        overlay.addEventListener('click', closeMenu);
+        document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeMenu(); });
+        dropdownMenu.querySelectorAll('a').forEach(function(link) { link.addEventListener('click', closeMenu); });
+
+        // ============================================================
+        // 3. QUANTITY
+        // ============================================================
+        let quantity = 1;
+        const price = 999;
+        const originalPrice = 4500;
+        let couponDiscount = 0;
+
+        function updateQty(change) {
+            quantity += change;
+            if (quantity < 1) quantity = 1;
+            document.getElementById('qtyDisplay').textContent = quantity;
+            updateSummary();
+        }
+
+        function updateSummary() {
+            const subtotal = price * quantity;
+            const total = subtotal - couponDiscount;
+
+            document.getElementById('summaryQty').textContent = quantity;
+            document.getElementById('summarySubtotal').textContent = '₹' + subtotal;
+            document.getElementById('summaryTotal').textContent = '₹' + total.toFixed(2);
+            document.getElementById('orderTotalBtn').textContent = total.toFixed(2);
+        }
+
+        // ============================================================
+        // 4. COUPON CODE
+        // ============================================================
+        function applyCoupon() {
+            const input = document.getElementById('couponInput');
+            const message = document.getElementById('couponMessage');
+            const code = input.value.trim().toUpperCase();
+
+            // Valid coupons
+            const coupons = {
+                'SAVE10': 10,
+                'SAVE20': 20,
+                'SNOOQ15': 15,
+                'WELCOME': 5,
+                'FIRST': 10
+            };
+
+            if (!code) {
+                message.textContent = 'Please enter a coupon code';
+                message.className = 'coupon-message error';
+                return;
+            }
+
+            if (coupons[code]) {
+                const discountPercent = coupons[code];
+                const subtotal = price * quantity;
+                couponDiscount = (subtotal * discountPercent) / 100;
+                
+                // Max discount ₹200
+                if (couponDiscount > 200) {
+                    couponDiscount = 200;
+                }
+
+                document.getElementById('discountRow').style.display = 'flex';
+                document.getElementById('summaryDiscount').textContent = '-₹' + couponDiscount.toFixed(2);
+                
+                message.textContent = '✅ Coupon applied! You saved ₹' + couponDiscount.toFixed(2);
+                message.className = 'coupon-message success';
+                input.style.borderColor = 'var(--success)';
+                
+                updateSummary();
+            } else {
+                message.textContent = '❌ Invalid coupon code. Try SAVE10, SAVE20, SNOOQ15';
+                message.className = 'coupon-message error';
+                input.style.borderColor = 'var(--danger)';
+            }
+        }
+
+        // Enter key for coupon
+        document.getElementById('couponInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                applyCoupon();
+            }
+        });
+
+        // ============================================================
+        // 5. STEP NAVIGATION
+        // ============================================================
+        let currentStep = 1;
+
+        function nextStep(step) {
+            // Validate step 2 before proceeding
+            if (step === 3) {
+                const name = document.getElementById('fullName').value.trim();
+                const phone = document.getElementById('phone').value.trim();
+                const whatsapp = document.getElementById('whatsapp').value.trim();
+                const address = document.getElementById('address').value.trim();
+                const city = document.getElementById('city').value.trim();
+                const state = document.getElementById('state').value.trim();
+                const pincode = document.getElementById('pincode').value.trim();
+
+                if (!name) {
+                    showNotification('Please enter your full name!');
+                    return;
+                }
+                if (!phone) {
+                    showNotification('Please enter your phone number!');
+                    return;
+                }
+                if (!whatsapp) {
+                    showNotification('Please enter your WhatsApp number!');
+                    return;
+                }
+                if (!address || !city || !state || !pincode) {
+                    showNotification('Please fill all address fields!');
+                    return;
+                }
+            }
+
+            currentStep = step;
+            updateSteps();
+        }
+
+        function prevStep(step) {
+            currentStep = step;
+            updateSteps();
+        }
+
+        function updateSteps() {
+            // Hide all content
+            document.getElementById('step1Content').style.display = 'none';
+            document.getElementById('step2Content').style.display = 'none';
+            document.getElementById('step3Content').style.display = 'none';
+
+            // Show current step content
+            document.getElementById('step' + currentStep + 'Content').style.display = 'block';
+
+            // Update step circles
+            for (let i = 1; i <= 3; i++) {
+                const stepEl = document.getElementById('step' + i);
+                stepEl.classList.remove('active', 'completed');
+                if (i < currentStep) {
+                    stepEl.classList.add('completed');
+                } else if (i === currentStep) {
+                    stepEl.classList.add('active');
+                }
+            }
+        }
+
+        // ============================================================
+        // 6. PAYMENT METHOD SELECTION
+        // ============================================================
+        function selectPayment(el) {
+            // Only allow Cash on Delivery (first option)
+            const firstOption = document.querySelector('.payment-method');
+            document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('active'));
+            firstOption.classList.add('active');
+            
+            if (el !== firstOption) {
+                showNotification('Only Cash on Delivery is available at the moment.');
+            }
+        }
+
+        // ============================================================
+        // 7. PLACE ORDER
+        // ============================================================
+        function placeOrder() {
+            // Validate form
+            const name = document.getElementById('fullName').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const whatsapp = document.getElementById('whatsapp').value.trim();
+            const address = document.getElementById('address').value.trim();
+            const city = document.getElementById('city').value.trim();
+            const state = document.getElementById('state').value.trim();
+            const pincode = document.getElementById('pincode').value.trim();
+
+            if (!name || !phone || !whatsapp || !address || !city || !state || !pincode) {
+                showNotification('Please fill all required fields!');
+                return;
+            }
+
+            // Generate order ID
+            const orderId = 'SNOOQ-' + Date.now().toString().slice(-6);
+            document.getElementById('orderId').textContent = orderId;
+
+            // Show success modal
+            document.getElementById('successModal').classList.add('show');
+            showNotification('🎉 Order placed successfully!');
+        }
+
+        function closeModal() {
+            document.getElementById('successModal').classList.remove('show');
+            window.location.href = 'index.html';
+        }
+
+        // ============================================================
+        // 8. NOTIFICATION SYSTEM
+        // ============================================================
+        function showNotification(message) {
+            const toast = document.getElementById('notificationToast');
+            const messageEl = document.getElementById('notifMessage');
+            messageEl.textContent = message;
+            toast.classList.add('show');
+            clearTimeout(window.toastTimeout);
+            window.toastTimeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // ============================================================
+        // 9. NEWSLETTER
+        // ============================================================
+        const newsletterForm = document.getElementById('newsletterForm');
+        const emailInput = document.getElementById('emailInput');
+        newsletterForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            if (emailInput.value.trim()) {
+                const submitBtn = this.querySelector('.btn-solid-primary');
+                submitBtn.textContent = '✓ Subscribed!';
+                submitBtn.style.background = '#9a7f4a';
+                submitBtn.style.borderColor = '#9a7f4a';
+                emailInput.disabled = true;
+                submitBtn.disabled = true;
+                showNotification('🎉 Subscribed successfully!');
+            }
+        });
+
+        // ============================================================
+        // 10. INIT
+        // ============================================================
+        updateSummary();
+        updateSteps();
+        console.log('🛒 SNOOQ — Checkout Page');
+    </script>
+</body>
+</html>
