@@ -1,256 +1,677 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>India · Gssssallery</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>India Gallery - 30 Images</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      background: #f5f0eb;
-      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      padding: 2rem 1.5rem;
-    }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            min-height: 100vh;
+        }
 
-    .card {
-      max-width: 1200px;
-      width: 100%;
-      background: white;
-      border-radius: 2.5rem;
-      box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.2), 0 8px 24px -6px rgba(0, 0, 0, 0.05);
-      padding: 2rem 1.5rem 2.5rem;
-    }
+        /* ===== HEADER ===== */
+        .header {
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            padding: 50px 20px 40px;
+            text-align: center;
+            border-bottom: 3px solid #e94560;
+            position: relative;
+            overflow: hidden;
+        }
 
-    h1 {
-      font-size: 2.2rem;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      color: #1e1a16;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      flex-wrap: wrap;
-      margin-bottom: 0.3rem;
-    }
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(233, 69, 96, 0.1) 0%, transparent 70%);
+            animation: pulse 8s ease-in-out infinite;
+        }
 
-    .subhead {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      margin-bottom: 2rem;
-      border-bottom: 2px solid #ede8e2;
-      padding-bottom: 1rem;
-    }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.5); opacity: 0.6; }
+        }
 
-    .subhead p {
-      color: #5b534b;
-      font-size: 1.1rem;
-      background: #f3eee9;
-      padding: 0.3rem 1rem;
-      border-radius: 40px;
-      font-weight: 450;
-    }
+        .header h1 {
+            font-size: 52px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            position: relative;
+            z-index: 1;
+        }
 
-    .subhead small {
-      color: #8a7f76;
-      font-size: 0.9rem;
-      background: #faf7f4;
-      padding: 0.2rem 1rem;
-      border-radius: 30px;
-      border: 1px solid #e3dbd3;
-    }
+        .header h1 span {
+            color: #e94560;
+        }
 
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.5rem;
-      margin-top: 0.75rem;
-    }
+        .header p {
+            font-size: 18px;
+            opacity: 0.8;
+            margin-top: 10px;
+            position: relative;
+            z-index: 1;
+        }
 
-    .gallery-item {
-      background: #fcf9f7;
-      border-radius: 1.5rem;
-      overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
-      transition: transform 0.25s ease, box-shadow 0.3s ease;
-      border: 1px solid #f0e9e3;
-      display: flex;
-      flex-direction: column;
-    }
+        .header .stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 20px;
+            position: relative;
+            z-index: 1;
+        }
 
-    .gallery-item:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 16px 28px -8px rgba(0, 0, 0, 0.12);
-      border-color: #dacec4;
-    }
+        .header .stats .stat {
+            background: rgba(255,255,255,0.05);
+            padding: 10px 25px;
+            border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
 
-    .gallery-item img {
-      display: block;
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      object-fit: cover;
-      background: #ede7e1;
-    }
+        .header .stats .stat strong {
+            color: #e94560;
+            font-size: 24px;
+        }
 
-    /* Fallback if images don't load */
-    .gallery-item img::before {
-      content: "Image not found";
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      height: 100%;
-      background: #f0e9e3;
-      color: #7b6f64;
-      font-size: 14px;
-    }
+        /* ===== FILTER BUTTONS ===== */
+        .filter-section {
+            padding: 25px 20px;
+            text-align: center;
+            background: #111;
+            border-bottom: 1px solid #222;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
 
-    .caption {
-      padding: 0.8rem 0.8rem 0.6rem;
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: #2d261f;
-      background: white;
-      border-top: 1px solid #f0e9e3;
-      text-align: center;
-      text-transform: capitalize;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.3rem;
-    }
+        .filter-section .filter-btn {
+            background: transparent;
+            color: #888;
+            border: 2px solid #333;
+            padding: 8px 22px;
+            margin: 5px 8px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
 
-    .caption span {
-      background: #f3ede8;
-      padding: 0.1rem 0.6rem;
-      border-radius: 30px;
-      font-size: 0.7rem;
-      font-weight: 400;
-      color: #5f5348;
-    }
+        .filter-section .filter-btn:hover {
+            border-color: #e94560;
+            color: #fff;
+        }
 
-    .footer-note {
-      margin-top: 2.4rem;
-      text-align: center;
-      color: #7b6f64;
-      font-size: 0.9rem;
-      border-top: 1px solid #e9e0d8;
-      padding-top: 1.5rem;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1rem;
-    }
+        .filter-section .filter-btn.active {
+            background: #e94560;
+            border-color: #e94560;
+            color: #fff;
+        }
 
-    .pin-badge {
-      background: #e60023;
-      color: white;
-      font-size: 0.6rem;
-      font-weight: 600;
-      padding: 0.15rem 0.6rem;
-      border-radius: 20px;
-      letter-spacing: 0.3px;
-      display: inline-block;
-      margin-left: 0.3rem;
-    }
+        /* ===== GALLERY GRID ===== */
+        .gallery {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
 
-    @media (max-width: 550px) {
-      .card { padding: 1.25rem 0.75rem; }
-      h1 { font-size: 1.8rem; }
-      .subhead { flex-direction: column; align-items: start; gap: 0.4rem; }
-    }
+        .gallery-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            background: #1a1a1a;
+            aspect-ratio: 1 / 1;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
 
-    /* Debug info - shows if images load */
-    .debug-info {
-      margin-top: 10px;
-      font-size: 12px;
-      color: #999;
-      text-align: center;
-      display: none;
-    }
-  </style>
+        .gallery-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 15px 50px rgba(233, 69, 96, 0.3);
+            z-index: 10;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-item .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 30px 20px 20px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover .overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-item .overlay .number {
+            display: inline-block;
+            background: #e94560;
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 12px;
+            border-radius: 20px;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .gallery-item .overlay h3 {
+            font-size: 16px;
+            margin-bottom: 3px;
+        }
+
+        .gallery-item .overlay p {
+            font-size: 13px;
+            opacity: 0.7;
+        }
+
+        /* ===== LIGHTBOX ===== */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 85%;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+        }
+
+        .lightbox .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 40px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            transition: transform 0.3s;
+        }
+
+        .lightbox .close:hover {
+            transform: rotate(90deg);
+        }
+
+        .lightbox .nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #fff;
+            font-size: 30px;
+            cursor: pointer;
+            padding: 15px 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s;
+            min-width: 55px;
+            min-height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox .nav:hover {
+            background: rgba(233, 69, 96, 0.4);
+            border-color: #e94560;
+        }
+
+        .lightbox .nav.prev { left: 20px; }
+        .lightbox .nav.next { right: 20px; }
+
+        .lightbox .counter {
+            position: absolute;
+            bottom: 30px;
+            color: #fff;
+            font-size: 16px;
+            background: rgba(0,0,0,0.6);
+            padding: 8px 25px;
+            border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .lightbox .info-bar {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #fff;
+            font-size: 14px;
+            background: rgba(0,0,0,0.6);
+            padding: 8px 25px;
+            border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+        }
+
+        /* ===== LOAD MORE ===== */
+        .load-more {
+            text-align: center;
+            padding: 30px 20px 50px;
+        }
+
+        .load-more button {
+            background: transparent;
+            color: #fff;
+            border: 2px solid #e94560;
+            padding: 15px 50px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .load-more button:hover {
+            background: #e94560;
+            transform: scale(1.05);
+            box-shadow: 0 10px 40px rgba(233, 69, 96, 0.3);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            background: #111;
+            border-top: 1px solid #222;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .footer a {
+            color: #e94560;
+            text-decoration: none;
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .header h1 { font-size: 32px; }
+            .header .stats { flex-direction: column; gap: 10px; align-items: center; }
+            .gallery { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; padding: 15px 10px; }
+            .gallery-item .overlay { transform: translateY(0); padding: 15px 12px 12px; background: linear-gradient(transparent, rgba(0,0,0,0.8)); }
+            .gallery-item .overlay h3 { font-size: 13px; }
+            .gallery-item .overlay p { display: none; }
+            .gallery-item .overlay .number { font-size: 10px; padding: 2px 10px; }
+            .lightbox { padding: 15px; }
+            .lightbox .nav { min-width: 40px; min-height: 40px; font-size: 20px; padding: 10px; }
+            .lightbox .nav.prev { left: 5px; }
+            .lightbox .nav.next { right: 5px; }
+            .lightbox .info-bar { font-size: 12px; padding: 5px 15px; top: 10px; }
+            .lightbox .counter { font-size: 13px; padding: 5px 15px; bottom: 15px; }
+            .filter-section .filter-btn { padding: 6px 14px; font-size: 11px; margin: 3px 4px; }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .gallery { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #111; }
+        ::-webkit-scrollbar-thumb { background: #e94560; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #c73652; }
+    </style>
 </head>
 <body>
-  <div class="card">
-    <div class="subhead">
-      <h1>
-        <span>🇮🇳</span> India · in frames
-        <span class="pin-badge">📁 GitHub Pages</span>
-      </h1>
-      <p>5 images · from /images/ folder</p>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <h1>🇮🇳 India <span>Gallery</span></h1>
+        <p>30 stunning images showcasing the beauty, culture, and diversity of India</p>
+        <div class="stats">
+            <div class="stat"><strong id="totalImages">30</strong> Images</div>
+            <div class="stat"><strong>📸</strong> Click to Enlarge</div>
+            <div class="stat"><strong>⌨️</strong> Arrow Keys Navigate</div>
+        </div>
+    </header>
+
+    <!-- ===== FILTERS ===== -->
+    <div class="filter-section">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="heritage">🏛️ Heritage</button>
+        <button class="filter-btn" data-filter="nature">🌿 Nature</button>
+        <button class="filter-btn" data-filter="spiritual">🕉️ Spiritual</button>
+        <button class="filter-btn" data-filter="festival">🎉 Festival</button>
+        <button class="filter-btn" data-filter="urban">🏙️ Urban</button>
     </div>
 
-    <div class="gallery">
-      <!-- 1. Image 1 -->
-      <div class="gallery-item">
-        <img 
-          src="images/1.jpg" 
-          alt="India image 1" 
-          onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22%3E%3Crect width=%22400%22 height=%22400%22 fill=%22%23f5e6d3%22/%3E%3Ctext x=%22200%22 y=%22180%22 font-family=%22sans-serif%22 font-size=%2228%22 text-anchor=%22middle%22 fill=%22%238b5a3c%22%3E❌%3C/text%3E%3Ctext x=%22200%22 y=%22230%22 font-family=%22sans-serif%22 font-size=%2220%22 font-weight=%22bold%22 text-anchor=%22middle%22 fill=%22%237a5238%22%3ENot Found%3C/text%3E%3Ctext x=%22200%22 y=%22260%22 font-family=%22sans-serif%22 font-size=%2214%22 text-anchor=%22middle%22 fill=%22%23997a64%22%3Echeck path%3C/text%3E%3C/svg%3E'"
-        >
-        <div class="caption">Image 1 <span>📍</span></div>
-      </div>
+    <!-- ===== GALLERY ===== -->
+    <div class="gallery" id="gallery"></div>
 
-      <!-- 2. Image 2 -->
-      <div class="gallery-item">
-        <img 
-          src="images/2.jpg" 
-          alt="India image 2"
-          onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22%3E%3Crect width=%22400%22 height=%22400%22 fill=%22%23fce4d6%22/%3E%3Ctext x=%22200%22 y=%22180%22 font-family=%22sans-serif%22 font-size=%2228%22 text-anchor=%22middle%22 fill=%22%23c0392b%22%3E❌%3C/text%3E%3Ctext x=%22200%22 y=%22230%22 font-family=%22sans-serif%22 font-size=%2220%22 font-weight=%22bold%22 text-anchor=%22middle%22 fill=%22%23a93226%22%3ENot Found%3C/text%3E%3Ctext x=%22200%22 y=%22260%22 font-family=%22sans-serif%22 font-size=%2214%22 text-anchor=%22middle%22 fill=%22%23b9775e%22%3Echeck path%3C/text%3E%3C/svg%3E'"
-        >
-        <div class="caption">Image 2 <span>📍</span></div>
-      </div>
-
-      <!-- 3. Image 3 -->
-      <div class="gallery-item">
-        <img 
-          src="images/3.jpg" 
-          alt="India image 3"
-          onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22%3E%3Crect width=%22400%22 height=%22400%22 fill=%22%23d5e8d5%22/%3E%3Ctext x=%22200%22 y=%22180%22 font-family=%22sans-serif%22 font-size=%2228%22 text-anchor=%22middle%22 fill=%22%232d6b2d%22%3E❌%3C/text%3E%3Ctext x=%22200%22 y=%22230%22 font-family=%22sans-serif%22 font-size=%2220%22 font-weight=%22bold%22 text-anchor=%22middle%22 fill=%22%231f4d1f%22%3ENot Found%3C/text%3E%3Ctext x=%22200%22 y=%22260%22 font-family=%22sans-serif%22 font-size=%2214%22 text-anchor=%22middle%22 fill=%22%233d7a3d%22%3Echeck path%3C/text%3E%3C/svg%3E'"
-        >
-        <div class="caption">Image 3 <span>📍</span></div>
-      </div>
-
-      <!-- 4. Image 4 -->
-      <div class="gallery-item">
-        <img 
-          src="images/4.jpg" 
-          alt="India image 4"
-          onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22%3E%3Crect width=%22400%22 height=%22400%22 fill=%22%23b3d9b3%22/%3E%3Ctext x=%22200%22 y=%22180%22 font-family=%22sans-serif%22 font-size=%2228%22 text-anchor=%22middle%22 fill=%22%23006633%22%3E❌%3C/text%3E%3Ctext x=%22200%22 y=%22230%22 font-family=%22sans-serif%22 font-size=%2220%22 font-weight=%22bold%22 text-anchor=%22middle%22 fill=%22%23004d26%22%3ENot Found%3C/text%3E%3Ctext x=%22200%22 y=%22260%22 font-family=%22sans-serif%22 font-size=%2214%22 text-anchor=%22middle%22 fill=%22%232b7a4d%22%3Echeck path%3C/text%3E%3C/svg%3E'"
-        >
-        <div class="caption">Image 4 <span>📍</span></div>
-      </div>
-
-      <!-- 5. Image 5 -->
-      <div class="gallery-item">
-        <img 
-          src="images/5.jpg" 
-          alt="India image 5"
-          onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22%3E%3Crect width=%22400%22 height=%22400%22 fill=%22%23e8e0d0%22/%3E%3Ctext x=%22200%22 y=%22180%22 font-family=%22sans-serif%22 font-size=%2228%22 text-anchor=%22middle%22 fill=%22%238b4513%22%3E❌%3C/text%3E%3Ctext x=%22200%22 y=%22230%22 font-family=%22sans-serif%22 font-size=%2220%22 font-weight=%22bold%22 text-anchor=%22middle%22 fill=%22%236b3410%22%3ENot Found%3C/text%3E%3Ctext x=%22200%22 y=%22260%22 font-family=%22sans-serif%22 font-size=%2214%22 text-anchor=%22middle%22 fill=%22%23996633%22%3Echeck path%3C/text%3E%3C/svg%3E'"
-        >
-        <div class="caption">Image 5 <span>📍</span></div>
-      </div>
+    <!-- ===== LIGHTBOX ===== -->
+    <div class="lightbox" id="lightbox">
+        <button class="close" id="closeLightbox">✕</button>
+        <button class="nav prev" id="prevImage">‹</button>
+        <button class="nav next" id="nextImage">›</button>
+        <div class="info-bar" id="imageInfo">Image 1 of 30</div>
+        <img id="lightboxImage" src="" alt="Enlarged view">
+        <div class="counter" id="imageCounter">1 / 30</div>
     </div>
 
-    <div class="footer-note">
-      <span>📌 your images · /images/1.jpg to 5.jpg</span>
-      <span>✦ GitHub Pages ready</span>
-      <span>✅ fallback if images missing</span>
-    </div>
-  </div>
-  <div style="margin-top: 1.2rem; font-size: 0.75rem; color: #a39286; text-align: center; max-width: 600px;">
-    <span>📂 place images in an 'images' folder · if images don't load, check the path</span>
-  </div>
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <p>📍 India Gallery · 30 stunning images</p>
+        <p style="margin-top: 5px;">Made with ❤️ · Click any image to enlarge · Arrow keys to navigate</p>
+    </footer>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        // ============================================================
+        // IMAGE DATA - 30 images with your file naming pattern
+        // ============================================================
+        const images = [];
+
+        // Generate 30 images with various extensions
+        const extensions = ['.jpg', '.jpeg', '.png'];
+        const categories = [
+            { name: 'Heritage', icon: '🏛️', filter: 'heritage' },
+            { name: 'Nature', icon: '🌿', filter: 'nature' },
+            { name: 'Spiritual', icon: '🕉️', filter: 'spiritual' },
+            { name: 'Festival', icon: '🎉', filter: 'festival' },
+            { name: 'Urban', icon: '🏙️', filter: 'urban' }
+        ];
+
+        // Image titles and descriptions
+        const titles = [
+            'Taj Mahal at Sunrise',
+            'Hawa Mahal, Jaipur',
+            'Ganges Ghats, Varanasi',
+            'Kerala Backwaters',
+            'Himalayan Monastery',
+            'Gateway of India',
+            'Mysore Palace',
+            'Golden Temple, Amritsar',
+            'Qutub Minar, Delhi',
+            'Red Fort, Delhi',
+            'Darjeeling Tea Gardens',
+            'Goa Beaches',
+            'Ladakh Landscape',
+            'Kashmir Valley',
+            'Rajasthan Desert',
+            'Kumbh Mela Festival',
+            'Diwali Celebrations',
+            'Holi Festival Colors',
+            'Durga Puja, Kolkata',
+            'Ganesh Chaturthi',
+            'Mumbai Skyline',
+            'Bangalore Tech Hub',
+            'Delhi Metro',
+            'Chennai Marina Beach',
+            'Ajanta Caves',
+            'Ellora Caves',
+            'Khajuraho Temples',
+            'Konark Sun Temple',
+            'Meenakshi Temple',
+            'Bodh Gaya Temple'
+        ];
+
+        const descriptions = [
+            'The iconic white marble mausoleum glowing in golden sunrise light.',
+            'The Pink City\'s most famous facade with 953 small windows.',
+            'Sacred steps leading to the holy Ganges river at dawn.',
+            'Serene houseboat cruise through palm-fringed waterways.',
+            'Ancient Buddhist monastery perched in the high Himalayas.',
+            'Historic arch monument overlooking the Arabian Sea.',
+            'Stunning Indo-Saracenic architecture illuminated at night.',
+            'The holiest Sikh shrine gleaming with gold and marble.',
+            'Towering 12th-century minaret in the heart of Delhi.',
+            'Massive red sandstone fortress from the Mughal era.',
+            'Rolling green tea plantations in the Himalayan foothills.',
+            'Sun-kissed beaches and Portuguese heritage on the coast.',
+            'Dramatic high-altitude desert with snow-capped peaks.',
+            'Paradise on Earth with lush valleys and alpine lakes.',
+            'Golden sand dunes stretching to the horizon.',
+            'The world\'s largest religious gathering on the riverbanks.',
+            'Homes illuminated with oil lamps during the Festival of Lights.',
+            'A riot of colors marking the arrival of spring.',
+            'Grand ten-day festival celebrating the goddess Durga.',
+            'Massive elephant-headed idol processions through streets.',
+            'Soaring skyscrapers and the vibrant cityscape of Mumbai.',
+            'India\'s Silicon Valley with tech parks and innovation hubs.',
+            'Efficient modern metro system connecting the capital.',
+            'The second-longest urban beach in the world.',
+            'Ancient Buddhist caves with intricate rock-cut sculptures.',
+            'Magnificent rock-cut temples dedicated to Hindu deities.',
+            'Erotic sculptures and grand temple complexes.',
+            'Sun temple shaped like a giant chariot with stone wheels.',
+            'Colorful temple with thousands of mythical carvings.',
+            'The sacred site where Buddha attained enlightenment.'
+        ];
+
+        // Assign categories to images
+        const categoryAssignments = [
+            0,0,2,1,2,0,0,2,0,0,1,1,1,1,1,3,3,3,3,3,4,4,4,4,0,0,0,0,2,2
+        ];
+
+        for (let i = 0; i < 30; i++) {
+            // Use a mix of extensions
+            const ext = extensions[i % extensions.length];
+            const catIndex = categoryAssignments[i];
+            const cat = categories[catIndex];
+            
+            // Generate filename: 1 (1).jpg, 1 (2).jpg, etc.
+            let filename;
+            if (i === 0) {
+                filename = `1${ext}`;
+            } else {
+                filename = `1 (${i + 1})${ext}`;
+            }
+
+            images.push({
+                id: i,
+                src: filename,
+                title: titles[i],
+                description: descriptions[i],
+                category: cat.filter,
+                categoryIcon: cat.icon,
+                categoryName: cat.name,
+                number: i + 1
+            });
+        }
+
+        // ============================================================
+        // RENDER GALLERY
+        // ============================================================
+        const gallery = document.getElementById('gallery');
+        let currentFilter = 'all';
+
+        function renderGallery(filter = 'all') {
+            const filtered = filter === 'all' 
+                ? images 
+                : images.filter(img => img.category === filter);
+
+            gallery.innerHTML = filtered.map(img => `
+                <div class="gallery-item" data-id="${img.id}" data-category="${img.category}">
+                    <img src="${img.src}" alt="${img.title}" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22%3E%3Crect width=%22400%22 height=%22400%22 fill=%22%231a1a2e%22/%3E%3Ctext x=%22200%22 y=%22190%22 font-family=%22sans-serif%22 font-size=%2240%22 text-anchor=%22middle%22 fill=%22%23666%22%3E📷%3C/text%3E%3Ctext x=%22200%22 y=%22240%22 font-family=%22sans-serif%22 font-size=%2218%22 text-anchor=%22middle%22 fill=%22%23555%22%3EImage%20${img.number}%3C/text%3E%3Ctext x=%22200%22 y=%22270%22 font-family=%22sans-serif%22 font-size=%2212%22 text-anchor=%22middle%22 fill=%22%23444%22%3E${img.src}%3C/text%3E%3C/svg%3E'">
+                    <div class="overlay">
+                        <span class="number">${img.categoryIcon} ${img.categoryName}</span>
+                        <h3>${img.title}</h3>
+                        <p>${img.description.substring(0, 60)}...</p>
+                    </div>
+                </div>
+            `).join('');
+
+            // Update image count
+            document.getElementById('totalImages').textContent = filtered.length;
+        }
+
+        renderGallery();
+
+        // ============================================================
+        // FILTERS
+        // ============================================================
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentFilter = this.dataset.filter;
+                renderGallery(currentFilter);
+            });
+        });
+
+        // ============================================================
+        // LIGHTBOX
+        // ============================================================
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImage = document.getElementById('lightboxImage');
+        const counter = document.getElementById('imageCounter');
+        const imageInfo = document.getElementById('imageInfo');
+        let currentIndex = 0;
+        let currentImages = [];
+
+        function getCurrentImages() {
+            const items = document.querySelectorAll('.gallery-item');
+            return Array.from(items).map(item => {
+                const img = item.querySelector('img');
+                const id = parseInt(item.dataset.id);
+                return {
+                    src: img.src,
+                    id: id,
+                    title: images[id].title,
+                    number: images[id].number
+                };
+            });
+        }
+
+        function openLightbox(index) {
+            currentImages = getCurrentImages();
+            if (currentImages.length === 0) return;
+            currentIndex = Math.min(index, currentImages.length - 1);
+            updateLightbox();
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function updateLightbox() {
+            const img = currentImages[currentIndex];
+            lightboxImage.src = img.src;
+            counter.textContent = `${currentIndex + 1} / ${currentImages.length}`;
+            imageInfo.textContent = `${img.title} · Image ${img.number} of ${images.length}`;
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function navigateImage(direction) {
+            if (currentImages.length === 0) return;
+            currentIndex = (currentIndex + direction + currentImages.length) % currentImages.length;
+            updateLightbox();
+        }
+
+        // Click gallery item
+        document.addEventListener('click', function(e) {
+            const item = e.target.closest('.gallery-item');
+            if (item) {
+                const allItems = document.querySelectorAll('.gallery-item');
+                const index = Array.from(allItems).indexOf(item);
+                openLightbox(index);
+            }
+        });
+
+        // Close button
+        document.getElementById('closeLightbox').addEventListener('click', closeLightbox);
+
+        // Background click
+        lightbox.addEventListener('click', function(e) {
+            if (e.target === this) closeLightbox();
+        });
+
+        // Navigation buttons
+        document.getElementById('prevImage').addEventListener('click', function(e) {
+            e.stopPropagation();
+            navigateImage(-1);
+        });
+
+        document.getElementById('nextImage').addEventListener('click', function(e) {
+            e.stopPropagation();
+            navigateImage(1);
+        });
+
+        // Keyboard
+        document.addEventListener('keydown', function(e) {
+            if (lightbox.classList.contains('active')) {
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowLeft') navigateImage(-1);
+                if (e.key === 'ArrowRight') navigateImage(1);
+            }
+        });
+
+        // Touch support
+        let touchStartX = 0;
+        lightbox.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        lightbox.addEventListener('touchend', function(e) {
+            const diff = touchStartX - e.changedTouches[0].screenX;
+            if (Math.abs(diff) > 50) {
+                navigateImage(diff > 0 ? 1 : -1);
+            }
+        });
+
+        console.log('✅ Gallery loaded! 30 images ready.');
+        console.log('📁 Place your images in the same folder as this HTML file.');
+        console.log('📝 File names should be: 1.jpg, 1 (1).jpg, 1 (2).jpg, ... 1 (29).jpg');
+    </script>
 </body>
 </html>
