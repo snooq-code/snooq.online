@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>India · random gallery</title>
+  <title>India · Gallery</title>
   <style>
     * {
       margin: 0;
@@ -29,7 +29,6 @@
       border-radius: 2.5rem;
       box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.2), 0 8px 24px -6px rgba(0, 0, 0, 0.05);
       padding: 2rem 1.5rem 2.5rem;
-      transition: all 0.2s ease;
     }
 
     h1 {
@@ -141,18 +140,6 @@
       gap: 1rem;
     }
 
-    .footer-note a {
-      color: #a1513b;
-      text-decoration: none;
-      font-weight: 500;
-      border-bottom: 1px dotted #d5c2b6;
-    }
-
-    .footer-note a:hover {
-      color: #753f2f;
-      border-bottom: 1px solid #753f2f;
-    }
-
     .pin-badge {
       background: #e60023;
       color: white;
@@ -176,75 +163,67 @@
   <div class="card">
     <div class="subhead">
       <h1>
-        <span>🇮🇳</span> India · random frames
-        <span class="pin-badge">✨ fresh</span>
+        <span>🇮🇳</span> India · in frames
+        <span class="pin-badge">📁 local images</span>
       </h1>
-      <p>5 images · random seeds</p>
+      <p>5 images · from your folder</p>
     </div>
 
-    <!-- gallery grid: 5 random images (India themed via seed & category) 
-         using picsum, loremflickr, and via.placeholder with India keywords 
-         all are 100% reliable, no hotlinking issues -->
     <div class="gallery">
-      <!-- 1. Taj Mahal – using picsum with fixed seed + via.placeholder fallback style -->
+      <!-- 1. Image 1 -->
       <div class="gallery-item">
         <img 
-          src="https://picsum.photos/seed/taj/400/400" 
-          alt="Taj Mahal, Agra" 
-          loading="lazy"
+          src="1.jpg" 
+          alt="India image 1" 
         >
-        <div class="caption">Taj Mahal <span>Agra</span></div>
+        <div class="caption">Image 1 <span>📍</span></div>
       </div>
 
-      <!-- 2. Jaipur / Hawa Mahal – picsum seed -->
+      <!-- 2. Image 2 -->
       <div class="gallery-item">
         <img 
-          src="https://picsum.photos/seed/jaipur/400/400" 
-          alt="Hawa Mahal, Jaipur" 
-          loading="lazy"
+          src="2.jpg" 
+          alt="India image 2" 
         >
-        <div class="caption">Hawa Mahal <span>Jaipur</span></div>
+        <div class="caption">Image 2 <span>📍</span></div>
       </div>
 
-      <!-- 3. Varanasi ghats – picsum seed -->
+      <!-- 3. Image 3 -->
       <div class="gallery-item">
         <img 
-          src="https://picsum.photos/seed/varanasi/400/400" 
-          alt="Ganges ghats, Varanasi" 
-          loading="lazy"
+          src="3.jpg" 
+          alt="India image 3" 
         >
-        <div class="caption">Ganges ghats <span>Varanasi</span></div>
+        <div class="caption">Image 3 <span>📍</span></div>
       </div>
 
-      <!-- 4. Kerala backwaters – picsum seed -->
+      <!-- 4. Image 4 -->
       <div class="gallery-item">
         <img 
-          src="https://picsum.photos/seed/kerala/400/400" 
-          alt="Kerala backwaters" 
-          loading="lazy"
+          src="4.jpg" 
+          alt="India image 4" 
         >
-        <div class="caption">Backwaters <span>Kerala</span></div>
+        <div class="caption">Image 4 <span>📍</span></div>
       </div>
 
-      <!-- 5. Himalayan monastery – picsum seed -->
+      <!-- 5. Image 5 -->
       <div class="gallery-item">
         <img 
-          src="https://picsum.photos/seed/himalaya/400/400" 
-          alt="Himalayan monastery" 
-          loading="lazy"
+          src="5.jpg" 
+          alt="India image 5" 
         >
-        <div class="caption">Himalayan monastery <span>Himachal</span></div>
+        <div class="caption">Image 5 <span>📍</span></div>
       </div>
     </div>
 
     <div class="footer-note">
-      <span>📌 random images · always fresh</span>
-      <span>✦ seeds: taj, jaipur, varanasi, kerala, himalaya</span>
-      <a href="#" onclick="event.preventDefault(); alert('🇮🇳 नमस्ते! Each image uses a random seed from picsum.')">about this page</a>
+      <span>📌 your images · 1.jpg to 5.jpg</span>
+      <span>✦ make sure images are in the same folder</span>
+      <span>✅ ready to upload</span>
     </div>
   </div>
   <div style="margin-top: 1.2rem; font-size: 0.75rem; color: #a39286; text-align: center; max-width: 600px;">
-    <span>🔄 images are randomly generated · each seed gives a consistent unique image</span>
+    <span>📂 place this HTML file in the same folder as your 1.jpg, 2.jpg, 3.jpg, 4.jpg, 5.jpg</span>
   </div>
 </body>
 </html>
